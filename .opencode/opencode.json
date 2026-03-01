@@ -1,5 +1,34 @@
 {
     "$schema": "https://opencode.ai/config.json",
+    "model": "anthropic/claude-sonnet-4-5",
+    "small_model": "anthropic/claude-haiku-4-5",
+    "default_agent": "build",
+    "instructions": [
+        ".opencode/instructions/INSTRUCTIONS.md",
+        ".opencode/rules/common/agents.md",
+        ".opencode/rules/common/coding-style.md",
+        ".opencode/rules/common/git-workflow.md",
+        ".opencode/rules/common/hooks.md",
+        ".opencode/rules/common/patterns.md",
+        ".opencode/rules/common/performance.md",
+        ".opencode/rules/common/security.md",
+        ".opencode/rules/common/testing.md"
+    ],
+    "agent": {
+        "build": {
+            "description": "主要编码代理，用于开发工作",
+            "mode": "primary",
+            "tools": {
+                "write": true,
+                "edit": true,
+                "bash": true,
+                "read": true
+            }
+        }
+    },
+    "permission": {
+        "mcp_*": "ask"
+    },
     "mcp": {
         "grep-app": {
             "type": "remote",
