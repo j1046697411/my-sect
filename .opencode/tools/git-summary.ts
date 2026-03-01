@@ -1,20 +1,20 @@
 /**
- * ECC Custom Tool: Git Summary
+ * ECC 自定义工具：Git 摘要
  *
- * Provides a comprehensive git status including branch info, status,
- * recent log, and diff against base branch.
+ * 提供全面的 git 状态信息，包括分支信息、状态、近期日志和与基础分支的差异。
  */
 
+// @ts-ignore
 import { tool } from "@opencode-ai/plugin"
 import { z } from "zod"
 
 export default tool({
   name: "git-summary",
-  description: "Get comprehensive git summary: branch, status, recent log, and diff against base branch.",
+  description: "获取全面的 git 摘要：分支、状态、近期日志和与基础分支的差异。",
   parameters: z.object({
-    depth: z.number().optional().describe("Number of recent commits to show (default: 5)"),
-    includeDiff: z.boolean().optional().describe("Include diff against base branch (default: true)"),
-    baseBranch: z.string().optional().describe("Base branch for comparison (default: main)"),
+    depth: z.number().optional().describe("显示的近期提交数量（默认：5）"),
+    includeDiff: z.boolean().optional().describe("包含与基础分支的差异（默认：true）"),
+    baseBranch: z.string().optional().describe("用于比较的基础分支（默认：main）"),
   }),
   execute: async ({ depth = 5, includeDiff = true, baseBranch = "main" }, { $ }) => {
     const results: Record<string, string> = {}
@@ -28,13 +28,13 @@ export default tool({
     try {
       results.status = (await $`git status --short`.text()).trim()
     } catch {
-      results.status = "unable to get status"
+      results.status = "无法获取状态"
     }
 
     try {
       results.log = (await $`git log --oneline -${depth}`.text()).trim()
     } catch {
-      results.log = "unable to get log"
+      results.log = "无法获取日志"
     }
 
     if (includeDiff) {
@@ -47,7 +47,7 @@ export default tool({
       try {
         results.branchDiff = (await $`git diff ${baseBranch}...HEAD --stat`.text()).trim()
       } catch {
-        results.branchDiff = `unable to diff against ${baseBranch}`
+        results.branchDiff = `无法与 ${baseBranch} 比较`
       }
     }
 

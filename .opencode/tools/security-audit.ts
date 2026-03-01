@@ -1,11 +1,11 @@
 /**
- * Security Audit Tool
+ * 安全审计工具
  *
- * Custom OpenCode tool to run security audits on dependencies and code.
- * Combines npm audit, secret scanning, and OWASP checks.
+ * 自定义 OpenCode 工具，用于对依赖项和代码运行安全审计。
+ * 结合了 npm audit、密钥扫描和 OWASP 检查。
  *
- * NOTE: This tool SCANS for security anti-patterns - it does not introduce them.
- * The regex patterns below are used to DETECT potential issues in user code.
+ * 注意：此工具用于扫描安全反模式 - 它不会引入这些反模式。
+ * 下面的正则表达式模式用于检测用户代码中的潜在问题。
  */
 
 import { tool } from "@opencode-ai/plugin/tool"
@@ -13,21 +13,20 @@ import * as path from "path"
 import * as fs from "fs"
 
 export default tool({
-  description:
-    "Run a comprehensive security audit including dependency vulnerabilities, secret scanning, and common security issues.",
+  description: "运行全面的安全审计，包括依赖项漏洞、密钥扫描和常见安全问题。",
   args: {
     type: tool.schema
       .enum(["all", "dependencies", "secrets", "code"])
       .optional()
-      .describe("Type of audit to run (default: all)"),
+      .describe("要运行的审计类型（默认：all）"),
     fix: tool.schema
       .boolean()
       .optional()
-      .describe("Attempt to auto-fix dependency vulnerabilities (default: false)"),
+      .describe("尝试自动修复依赖项漏洞（默认：false）"),
     severity: tool.schema
       .enum(["low", "moderate", "high", "critical"])
       .optional()
-      .describe("Minimum severity level to report (default: moderate)"),
+      .describe("要报告的最低严重级别（默认：moderate）"),
   },
   async execute(args, context) {
     const auditType = args.type ?? "all"
@@ -46,60 +45,60 @@ export default tool({
       },
     }
 
-    // Check for dependencies audit
+    // 检查依赖项审计
     if (auditType === "all" || auditType === "dependencies") {
       results.checks.push({
-        name: "Dependency Vulnerabilities",
-        description: "Check for known vulnerabilities in dependencies",
+        name: "依赖项漏洞",
+        description: "检查依赖项中的已知漏洞",
         command: fix ? "npm audit fix" : "npm audit",
         severityFilter: severity,
         status: "pending",
       })
     }
 
-    // Check for secrets
+    // 检查密钥
     if (auditType === "all" || auditType === "secrets") {
       const secretPatterns = await scanForSecrets(cwd)
       if (secretPatterns.length > 0) {
         results.checks.push({
-          name: "Secret Detection",
-          description: "Scan for hardcoded secrets and API keys",
+          name: "密钥检测",
+          description: "扫描硬编码的密钥和 API 密钥",
           status: "failed",
           findings: secretPatterns,
         })
         results.summary.failed++
       } else {
         results.checks.push({
-          name: "Secret Detection",
-          description: "Scan for hardcoded secrets and API keys",
+          name: "密钥检测",
+          description: "扫描硬编码的密钥和 API 密钥",
           status: "passed",
         })
         results.summary.passed++
       }
     }
 
-    // Check for common code security issues
+    // 检查常见代码安全问题
     if (auditType === "all" || auditType === "code") {
       const codeIssues = await scanCodeSecurity(cwd)
       if (codeIssues.length > 0) {
         results.checks.push({
-          name: "Code Security",
-          description: "Check for common security anti-patterns",
+          name: "代码安全",
+          description: "检查常见的安全反模式",
           status: "warning",
           findings: codeIssues,
         })
         results.summary.warnings++
       } else {
         results.checks.push({
-          name: "Code Security",
-          description: "Check for common security anti-patterns",
+          name: "代码安全",
+          description: "检查常见的安全反模式",
           status: "passed",
         })
         results.summary.passed++
       }
     }
 
-    // Generate recommendations
+    // 生成建议
     results.recommendations = generateRecommendations(results)
 
     return JSON.stringify(results)
@@ -132,15 +131,15 @@ async function scanForSecrets(
 ): Promise<Array<{ file: string; issue: string; line?: number }>> {
   const findings: Array<{ file: string; issue: string; line?: number }> = []
 
-  // Patterns to DETECT potential secrets (security scanning)
+  // 用于检测潜在密钥的模式（安全扫描）
   const secretPatterns = [
-    { pattern: /api[_-]?key\s*[:=]\s*['"][^'"]{20,}['"]/gi, name: "API Key" },
-    { pattern: /password\s*[:=]\s*['"][^'"]+['"]/gi, name: "Password" },
-    { pattern: /secret\s*[:=]\s*['"][^'"]{10,}['"]/gi, name: "Secret" },
-    { pattern: /Bearer\s+[A-Za-z0-9\-_]+\.[A-Za-z0-9\-_]+/g, name: "JWT Token" },
-    { pattern: /sk-[a-zA-Z0-9]{32,}/g, name: "OpenAI API Key" },
-    { pattern: /ghp_[a-zA-Z0-9]{36}/g, name: "GitHub Token" },
-    { pattern: /aws[_-]?secret[_-]?access[_-]?key/gi, name: "AWS Secret" },
+    { pattern: /api[_-]?key\s*[:=]\s*['"][^'"]{20,}['"]/gi, name: "API 密钥" },
+    { pattern: /password\s*[:=]\s*['"][^'"]+['"]/gi, name: "密码" },
+    { pattern: /secret\s*[:=]\s*['"][^'"]{10,}['"]/gi, name: "密钥" },
+    { pattern: /Bearer\s+[A-Za-z0-9\-_]+\.[A-Za-z0-9\-_]+/g, name: "JWT 令牌" },
+    { pattern: /sk-[a-zA-Z0-9]{32,}/g, name: "OpenAI API 密钥" },
+    { pattern: /ghp_[a-zA-Z0-9]{36}/g, name: "GitHub 令牌" },
+    { pattern: /aws[_-]?secret[_-]?access[_-]?key/gi, name: "AWS 密钥" },
   ]
 
   const ignorePatterns = [
@@ -157,7 +156,7 @@ async function scanForSecrets(
     await scanDirectory(srcDir, secretPatterns, ignorePatterns, findings)
   }
 
-  // Also check root config files
+  // 还要检查根目录配置文件
   const configFiles = ["config.js", "config.ts", "settings.js", "settings.ts"]
   for (const configFile of configFiles) {
     const filePath = path.join(cwd, configFile)
@@ -204,19 +203,19 @@ async function scanFile(
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i]
       for (const { pattern, name } of patterns) {
-        // Reset regex state
+        // 重置正则表达式状态
         pattern.lastIndex = 0
         if (pattern.test(line)) {
           findings.push({
             file: filePath,
-            issue: `Potential ${name} found`,
+            issue: `发现潜在 ${name}`,
             line: i + 1,
           })
         }
       }
     }
   } catch {
-    // Ignore read errors
+    // 忽略读取错误
   }
 }
 
@@ -225,14 +224,14 @@ async function scanCodeSecurity(
 ): Promise<Array<{ file: string; issue: string; line?: number }>> {
   const findings: Array<{ file: string; issue: string; line?: number }> = []
 
-  // Patterns to DETECT security anti-patterns (this tool scans for issues)
-  // These are detection patterns, not code that uses these anti-patterns
+  // 用于检测安全反模式的模式（此工具用于扫描问题）
+  // 这些是检测模式，而不是使用这些反模式的代码
   const securityPatterns = [
-    { pattern: /\beval\s*\(/g, name: "eval() usage - potential code injection" },
-    { pattern: /innerHTML\s*=/g, name: "innerHTML assignment - potential XSS" },
-    { pattern: /dangerouslySetInnerHTML/g, name: "dangerouslySetInnerHTML - potential XSS" },
-    { pattern: /document\.write/g, name: "document.write - potential XSS" },
-    { pattern: /\$\{.*\}.*sql/gi, name: "Potential SQL injection" },
+    { pattern: /\beval\s*\(/g, name: "eval() 使用 - 潜在的代码注入" },
+    { pattern: /innerHTML\s*=/g, name: "innerHTML 赋值 - 潜在的 XSS" },
+    { pattern: /dangerouslySetInnerHTML/g, name: "dangerouslySetInnerHTML - 潜在的 XSS" },
+    { pattern: /document\.write/g, name: "document.write - 潜在的 XSS" },
+    { pattern: /\$\{.*\}.*sql/gi, name: "潜在的 SQL 注入" },
   ]
 
   const srcDir = path.join(cwd, "src")
@@ -247,30 +246,30 @@ function generateRecommendations(results: AuditResults): string[] {
   const recommendations: string[] = []
 
   for (const check of results.checks) {
-    if (check.status === "failed" && check.name === "Secret Detection") {
+    if (check.status === "failed" && check.name === "密钥检测") {
       recommendations.push(
-        "CRITICAL: Remove hardcoded secrets and use environment variables instead"
+        "严重：移除硬编码的密钥，改用环境变量"
       )
-      recommendations.push("Add a .env file (gitignored) for local development")
-      recommendations.push("Use a secrets manager for production deployments")
+      recommendations.push("添加 .env 文件（加入 .gitignore）用于本地开发")
+      recommendations.push("生产部署使用密钥管理器")
     }
 
-    if (check.status === "warning" && check.name === "Code Security") {
+    if (check.status === "warning" && check.name === "代码安全") {
       recommendations.push(
-        "Review flagged code patterns for potential security vulnerabilities"
+        "检查标记的代码模式，查找潜在的安全漏洞"
       )
-      recommendations.push("Consider using DOMPurify for HTML sanitization")
-      recommendations.push("Use parameterized queries for database operations")
+      recommendations.push("考虑使用 DOMPurify 进行 HTML 净化")
+      recommendations.push("数据库操作使用参数化查询")
     }
 
-    if (check.status === "pending" && check.name === "Dependency Vulnerabilities") {
-      recommendations.push("Run 'npm audit' to check for dependency vulnerabilities")
-      recommendations.push("Consider using 'npm audit fix' to auto-fix issues")
+    if (check.status === "pending" && check.name === "依赖项漏洞") {
+      recommendations.push("运行 'npm audit' 检查依赖项漏洞")
+      recommendations.push("考虑使用 'npm audit fix' 自动修复问题")
     }
   }
 
   if (recommendations.length === 0) {
-    recommendations.push("No critical security issues found. Continue following security best practices.")
+    recommendations.push("未发现严重安全问题。继续遵循安全最佳实践。")
   }
 
   return recommendations

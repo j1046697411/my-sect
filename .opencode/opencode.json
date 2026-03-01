@@ -4,7 +4,6 @@
     "small_model": "anthropic/claude-haiku-4-5",
     "default_agent": "build",
     "instructions": [
-        ".opencode/instructions/INSTRUCTIONS.md",
         ".opencode/rules/common/agents.md",
         ".opencode/rules/common/coding-style.md",
         ".opencode/rules/common/git-workflow.md",

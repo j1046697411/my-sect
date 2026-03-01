@@ -28,22 +28,22 @@ tools:
 ### 数据库分析命令
 
 ```bash
-# Connect to database
+# 连接数据库
 psql $DATABASE_URL
 
-# Check for slow queries (requires pg_stat_statements)
+# 检查慢查询（需要 pg_stat_statements）
 psql -c "SELECT query, mean_exec_time, calls FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 10;"
 
-# Check table sizes
+# 检查表大小
 psql -c "SELECT relname, pg_size_pretty(pg_total_relation_size(relid)) FROM pg_stat_user_tables ORDER BY pg_total_relation_size(relid) DESC;"
 
-# Check index usage
+# 检查索引使用
 psql -c "SELECT indexrelname, idx_scan, idx_tup_read FROM pg_stat_user_indexes ORDER BY idx_scan DESC;"
 
-# Find missing indexes on foreign keys
+# 查找外键上缺失的索引
 psql -c "SELECT conrelid::regclass, a.attname FROM pg_constraint c JOIN pg_attribute a ON a.attrelid = c.conrelid AND a.attnum = ANY(c.conkey) WHERE c.contype = 'f' AND NOT EXISTS (SELECT 1 FROM pg_index i WHERE i.indrelid = c.conrelid AND a.attnum = ANY(i.indkey));"
 
-# Check for table bloat
+# 检查表膨胀
 psql -c "SELECT relname, n_dead_tup, last_vacuum, last_autovacuum FROM pg_stat_user_tables WHERE n_dead_tup > 1000 ORDER BY n_dead_tup DESC;"
 ```
 

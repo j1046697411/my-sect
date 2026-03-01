@@ -1,8 +1,8 @@
 /**
- * ECC Custom Tool: Lint Check
+ * ECC 自定义工具：代码检查
  *
- * Multi-language linter that auto-detects the project's linting tool.
- * Supports: ESLint/Biome (JS/TS), Pylint/Ruff (Python), golangci-lint (Go)
+ * 多语言 linter，自动检测项目的 linting 工具。
+ * 支持：ESLint/Biome (JS/TS)、Pylint/Ruff (Python)、golangci-lint (Go)
  */
 
 import { tool } from "@opencode-ai/plugin"
@@ -10,14 +10,14 @@ import { z } from "zod"
 
 export default tool({
   name: "lint-check",
-  description: "Run linter on files or directories. Auto-detects ESLint, Biome, Ruff, Pylint, or golangci-lint.",
+  description: "在文件或目录上运行 linter。自动检测 ESLint、Biome、Ruff、Pylint 或 golangci-lint。",
   parameters: z.object({
-    target: z.string().optional().describe("File or directory to lint (default: current directory)"),
-    fix: z.boolean().optional().describe("Auto-fix issues if supported (default: false)"),
-    linter: z.string().optional().describe("Override linter: eslint, biome, ruff, pylint, golangci-lint (default: auto-detect)"),
+    target: z.string().optional().describe("要检查的文件或目录（默认：当前目录）"),
+    fix: z.boolean().optional().describe("如果支持则自动修复问题（默认：false）"),
+    linter: z.string().optional().describe("覆盖 linter：eslint、biome、ruff、pylint、golangci-lint（默认：自动检测）"),
   }),
   execute: async ({ target = ".", fix = false, linter }, { $ }) => {
-    // Auto-detect linter
+    // 自动检测 linter
     let detected = linter
     if (!detected) {
       try {
@@ -36,7 +36,7 @@ export default tool({
               await $`test -f .golangci.yml || test -f .golangci.yaml`
               detected = "golangci-lint"
             } catch {
-              // Fall back based on file extensions in target
+              // 根据目标中的文件扩展名回退
               detected = "eslint"
             }
           }
@@ -55,7 +55,7 @@ export default tool({
 
     const cmd = commands[detected]
     if (!cmd) {
-      return { success: false, message: `Unknown linter: ${detected}` }
+      return { success: false, message: `未知的 linter：${detected}` }
     }
 
     try {

@@ -1,0 +1,161 @@
+# AGENTS.md - AI 智能体开发指南
+
+这是一个使用 Gradle 构建的 Kotlin Multiplatform 项目，采用 Compose 作为 UI 框架。
+
+## 构建命令
+
+### Gradle Wrapper
+```bash
+./gradlew <任务>
+```
+
+### 构建任务
+| 命令 | 描述 |
+|------|------|
+| `./gradlew assemble` | 构建所有目标 |
+| `./gradlew assembleDebug` | 构建调试版 APK/AAR |
+| `./gradlew build` | 完整构建（含检查）|
+| `./gradlew compileKotlin` | 编译 Kotlin 源码 |
+| `./gradlew compileKotlinJvm` | 编译 JVM 目标 |
+| `./gradlew compileKotlinAndroid` | 编译 Android 目标 |
+
+### 运行应用
+| 命令 | 描述 |
+|------|------|
+| `./gradlew run` | 运行桌面应用 |
+| `./gradlew installDebug` | 安装 Android 调试版 APK |
+
+### 测试
+| 命令 | 描述 |
+|------|------|
+| `./gradlew test` | 运行所有测试 |
+| `./gradlew test --tests "com.sect.game.*"` | 运行匹配模式的测试 |
+| `./gradlew test --tests "com.sect.game.client.MyTest"` | 运行单个测试类 |
+| `./gradlew test --tests "com.sect.game.client.MyTest.testMethod"` | 运行单个测试方法 |
+| `./gradlew jvmTest` | 仅运行 JVM 测试 |
+| `./gradlew check` | 运行所有检查（测试、lint 等）|
+
+### 代码质量
+| 命令 | 描述 |
+|------|------|
+| `./gradlew ktlintCheck` | 运行 Kotlin linter |
+| `./gradlew ktlintFormat` | 自动修复 lint 问题 |
+| `./gradlew detekt` | 静态代码分析 |
+
+### 清理和重新构建
+| 命令 | 描述 |
+|------|------|
+| `./gradlew clean` | 清理构建输出 |
+| `./gradlew clean build` | 清理并重新构建 |
+
+---
+
+## 代码风格规范
+
+### Kotlin 约定
+
+**命名规范**
+- 类/对象：`PascalCase`（如 `GameEngine`、`PlayerController`）
+- 函数/属性：`camelCase`（如 `updatePosition`、`isGameOver`）
+- 常量：`UPPER_SNAKE_CASE`（如 `MAX_PLAYERS`、`DEFAULT_SPEED`）
+- 包名：小写（如 `com.sect.game.client`）
+
+**导入**
+- 按字母顺序排序，分组：stdlib → 外部库 → 内部代码
+- 使用显式导入（禁止通配符 `.*`）
+
+**格式化**
+- 4 空格缩进（禁止 tab）
+- 最大行长度：120 字符
+- 顶层声明之间单空行
+- 适当使用表达式体函数
+
+```kotlin
+// Good
+fun isValid() = state.isActive && !state.isPaused
+
+// Good
+fun calculateScore(): Int {
+    return baseScore * multiplier
+}
+```
+
+### 类型系统
+- 优先使用不可变数据：`val` 优于 `var`
+- 使用 `data class` 表示值对象
+- 避免可空类型（`?`），除非必要
+- 使用 `sealed class` 实现穷尽的 when 表达式
+
+### 函数
+- 保持函数短小（< 30 行）
+- 单一职责原则
+- 使用默认参数代替重载
+
+### 集合
+- 使用 `listOf()`、`setOf()`、`mapOf()` 表示不可变集合
+- 仅在需要修改时使用 `mutableListOf()`
+- 优先使用函数式操作：`map`、`filter`、`reduce`
+
+### 错误处理
+- 绝不静默忽略异常
+- 使用 `Result<T>` 处理可恢复错误
+- 记录详细的错误上下文
+- 在 UI 层提供用户友好的错误消息
+
+### 依赖注入
+- 使用 Kodein 进行 DI（项目已配置）
+- 遵循构造函数注入模式
+
+### Compose 规范
+- 使用 `remember` 管理 UI 状态
+- 使用 `rememberSaveable` 持久化状态
+- 避免在状态中存储可变对象
+- 将超过 30 行的 composable 提取为独立组件
+
+### 架构
+- Compose 应用遵循 MVVM 模式
+- 分离 UI、业务逻辑和数据层
+- 使用仓储模式抽象数据访问
+- 将平台特定代码放在对应的源集中
+
+### 测试
+- 最低 80% 测试覆盖率
+- 单元测试使用 `kotlin-test` 框架
+- 测试命名：`类名_方法名_场景_预期结果`
+- 遵循 TDD：Red → Green → Refactor
+
+---
+
+## 项目结构
+
+```
+client/
+├── src/
+│   ├── androidMain/       # Android 特定代码
+│   │   └── kotlin/
+│   ├── desktopMain/      # 桌面端特定代码
+│   │   └── kotlin/
+│   ├── commonMain/       # 共享代码
+│   │   └── kotlin/
+│   └── commonTest/       # 共享测试
+│       └── kotlin/
+```
+
+---
+
+## 依赖版本
+
+- Kotlin 2.3.10
+- Kotlin Coroutines 1
+- Kotlin Serial.10.2ization 1.10.0
+- Jetpack Compose (BOM 1.10.1)
+- Kodein DI 10.1.0
+
+---
+
+## 注意事项
+
+- 这是一个面向 JVM 和 Android 的 Kotlin Multiplatform 项目
+- 使用阿里云镜像加速国内依赖下载
+- Android minSdk: 24，targetSdk: 36
+- 构建需要 Java 17

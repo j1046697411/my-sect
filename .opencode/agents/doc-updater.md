@@ -1,7 +1,7 @@
 ---
 description: 文档和代码映射专家。主动用于更新代码映射和文档。运行 /update-codemaps 和 /update-docs，生成 docs/CODEMAPS/*，更新 README 和指南。
 mode: subagent
-tools: 
+tools:
   Read: true
   Write: true
   Edit: true
@@ -34,13 +34,13 @@ tools:
 ### 分析命令
 
 ```bash
-# Analyze TypeScript project structure (run custom script using ts-morph library)
+# 分析 TypeScript 项目结构（使用 ts-morph 库运行自定义脚本）
 npx tsx scripts/codemaps/generate.ts
 
-# Generate dependency graph
+# 生成依赖关系图
 npx madge --image graph.svg src/
 
-# Extract JSDoc comments
+# 提取 JSDoc 注释
 npx jsdoc2md src/**/*.ts
 ```
 
@@ -49,34 +49,34 @@ npx jsdoc2md src/**/*.ts
 ### 1. 仓库结构分析
 
 ```
-a) Identify all workspaces/packages
-b) Map directory structure
-c) Find entry points (apps/*, packages/*, services/*)
-d) Detect framework patterns (Next.js, Node.js, etc.)
+a) 识别所有工作区/包
+b) 映射目录结构
+c) 查找入口点 (apps/*, packages/*, services/*)
+d) 检测框架模式 (Next.js, Node.js 等)
 ```
 
 ### 2. 模块分析
 
 ```
-For each module:
-- Extract exports (public API)
-- Map imports (dependencies)
-- Identify routes (API routes, pages)
-- Find database models (Supabase, Prisma)
-- Locate queue/worker modules
+对于每个模块：
+- 提取导出（公共 API）
+- 映射导入（依赖项）
+- 识别路由（API 路由、页面）
+- 查找数据库模型（Supabase、Prisma）
+- 定位队列/工作模块
 ```
 
 ### 3. 生成代码映射
 
 ```
-Structure:
+结构：
 docs/CODEMAPS/
-├── INDEX.md              # Overview of all areas
-├── frontend.md           # Frontend structure
-├── backend.md            # Backend/API structure
-├── database.md           # Database schema
-├── integrations.md       # External services
-└── workers.md            # Background jobs
+├── INDEX.md              # 所有领域概览
+├── frontend.md           # 前端结构
+├── backend.md            # 后端/API 结构
+├── database.md           # 数据库结构
+├── integrations.md        # 外部服务
+└── workers.md            # 后台作业
 ```
 
 ### 4. 代码映射格式
@@ -116,29 +116,29 @@ docs/CODEMAPS/
 ### 1. 从代码中提取文档
 
 ```
-- Read JSDoc/TSDoc comments
-- Extract README sections from package.json
-- Parse environment variables from .env.example
-- Collect API endpoint definitions
+- 读取 JSDoc/TSDoc 注释
+- 从 package.json 提取 README 部分
+- 从 .env.example 解析环境变量
+- 收集 API 端点定义
 ```
 
 ### 2. 更新文档文件
 
 ```
-Files to update:
-- README.md - Project overview, setup instructions
-- docs/GUIDES/*.md - Feature guides, tutorials
-- package.json - Descriptions, scripts docs
-- API documentation - Endpoint specs
+需要更新的文件：
+- README.md - 项目概述、设置说明
+- docs/GUIDES/*.md - 功能指南、教程
+- package.json - 描述、脚本文档
+- API 文档 - 端点规范
 ```
 
 ### 3. 文档验证
 
 ```
-- Verify all mentioned files exist
-- Check all links work
-- Ensure examples are runnable
-- Validate code snippets compile
+- 验证所有提到的文件存在
+- 检查所有链接是否有效
+- 确保示例可运行
+- 验证代码片段可编译
 ```
 
 ## 项目特定代码映射示例
@@ -252,8 +252,7 @@ API 路由 → Supabase 查询 → Redis (缓存) → 响应
 
 ## 设置
 
-`​`​`bash
-
+```bash
 # 安装
 npm install
 
@@ -266,7 +265,7 @@ npm run dev
 
 # 构建
 npm run build
-`​`​`
+```
 
 
 ## 架构
@@ -301,8 +300,8 @@ npm run build
 
 ```typescript
 /**
- * Generate codemaps from repository structure
- * Usage: tsx scripts/codemaps/generate.ts
+ * 从仓库结构生成代码映射
+ * 用法：tsx scripts/codemaps/generate.ts
  */
 
 import { Project } from 'ts-morph'
@@ -314,32 +313,32 @@ async function generateCodemaps() {
     tsConfigFilePath: 'tsconfig.json',
   })
 
-  // 1. Discover all source files
+  // 1. 发现所有源文件
   const sourceFiles = project.getSourceFiles('src/**/*.{ts,tsx}')
 
-  // 2. Build import/export graph
+  // 2. 构建导入/导出图
   const graph = buildDependencyGraph(sourceFiles)
 
-  // 3. Detect entrypoints (pages, API routes)
+  // 3. 检测入口点（页面、API 路由）
   const entrypoints = findEntrypoints(sourceFiles)
 
-  // 4. Generate codemaps
+  // 4. 生成代码映射
   await generateFrontendMap(graph, entrypoints)
   await generateBackendMap(graph, entrypoints)
   await generateIntegrationsMap(graph)
 
-  // 5. Generate index
+  // 5. 生成索引
   await generateIndex()
 }
 
 function buildDependencyGraph(files: SourceFile[]) {
-  // Map imports/exports between files
-  // Return graph structure
+  // 映射文件之间的导入/导出
+  // 返回图结构
 }
 
 function findEntrypoints(files: SourceFile[]) {
-  // Identify pages, API routes, entry files
-  // Return list of entrypoints
+  // 识别页面、API 路由、入口文件
+  // 返回入口点列表
 }
 ```
 
@@ -347,33 +346,33 @@ function findEntrypoints(files: SourceFile[]) {
 
 ```typescript
 /**
- * Update documentation from code
- * Usage: tsx scripts/docs/update.ts
+ * 从代码更新文档
+ * 用法：tsx scripts/docs/update.ts
  */
 
 import * as fs from 'fs'
 import { execSync } from 'child_process'
 
 async function updateDocs() {
-  // 1. Read codemaps
+  // 1. 读取代码映射
   const codemaps = readCodemaps()
 
-  // 2. Extract JSDoc/TSDoc
+  // 2. 提取 JSDoc/TSDoc
   const apiDocs = extractJSDoc('src/**/*.ts')
 
-  // 3. Update README.md
+  // 3. 更新 README.md
   await updateReadme(codemaps, apiDocs)
 
-  // 4. Update guides
+  // 4. 更新指南
   await updateGuides(codemaps)
 
-  // 5. Generate API reference
+  // 5. 生成 API 参考
   await generateAPIReference(apiDocs)
 }
 
 function extractJSDoc(pattern: string) {
-  // Use jsdoc-to-markdown or similar
-  // Extract documentation from source
+  // 使用 jsdoc-to-markdown 或类似工具
+  // 从源代码中提取文档
 }
 ```
 

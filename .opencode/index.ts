@@ -1,28 +1,28 @@
 /**
- * Everything Claude Code (ECC) Plugin for OpenCode
+ * Everything Claude Code (ECC) OpenCode 插件
  *
- * This package provides a complete OpenCode plugin with:
- * - 13 specialized agents (planner, architect, code-reviewer, etc.)
- * - 31 commands (/plan, /tdd, /code-review, etc.)
- * - Plugin hooks (auto-format, TypeScript check, console.log warning, env injection, etc.)
- * - Custom tools (run-tests, check-coverage, security-audit, format-code, lint-check, git-summary)
- * - 37 skills (coding-standards, security-review, tdd-workflow, etc.)
+ * 此包提供了一个完整的 OpenCode 插件，包括：
+ * - 13 个专业 agents（planner、architect、code-reviewer 等）
+ * - 31 个命令（/plan、/tdd、/code-review 等）
+ * - 插件钩子（自动格式化、TypeScript 检查、console.log 警告、环境变量注入等）
+ * - 自定义工具（run-tests、check-coverage、security-audit、format-code、lint-check、git-summary）
+ * - 37 个技能（coding-standards、security-review、tdd-workflow 等）
  *
- * Usage:
+ * 使用方法：
  *
- * Option 1: Install via npm
+ * 选项 1：通过 npm 安装
  * ```bash
  * npm install ecc-universal
  * ```
  *
- * Then add to your opencode.json:
+ * 然后添加到 opencode.json：
  * ```json
  * {
  *   "plugin": ["ecc-universal"]
  * }
  * ```
  *
- * Option 2: Clone and use directly
+ * 选项 2：克隆并直接使用
  * ```bash
  * git clone https://github.com/affaan-m/everything-claude-code
  * cd everything-claude-code
@@ -32,20 +32,20 @@
  * @packageDocumentation
  */
 
-// Export the main plugin
+// 导出主插件
 export { ECCHooksPlugin, default } from "./plugins/index.js"
 
-// Export individual components for selective use
+// 导出各个组件以便选择性使用
 export * from "./plugins/index.js"
 
-// Version export
+// 版本导出
 export const VERSION = "1.6.0"
 
-// Plugin metadata
+// 插件元数据
 export const metadata = {
   name: "ecc-universal",
   version: VERSION,
-  description: "Everything Claude Code plugin for OpenCode",
+  description: "Everything Claude Code OpenCode 插件",
   author: "affaan-m",
   features: {
     agents: 13,

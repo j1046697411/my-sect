@@ -1,8 +1,8 @@
 /**
- * ECC Custom Tool: Format Code
+ * ECC 自定义工具：格式化代码
  *
- * Language-aware code formatter that auto-detects the project's formatter.
- * Supports: Biome/Prettier (JS/TS), Black (Python), gofmt (Go), rustfmt (Rust)
+ * 支持语言识别的代码格式化工具，自动检测项目的格式化工具。
+ * 支持：Biome/Prettier (JS/TS)、Black (Python)、gofmt (Go)、rustfmt (Rust)
  */
 
 import { tool } from "@opencode-ai/plugin"
@@ -10,19 +10,19 @@ import { z } from "zod"
 
 export default tool({
   name: "format-code",
-  description: "Format a file using the project's configured formatter. Auto-detects Biome, Prettier, Black, gofmt, or rustfmt.",
+  description: "使用项目配置的格式化工具格式化文件。自动检测 Biome、Prettier、Black、gofmt 或 rustfmt。",
   parameters: z.object({
-    filePath: z.string().describe("Path to the file to format"),
-    formatter: z.string().optional().describe("Override formatter: biome, prettier, black, gofmt, rustfmt (default: auto-detect)"),
+    filePath: z.string().describe("要格式化的文件路径"),
+    formatter: z.string().optional().describe("覆盖格式化工具：biome、prettier、black、gofmt、rustfmt（默认：自动检测）"),
   }),
   execute: async ({ filePath, formatter }, { $ }) => {
     const ext = filePath.split(".").pop()?.toLowerCase() || ""
 
-    // Auto-detect formatter based on file extension and config files
+    // 根据文件扩展名和配置文件自动检测格式化工具
     let detected = formatter
     if (!detected) {
       if (["ts", "tsx", "js", "jsx", "json", "css", "scss"].includes(ext)) {
-        // Check for Biome first, then Prettier
+        // 先检查 Biome，再检查 Prettier
         try {
           await $`test -f biome.json || test -f biome.jsonc`
           detected = "biome"
@@ -39,7 +39,7 @@ export default tool({
     }
 
     if (!detected) {
-      return { formatted: false, message: `No formatter detected for .${ext} files` }
+      return { formatted: false, message: `未检测到 .${ext} 文件的格式化工具` }
     }
 
     const commands: Record<string, string> = {
@@ -52,7 +52,7 @@ export default tool({
 
     const cmd = commands[detected]
     if (!cmd) {
-      return { formatted: false, message: `Unknown formatter: ${detected}` }
+      return { formatted: false, message: `未知的格式化工具：${detected}` }
     }
 
     try {
@@ -60,7 +60,7 @@ export default tool({
       return { formatted: true, formatter: detected, output: result }
     } catch (error: unknown) {
       const err = error as { stderr?: string }
-      return { formatted: false, formatter: detected, error: err.stderr || "Format failed" }
+      return { formatted: false, formatter: detected, error: err.stderr || "格式化失败" }
     }
   },
 })
