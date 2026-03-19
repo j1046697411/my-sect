@@ -14,3 +14,4 @@ agent: build
 4. 修复问题
 5. 本地验证：`./gradlew compileKotlinJvm`（不需要 Android SDK）
 6. 提交并推送修复
+7. **重要**：提交推送后立即结束，不要等待 CI 运行完成
