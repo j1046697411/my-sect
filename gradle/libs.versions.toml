@@ -10,6 +10,9 @@ dokka = "2.0.0"
 androidx-activity-ktx = "1.10.1"
 androidx-core-ktx = "1.15.0"
 androidx-lifecycle-runtime = "2.8.7"
+kover = "0.9.1"
+flowmvi-core = "3.2.0"
+kodein = "7.26.1"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -20,6 +23,9 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity-ktx" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-runtime" }
+flowmvi-core = { module = "pro.respawn.flowmvi:core", version.ref = "flowmvi-core" }
+kodein = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-ktx" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -27,6 +33,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kotlinx-compose = { id = "org.jetbrains.compose", version.ref = "kotlinx-compose" }
 kotlinx-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 
 android-application = { id = "com.android.application", version.ref = "android-gradle" }
 android-library = { id = "com.android.library", version.ref = "android-gradle" }

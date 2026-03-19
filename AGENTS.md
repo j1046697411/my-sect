@@ -143,13 +143,70 @@ client/
 
 ---
 
+## 依赖管理
+
+**强制规则：所有依赖必须写入 `@gradle/libs.versions.toml`**
+- 禁止在 `build.gradle.kts` 中使用内联版本号（如 `implementation("org.example:lib:1.0")`）
+- 必须通过版本目录引用：`implementation(libs.library.name)`
+- 插件同理：使用 `alias(libs.plugins.plugin.name)` 而非内联版本
+
+**版本目录结构：**
+```toml
+[versions]    # 版本号
+[libraries]   # 库依赖
+[plugins]     # 插件
+```
+
+---
+
 ## 依赖版本
 
 - Kotlin 2.3.10
 - Kotlin Coroutines 1
-- Kotlin Serial.10.2ization 1.10.0
+- Kotlin Serialization 1.10.0
 - Jetpack Compose (BOM 1.10.1)
-- Kodein DI 10.1.0
+- Kodein DI 7.26.1
+
+---
+
+## 禁止模式
+
+**类型安全**
+- 禁止 `as Any`、强制解包 `!!`
+- 禁止 `@Suppress` 抑制警告
+
+**错误处理**
+- 禁止空 catch 块 `catch { }`
+- 禁止使用 `println` 输出错误（应用日志框架）
+
+**导入**
+- 禁止通配符导入 `.*`
+
+**测试**
+- 禁止删除测试使 CI 通过
+
+**文档和注释**
+- 所有文档（README、*.md）和代码注释必须使用中文
+- 禁止在代码或文档中出现英文注释
+
+---
+
+## Git 规范
+
+**提交规则**
+- 所有任务完成后必须通过 `git commit` 提交到本地仓库
+- 提交前确保代码通过 `./gradlew check`
+- 提交信息应清晰描述本次修改的内容和目的
+
+---
+
+## 技术债务
+
+| 问题 | 状态 | 说明 |
+|------|------|------|
+| ktlint/detekt 未配置 | ⚠️ | AGENTS.md 提到但 build.gradle.kts 未应用 |
+| CI/CD 未配置 | ⚠️ | 无 .github/workflows |
+| UI 未连接 GOAP/MVI | ⚠️ | 入口点仅显示静态文本 |
 
 ---
 
