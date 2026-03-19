@@ -20,3 +20,5 @@ node_modules/
 .trae
 .vscode
 .worktrees
+build/dokka/
+*.log
