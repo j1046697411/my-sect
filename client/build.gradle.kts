@@ -12,7 +12,7 @@ plugins {
 kotlin {
     jvm()
     androidTarget()
-
+    
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -46,6 +46,7 @@ kotlin {
         }
     }
 }
+
 
 android {
     namespace = "com.sect.game.client"
