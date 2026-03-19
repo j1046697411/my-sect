@@ -13,9 +13,12 @@ agent: build
    - 如果编译失败，修复问题后重新验证，直到通过
    - 运行 `git add <files>` 暂存修改
    - 运行 `git commit -m "<type>: <description>"` 提交
-3. 如果没有修改：
+ 3. 如果没有修改：
    - 运行 `git fetch origin` 拉取远程最新状态
    - 运行 `git pull origin <branch-name>` 拉取 PR 最新代码
+   - 运行 `gh pr list --head <branch-name>` 获取 PR 编号
+   - 运行 `gh api repos/<owner>/<repo>/pulls/<pr_number>/comments` 获取 PR 评论
+   - 将评论内容添加到上下文，理解需要修复的问题
    - 运行 `git status` 再次确认是否有修改需要提交
 4. 检查当前分支是否已有 PR：运行 `gh pr list --head <branch-name>`
    - 如果没有 PR：运行 `gh pr create --title "<title>" --body "<body>"` 创建 PR
