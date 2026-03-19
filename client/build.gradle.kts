@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.application)
+    alias(libs.plugins.dokka)
 }
 
 kotlin {
@@ -49,5 +50,15 @@ android {
 
     buildFeatures {
         compose = true
+    }
+}
+
+tasks.dokkaHtml {
+    outputDirectory.set(layout.buildDirectory.dir("dokka"))
+    dokkaSourceSets {
+        configureEach {
+            reportUndocumented.set(true)
+            skipDeprecated.set(true)
+        }
     }
 }
