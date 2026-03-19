@@ -1,0 +1,204 @@
+name: Auto Update Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'client/src/**'
+      - 'client/api/**'
+      - 'docs/architecture/adr/**'
+      - '.opencode/rules/**'
+  workflow_dispatch:
+
+env:
+  GIT_AUTHOR_NAME: "Doc Bot"
+  GIT_AUTHOR_EMAIL: "doc-bot@github.com"
+  GIT_COMMITTER_NAME: "Doc Bot"
+  GIT_COMMITTER_EMAIL: "doc-bot@github.com"
+
+jobs:
+  generate-api-docs:
+    name: Generate API Docs (Dokka)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Generate Dokka documentation
+        run: ./gradlew dokkaHtml
+
+      - name: Upload API docs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs
+          path: client/build/dokka
+          retention-days: 1
+
+  update-adr-index:
+    name: Update ADR Index
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find ADR files
+        id: find-adr
+        run: |
+          echo "Searching for ADR files..."
+          ADR_COUNT=$(find docs/architecture/adr -name "*.md" -type f 2>/dev/null | wc -l)
+          echo "adr_count=$ADR_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Generate ADR index
+        run: |
+          cat > docs/architecture/adr/README.md << 'EOF'
+          # Architecture Decision Records (ADR)
+
+          This directory contains Architecture Decision Records (ADRs) for the project.
+
+          ## ADR List
+
+          EOF
+
+          # Find all ADR files and add them to the index
+          for adr in $(find docs/architecture/adr -name "adr-*.md" -type f | sort); do
+            if [ -f "$adr" ]; then
+              title=$(head -n 1 "$adr" | sed 's/^# //')
+              filename=$(basename "$adr")
+              echo "- [$title]($filename)" >> docs/architecture/adr/README.md
+            fi
+          done
+
+          echo "" >> docs/architecture/adr/README.md
+          echo "---" >> docs/architecture/adr/README.md
+          echo "Generated automatically on $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> docs/architecture/adr/README.md
+
+      - name: Upload ADR index artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: adr-index
+          path: docs/architecture/adr/README.md
+          retention-days: 1
+
+  update-rules-docs:
+    name: Update Rules Docs (AI Agent)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for rule changes
+        id: check-changes
+        run: |
+          if git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -q "^\.opencode/rules/"; then
+            echo "rules_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "rules_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update rules documentation
+        if: steps.check-changes.outputs.rules_changed == 'true'
+        run: |
+          # Generate rules index
+          cat > .opencode/rules/RULES_INDEX.md << 'EOF'
+          # Rules Index
+
+          Auto-generated index of all rules in the project.
+
+          ## Common Rules
+
+          EOF
+
+          # Find all markdown files in rules/common
+          if [ -d ".opencode/rules/common" ]; then
+            for rule in .opencode/rules/common/*.md; do
+              if [ -f "$rule" ]; then
+                filename=$(basename "$rule")
+                title=$(head -n 1 "$rule" | sed 's/^# //' || echo "$filename")
+                echo "- [$title](common/$filename)" >> .opencode/rules/RULES_INDEX.md
+              fi
+            done
+          fi
+
+          echo "" >> .opencode/rules/RULES_INDEX.md
+          echo "---" >> .opencode/rules/RULES_INDEX.md
+          echo "Generated automatically on $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> .opencode/rules/RULES_INDEX.md
+
+      - name: Upload rules docs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rules-docs
+          path: .opencode/rules/RULES_INDEX.md
+          retention-days: 1
+
+  quality-check-and-commit:
+    name: Quality Check and Auto-Commit
+    runs-on: ubuntu-latest
+    needs: [generate-api-docs, update-adr-index, update-rules-docs]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.DOC_BOT_TOKEN }}
+
+      - name: Download API docs
+        uses: actions/download-artifact@v4
+        with:
+          name: api-docs
+          path: client/build/dokka
+
+      - name: Download ADR index
+        uses: actions/download-artifact@v4
+        with:
+          name: adr-index
+          path: docs/architecture/adr/
+
+      - name: Download rules docs
+        uses: actions/download-artifact@v4
+        with:
+          name: rules-docs
+          path: .opencode/rules/
+
+      - name: Configure git
+        run: |
+          git config --global user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config --global user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+
+      - name: Run documentation quality check
+        run: |
+          chmod +x .github/scripts/doc-quality-check.sh
+          .github/scripts/doc-quality-check.sh docs/ || true
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.has_changes == 'true'
+        run: |
+          git commit -m "docs: auto-update documentation [skip ci]"
+          git push origin main

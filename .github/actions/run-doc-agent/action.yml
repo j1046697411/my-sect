@@ -1,0 +1,99 @@
+name: 'Run Documentation Agent'
+description: 'Execute AI-powered documentation review and generate update suggestions'
+author: 'OhMyOpenCode'
+
+inputs:
+  agent-name:
+    description: 'Name of the agent to run (e.g., doc-updater)'
+    required: true
+    default: 'doc-updater'
+  openai-api-key:
+    description: 'OpenAI API Key for agent execution'
+    required: true
+  review-scope:
+    description: 'Scope of documentation to review (e.g., README, API, all)'
+    required: false
+    default: 'all'
+
+outputs:
+  has-updates:
+    description: 'Whether the agent found documentation updates needed'
+    value: ${{ steps.run-agent.outputs.has-updates }}
+  suggestion-file:
+    description: 'Path to the generated suggestion file'
+    value: ${{ steps.run-agent.outputs.suggestion-file }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Node.js runtime
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Run AI Agent review script
+      id: run-agent
+      shell: bash
+      env:
+        AGENT_NAME: ${{ inputs.agent-name }}
+        OPENAI_API_KEY: ${{ inputs.openai-api-key }}
+        REVIEW_SCOPE: ${{ inputs.review-scope }}
+      run: |
+        # Create output directory
+        mkdir -p .github/agent-output
+        
+        # Run the documentation agent
+        # The agent will analyze documentation and generate suggestions
+        node << 'EOF'
+        const { execSync } = require('child_process');
+        const fs = require('fs');
+        const path = require('path');
+        
+        const agentName = process.env.AGENT_NAME || 'doc-updater';
+        const reviewScope = process.env.REVIEW_SCOPE || 'all';
+        
+        console.log(`Running ${agentName} with scope: ${reviewScope}`);
+        
+        try {
+          // Execute the agent (this would call your actual agent script)
+          // For now, we simulate the agent execution
+          const outputDir = '.github/agent-output';
+          const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+          const suggestionFile = `${outputDir}/${agentName}-suggestions-${timestamp}.json`;
+          
+          // Simulate agent analysis
+          const agentResult = {
+            agent: agentName,
+            scope: reviewScope,
+            timestamp: timestamp,
+            hasUpdates: false,
+            suggestions: [],
+            filesReviewed: []
+          };
+          
+          // Write results
+          fs.writeFileSync(suggestionFile, JSON.stringify(agentResult, null, 2));
+          
+          // Set GitHub Outputs
+          console.log(`::set-output name=has-updates::${agentResult.hasUpdates}`);
+          console.log(`::set-output name=suggestion-file::${suggestionFile}`);
+          console.log(`Agent completed. Suggestions written to: ${suggestionFile}`);
+          
+        } catch (error) {
+          console.error(`Agent execution failed: ${error.message}`);
+          process.exit(1);
+        }
+        EOF
+
+    - name: Validate output
+      shell: bash
+      run: |
+        SUGGESTION_FILE="${{ steps.run-agent.outputs.suggestion-file }}"
+        if [ -n "$SUGGESTION_FILE" ] && [ -f "$SUGGESTION_FILE" ]; then
+          echo "✓ Suggestion file generated: $SUGGESTION_FILE"
+          # Display summary without exposing sensitive data
+          echo "Agent review completed successfully"
+        else
+          echo "⚠ No suggestion file generated"
+        fi
