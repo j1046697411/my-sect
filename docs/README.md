@@ -1,10 +1,10 @@
-# Documentation
+# 文档
 
-Welcome to the Clever Knight documentation.
+欢迎来到 Clever Knight 文档中心。
 
-## Navigation
+## 导航
 
-- **[Architecture](architecture/)** - System architecture and design decisions
-  - **[ADR](architecture/adr/)** - Architecture Decision Records
-- **[API](api/)** - API documentation and reference
-- **[Guides](guides/)** - User and developer guides
+- **[架构](architecture/)** - 系统架构和设计决策
+  - **[ADR](architecture/adr/)** - 架构决策记录
+- **[API](api/)** - API 文档和参考
+- **[指南](guides/)** - 用户和开发者指南

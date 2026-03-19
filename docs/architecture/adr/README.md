@@ -6,7 +6,7 @@
 
 | 编号 | 标题 | 日期 | 状态 |
 |------|------|------|------|
-| [001](001-document-management-system.md) | Document Management System | 2026-03-19 | accepted |
+| [001](001-document-management-system.md) | 文档管理系统 | 2026-03-19 | accepted |
 
 ## 什么是 ADR
 
