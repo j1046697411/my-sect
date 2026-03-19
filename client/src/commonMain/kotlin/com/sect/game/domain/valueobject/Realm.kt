@@ -13,11 +13,12 @@ enum class Realm(val order: Int) {
 
     /**
      * Returns the next realm in the cultivation path.
-     * Wraps around to the first realm after the last.
+     * Returns null if already at maximum realm (化神).
      */
-    fun next(): Realm {
-        val nextOrder = (order % 5) + 1
-        return entries.first { it.order == nextOrder }
+    fun next(): Realm? {
+        if (this == 化神) return null
+        val nextOrder = order + 1
+        return entries.find { it.order == nextOrder }
     }
 
     companion object {

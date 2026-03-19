@@ -70,7 +70,6 @@ class GameContainer {
         discipleResult.onSuccess { newDisciple ->
             val addResult = currentSect.addDisciple(newDisciple)
             addResult.onSuccess {
-                sect = currentSect
                 _state.value = _state.value.copy(
                     sectName = currentSect.name,
                     resources = currentSect.resources,
@@ -93,7 +92,6 @@ class GameContainer {
         val id = DiscipleId(discipleId)
         val result = currentSect.removeDisciple(id)
         result.onSuccess { removed ->
-            sect = currentSect
             _state.value = _state.value.copy(
                 disciples = currentSect.disciples.values.toList()
             )

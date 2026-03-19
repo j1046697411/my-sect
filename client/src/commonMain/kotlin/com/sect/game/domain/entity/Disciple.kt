@@ -78,10 +78,9 @@ data class Disciple(
                 cultivationProgress < 100 -> throw CultivationException.InsufficientProgressException(
                     id.value, cultivationProgress
                 )
-                realm == Realm.化神 -> throw CultivationException.MaxRealmReachedException(id.value, realm.name)
             }
             
-            realm.next()
+            realm.next() ?: throw CultivationException.MaxRealmReachedException(id.value, realm.name)
         }
     }
 

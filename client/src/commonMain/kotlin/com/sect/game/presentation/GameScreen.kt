@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.sect.game.domain.entity.Disciple
 import com.sect.game.domain.entity.Resources
+import com.sect.game.domain.valueobject.Attributes
 import com.sect.game.mvi.GameContainer
 import com.sect.game.mvi.GameIntent
 import com.sect.game.presentation.theme.SectColors
@@ -73,7 +74,10 @@ fun GameScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { },
+                onClick = {
+                    val newDiscipleName = "弟子${state.disciples.size + 1}"
+                    container.processIntent(GameIntent.CreateDisciple(newDiscipleName, Attributes.DEFAULT))
+                },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Text(

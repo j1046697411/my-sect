@@ -47,7 +47,7 @@ data class Sect(
         }
     }
 
-    fun spendResources(resourcesToSpend: Resources): Result<Unit> {
+    fun spendResources(resourcesToSpend: Resources): Result<Sect> {
         return Result.runCatching {
             if (!this@Sect.resources.isAffordable(resourcesToSpend)) {
                 throw SectException.InsufficientResourcesException(
@@ -59,6 +59,8 @@ data class Sect(
                     this@Sect.resources.pills
                 )
             }
+            val newResources = this@Sect.resources - resourcesToSpend
+            copy(resources = newResources)
         }
     }
 
@@ -66,7 +68,7 @@ data class Sect(
         return copy(resources = resources + resourcesToAdd)
     }
 
-    fun spendSpecificResource(type: ResourceType, amount: Int): Result<Unit> {
+    fun spendSpecificResource(type: ResourceType, amount: Int): Result<Sect> {
         return Result.runCatching {
             require(amount >= 0) { "amount must be non-negative, but was $amount" }
             val newResources = when (type) {
