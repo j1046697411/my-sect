@@ -1,18 +1,26 @@
 package com.sect.game.data.storage
 
+import android.content.Context
 import java.io.File
 import java.io.IOException
 
-class JvmGameStorage(
-    private val saveFileName: String = "game_save.json"
+private lateinit var appContext: Context
+
+fun initializeAndroidContext(context: Context) {
+    appContext = context.applicationContext
+}
+
+actual fun createPlatformStorage(): PlatformGameStorage = AndroidGameStorage()
+
+class AndroidGameStorage(
+    private val fileName: String = "game_save.json"
 ) : PlatformGameStorage {
 
     private val saveFile: File
-        get() = File(System.getProperty("user.home"), ".sect-game/$saveFileName")
+        get() = File(appContext.filesDir, fileName)
 
     override fun writeToFile(content: String) {
         try {
-            saveFile.parentFile?.mkdirs()
             saveFile.writeText(content)
         } catch (e: IOException) {
             throw GameStorageException.SaveWriteException(e)

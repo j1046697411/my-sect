@@ -1,28 +1,44 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.kotlinx.compose)
-    alias(libs.plugins.kotlinx.compose.compiler)
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.dokka)
     alias(libs.plugins.kover)
     alias(libs.plugins.detekt)
 }
 
+android {
+    namespace = "com.sect.game.client"
+    compileSdk = libs.versions.android.compile.sdk.get().toInt()
+
+    defaultConfig {
+        minSdk = libs.versions.android.min.sdk.get().toInt()
+    }
+}
+
 kotlin {
-    jvm()
-    androidTarget()
-    
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
+    jvm("desktop")
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.coroutines.swing)
                 implementation(libs.kotlinx.serialization.json)
-                implementation(compose.material3)
-                implementation(libs.flowmvi.core)
+                implementation(libs.compose.material3)
                 implementation(libs.kodein)
-                implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
             }
         }
 
@@ -32,10 +48,9 @@ kotlin {
             }
         }
 
-        val jvmMain by getting {
+        val desktopMain by getting {
             dependencies {
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.kotlinx.serialization.json)
+                implementation(compose.desktop.currentOs)
             }
             resources.srcDirs("src/jvmMain/resources")
         }
@@ -43,29 +58,21 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.android)
-                implementation(libs.androidx.activity.ktx)
                 implementation(libs.androidx.activity.compose)
             }
         }
     }
 }
 
+compose.desktop {
+    application {
+        mainClass = "com.sect.game.client.MainKt"
 
-android {
-    namespace = "com.sect.game.client"
-    compileSdk = libs.versions.android.target.sdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.android.min.sdk.get().toInt()
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    buildFeatures {
-        compose = true
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "SectMvp"
+            packageVersion = "1.0.0"
+        }
     }
 }
 
