@@ -51,6 +51,7 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
             }
             resources.srcDirs("src/jvmMain/resources")
         }
