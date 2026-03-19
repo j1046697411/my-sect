@@ -1,0 +1,15 @@
+# FlowMVI Stability Configuration
+# This file defines which classes should be considered stable for state comparison
+# Format: fully.qualified.ClassName
+
+# Domain value objects - should be stable
+com.sect.game.domain.valueobject.*
+
+# Domain entities - should be stable
+com.sect.game.domain.entity.*
+
+# GOAP core interfaces - should be stable
+com.sect.game.goap.core.*
+
+# MVI components - should be stable
+com.sect.game.mvi.*

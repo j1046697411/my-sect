@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.android.application)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
@@ -18,6 +19,8 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(compose.material3)
+                implementation(libs.flowmvi.core)
+                implementation(libs.kodein)
             }
         }
 
@@ -27,11 +30,18 @@ kotlin {
             }
         }
 
+        val jvmMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.serialization.json)
+            }
+        }
+
         val androidMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.android)
-                implementation("androidx.activity:activity-ktx:1.10.1")
-                implementation("androidx.activity:activity-compose:1.10.1")
+                implementation(libs.androidx.activity.ktx)
+                implementation(libs.androidx.activity.compose)
             }
         }
     }
