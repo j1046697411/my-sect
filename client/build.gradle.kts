@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.dokka)
     alias(libs.plugins.kover)
+    alias(libs.plugins.detekt)
 }
 
 kotlin {
@@ -21,6 +22,7 @@ kotlin {
                 implementation(compose.material3)
                 implementation(libs.flowmvi.core)
                 implementation(libs.kodein)
+                implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
             }
         }
 
@@ -35,6 +37,7 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serialization.json)
             }
+            resources.srcDirs("src/jvmMain/resources")
         }
 
         val androidMain by getting {
@@ -74,4 +77,24 @@ tasks.dokkaHtml {
             skipDeprecated.set(true)
         }
     }
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom(file("detekt.yml"))
+    source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
+}
+
+tasks.register<Copy>("copyDetektServices") {
+    from(file("src/jvmMain/resources/META-INF/services"))
+    into(layout.buildDirectory.dir("classes/kotlin/jvm/main/META-INF/services"))
+    dependsOn("compileKotlinJvm")
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    dependsOn("copyDetektServices")
+}
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    dependsOn(tasks.named("compileKotlinJvm"))
 }

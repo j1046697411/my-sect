@@ -1,0 +1,20 @@
+config:
+  validation: true
+  warningsAsErrors: false
+  excludes: 'no-chinese-in-test-method.*'
+
+processors:
+  active: true
+  exclude:
+    - '**/detekt/**/*.class'
+
+build:
+  maxIssues: 200
+
+output-reports:
+  active: true
+
+no-chinese-in-test-method:
+  active: true
+  NoChineseInTestMethodName:
+    active: true
