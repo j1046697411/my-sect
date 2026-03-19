@@ -67,6 +67,12 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packaging {
+        resources {
+            excludes += "kotlin/internal/internal.kotlin_builtins"
+        }
+    }
 }
 
 tasks.dokkaHtml {
