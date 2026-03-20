@@ -115,38 +115,6 @@ tasks.dokkaHtml {
             reportUndocumented.set(true)
             skipDeprecated.set(true)
         }
-        register("businessDomain") {
-            sourceRoot(file("../business/domain/src/commonMain/kotlin"))
-            displayName.set("domain")
-        }
-        register("businessEngine") {
-            sourceRoot(file("../business/engine/src/commonMain/kotlin"))
-            displayName.set("engine")
-        }
-        register("businessGoap") {
-            sourceRoot(file("../business/goap/src/commonMain/kotlin"))
-            displayName.set("goap")
-        }
-        register("businessGoapFramework") {
-            sourceRoot(file("../business/goap-framework/src/commonMain/kotlin"))
-            displayName.set("goap-framework")
-        }
-        register("businessMvi") {
-            sourceRoot(file("../business/mvi/src/commonMain/kotlin"))
-            displayName.set("mvi")
-        }
-        register("businessPresentation") {
-            sourceRoot(file("../business/presentation/src/commonMain/kotlin"))
-            displayName.set("presentation")
-        }
-        register("businessFeatureGame") {
-            sourceRoot(file("../business/feature-game/src/commonMain/kotlin"))
-            displayName.set("feature-game")
-        }
-        register("businessData") {
-            sourceRoot(file("../business/data/src/commonMain/kotlin"))
-            displayName.set("data")
-        }
     }
 }
 

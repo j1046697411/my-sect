@@ -12,7 +12,7 @@ jobs:
   generate-docs:
     name: Generate Dokka Documentation
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,13 +26,21 @@ jobs:
           distribution: 'temurin'
 
       - name: Generate Dokka Documentation
-        run: ./gradlew :client:dokkaHtml
+        run: |
+          ./gradlew :business:domain:dokkaHtml
+          ./gradlew :business:goap-framework:dokkaHtml
+          ./gradlew :business:goap:dokkaHtml
+          ./gradlew :business:mvi:dokkaHtml
+          ./gradlew :business:data:dokkaHtml
+          ./gradlew :business:engine:dokkaHtml
+          ./gradlew :business:feature-game:dokkaHtml
+          ./gradlew :business:presentation:dokkaHtml
 
       - name: Upload documentation artifact
         uses: actions/upload-artifact@v4
         with:
           name: dokka-docs
-          path: client/build/dokka
+          path: business/*/build/dokka
           retention-days: 1
 
   review-docs:
@@ -50,7 +58,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dokka-docs
-          path: client/build/dokka
+          path: dokka-docs
 
       - name: Run documentation review
         id: review
@@ -59,7 +67,7 @@ jobs:
           echo "" >> review-report.md
           echo "### Generated Documentation" >> review-report.md
           echo "- ✅ Dokka documentation generated successfully" >> review-report.md
-          echo "- 📁 Location: build/dokka/html" >> review-report.md
+          echo "- 📁 Location: business/*/build/dokka" >> review-report.md
           echo "" >> review-report.md
           echo "### Review Summary" >> review-report.md
           echo "- Documentation structure: OK" >> review-report.md
