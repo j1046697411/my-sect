@@ -1,4 +1,4 @@
-package com.sect.game.detekt
+package com.sect.game.tools.detekt
 
 import io.gitlab.arturbosch.detekt.api.CodeSmell
 import io.gitlab.arturbosch.detekt.api.Config

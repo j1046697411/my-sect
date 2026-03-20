@@ -46,7 +46,6 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.compose.material3)
                 implementation(libs.kodein)
-                implementation(libs.gitlab.detekt.api)
                 implementation(libs.flowmvi.core)
                 implementation(libs.flowmvi.compose)
             }
@@ -62,7 +61,6 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.compose.material3)
-                implementation(libs.gitlab.detekt.api)
                 implementation(libs.flowmvi.compose)
             }
             resources.srcDirs("src/jvmMain/resources")
@@ -115,8 +113,11 @@ tasks.dokkaHtml {
 
 detekt {
     buildUponDefaultConfig = true
-    config.setFrom(file("detekt.yml"))
+    config.setFrom(files("../tools/detekt-rules/detekt.yml"))
     source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
+    dependencies {
+        detektPlugins(project(":tools:detekt-rules"))
+    }
 }
 
 ktlint {
