@@ -27,3 +27,7 @@ kotlin {
 application {
     mainClass.set("com.sect.game.client.MainKt")
 }
+
+tasks.withType<AbstractArchiveTask> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
