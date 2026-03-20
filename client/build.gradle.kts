@@ -91,16 +91,6 @@ detekt {
     source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
 }
 
-tasks.register<Copy>("copyDetektServices") {
-    from(file("src/jvmMain/resources/META-INF/services"))
-    into(layout.buildDirectory.dir("classes/kotlin/jvm/main/META-INF/services"))
-    dependsOn("compileKotlinJvm")
-}
-
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    dependsOn("copyDetektServices")
-}
-
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     dependsOn(tasks.named("compileKotlinJvm"))
 }
