@@ -53,7 +53,6 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
             }
-            resources.srcDirs("src/jvmMain/resources")
         }
 
         val androidMain by getting {
@@ -91,18 +90,4 @@ detekt {
     buildUponDefaultConfig = true
     config.setFrom(file("detekt.yml"))
     source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
-}
-
-tasks.register<Copy>("copyDetektServices") {
-    from(file("src/jvmMain/resources/META-INF/services"))
-    into(layout.buildDirectory.dir("classes/kotlin/jvm/main/META-INF/services"))
-    dependsOn("compileKotlinJvm")
-}
-
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    dependsOn("copyDetektServices")
-}
-
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    dependsOn(tasks.named("compileKotlinJvm"))
 }
