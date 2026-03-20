@@ -47,12 +47,19 @@ kotlin {
                 implementation(libs.kodein)
                 implementation(libs.flowmvi.core)
                 implementation(libs.flowmvi.compose)
+                implementation(project(":business:presentation"))
+                implementation(project(":business:feature-game"))
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
+                implementation(project(":business:domain"))
+                implementation(project(":business:engine"))
+                implementation(project(":business:data"))
+                implementation(project(":business:goap"))
+                implementation(project(":business:goap-framework"))
             }
         }
 

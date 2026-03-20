@@ -1,0 +1,25 @@
+plugins {
+    alias(libs.plugins.kotlinMultiplatform)
+}
+
+kotlin {
+    jvm("desktop")
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(project(":business:goap-framework"))
+                implementation(project(":business:goap"))
+                implementation(project(":business:domain"))
+                implementation(libs.kotlinx.coroutines.core)
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(project(":business:goap"))
+                implementation(project(":business:domain"))
+                implementation(libs.kotlin.test)
+            }
+        }
+        val desktopMain by getting { }
+    }
+}
