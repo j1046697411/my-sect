@@ -12,16 +12,17 @@ object RestGoal {
             Condition.lessThan("fatigue", 20),
         )
 
+    private val template = GoalTemplate(
+        id = ID,
+        name = "休息",
+        priority = PRIORITY,
+        conditions = targetConditions,
+        targetState = WorldState().withValue("fatigue", 20),
+    )
+
     fun isSatisfied(state: WorldState): Boolean {
         return (state.getValue("fatigue") ?: 100) < 20
     }
 
-    fun create(): SimpleGoal {
-        return SimpleGoal(
-            id = ID,
-            priority = PRIORITY,
-            targetConditions = targetConditions,
-            satisfied = ::isSatisfied,
-        )
-    }
+    fun create(): SimpleGoal = template.toGoal(::isSatisfied)
 }

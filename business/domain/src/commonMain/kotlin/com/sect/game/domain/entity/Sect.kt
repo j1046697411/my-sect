@@ -69,64 +69,6 @@ data class Sect(
         return copy(resources = resources + resourcesToAdd)
     }
 
-    fun spendSpecificResource(
-        type: ResourceType,
-        amount: Int,
-    ): Result<Sect> {
-        return Result.runCatching {
-            require(amount >= 0) { "amount must be non-negative, but was $amount" }
-            val newResources =
-                when (type) {
-                    ResourceType.SPIRIT_STONES -> {
-                        if (resources.spiritStones < amount) {
-                            throw SectException.InsufficientResourcesException(
-                                amount,
-                                0,
-                                0,
-                                resources.spiritStones,
-                                resources.herbs,
-                                resources.pills,
-                            )
-                        }
-                        resources.copy(spiritStones = resources.spiritStones - amount)
-                    }
-                    ResourceType.HERBS -> {
-                        if (resources.herbs < amount) {
-                            throw SectException.InsufficientResourcesException(
-                                0,
-                                amount,
-                                0,
-                                resources.spiritStones,
-                                resources.herbs,
-                                resources.pills,
-                            )
-                        }
-                        resources.copy(herbs = resources.herbs - amount)
-                    }
-                    ResourceType.PILLS -> {
-                        if (resources.pills < amount) {
-                            throw SectException.InsufficientResourcesException(
-                                0,
-                                0,
-                                amount,
-                                resources.spiritStones,
-                                resources.herbs,
-                                resources.pills,
-                            )
-                        }
-                        resources.copy(pills = resources.pills - amount)
-                    }
-                }
-            copy(resources = newResources)
-        }
-    }
-
-    enum class ResourceType {
-        SPIRIT_STONES,
-        HERBS,
-        PILLS,
-    }
-
     companion object {
         fun create(
             id: SectId,

@@ -68,26 +68,6 @@ object GameErrorHandler {
         System.err.println("${prefix}Error: ${error.message}")
         error.printStackTrace()
     }
-
-    fun shouldRetry(error: Throwable): Boolean {
-        return when (error) {
-            is StorageException.SaveFailedException -> true
-            is StorageException.LoadFailedException -> true
-            is GoapException.PlanningFailedException -> false
-            is CultivationException.MaxRealmReachedException -> false
-            is SectException.AtCapacityException -> false
-            else -> true
-        }
-    }
-
-    fun getRetryStrategy(error: Throwable): RetryConfig {
-        return when (error) {
-            is StorageException.SaveFailedException -> DefaultRetryConfig(maxAttempts = 5, delayMs = 200L)
-            is StorageException.LoadFailedException -> DefaultRetryConfig(maxAttempts = 3, delayMs = 500L)
-            is GoapException.PlanningFailedException -> DefaultRetryConfig(maxAttempts = 1, delayMs = 0L)
-            else -> DefaultRetryConfig()
-        }
-    }
 }
 
 fun <T> Result<T>.toUserMessage(): String {

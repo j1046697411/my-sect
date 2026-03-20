@@ -8,6 +8,10 @@ import com.sect.game.presentation.theme.SectTheme
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.logging.Logger
+import java.util.logging.Level
+
+private val logger = Logger.getLogger("GameClient")
 
 fun main() =
     application {
@@ -24,13 +28,13 @@ fun main() =
             container.effects.collectLatest { effect ->
                 when (effect) {
                     is com.sect.game.feature.game.contract.GameAction.ShowError -> {
-                        println("错误: ${effect.message}")
+                        logger.log(Level.SEVERE, "错误: ${effect.message}")
                     }
                     is com.sect.game.feature.game.contract.GameAction.ShowSuccess -> {
-                        println("提示: ${effect.message}")
+                        logger.log(Level.INFO, "提示: ${effect.message}")
                     }
                     is com.sect.game.feature.game.contract.GameAction.NavigateToDiscipleDetail -> {
-                        println("导航到弟子详情")
+                        logger.log(Level.FINE, "导航到弟子详情")
                     }
                 }
             }

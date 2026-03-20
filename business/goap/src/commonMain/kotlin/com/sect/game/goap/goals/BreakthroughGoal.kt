@@ -13,18 +13,19 @@ object BreakthroughGoal {
             Condition.greaterThan("readiness", 80),
         )
 
+    private val template = GoalTemplate(
+        id = ID,
+        name = "突破",
+        priority = PRIORITY,
+        conditions = targetConditions,
+        targetState = WorldState().withValue("cultivationProgress", 100),
+    )
+
     fun isSatisfied(state: WorldState): Boolean {
         val progress = state.getValue("cultivationProgress") ?: 0
         val readiness = state.getValue("readiness") ?: 0
         return progress >= 100 && readiness > 80
     }
 
-    fun create(): SimpleGoal {
-        return SimpleGoal(
-            id = ID,
-            priority = PRIORITY,
-            targetConditions = targetConditions,
-            satisfied = ::isSatisfied,
-        )
-    }
+    fun create(): SimpleGoal = template.toGoal(::isSatisfied)
 }
