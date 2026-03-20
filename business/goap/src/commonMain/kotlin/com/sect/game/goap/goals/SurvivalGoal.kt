@@ -12,16 +12,17 @@ object SurvivalGoal {
             Condition.greaterThanOrEqual("health", 80),
         )
 
+    private val template = GoalTemplate(
+        id = ID,
+        name = "生存",
+        priority = PRIORITY,
+        conditions = targetConditions,
+        targetState = WorldState().withValue("health", 80),
+    )
+
     fun isSatisfied(state: WorldState): Boolean {
         return (state.getValue("health") ?: 0) >= 80
     }
 
-    fun create(): SimpleGoal {
-        return SimpleGoal(
-            id = ID,
-            priority = PRIORITY,
-            targetConditions = targetConditions,
-            satisfied = ::isSatisfied,
-        )
-    }
+    fun create(): SimpleGoal = template.toGoal(::isSatisfied)
 }

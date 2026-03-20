@@ -12,16 +12,17 @@ object CultivationGoal {
             Condition.greaterThanOrEqual("cultivationProgress", 100),
         )
 
+    private val template = GoalTemplate(
+        id = ID,
+        name = "修炼",
+        priority = PRIORITY,
+        conditions = targetConditions,
+        targetState = WorldState().withValue("cultivationProgress", 100),
+    )
+
     fun isSatisfied(state: WorldState): Boolean {
         return (state.getValue("cultivationProgress") ?: 0) >= 100
     }
 
-    fun create(): SimpleGoal {
-        return SimpleGoal(
-            id = ID,
-            priority = PRIORITY,
-            targetConditions = targetConditions,
-            satisfied = ::isSatisfied,
-        )
-    }
+    fun create(): SimpleGoal = template.toGoal(::isSatisfied)
 }

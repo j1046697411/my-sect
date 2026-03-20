@@ -2,6 +2,11 @@
 
 这是一个使用 Gradle 构建的 Kotlin Multiplatform 项目，采用 Compose 作为 UI 框架。
 
+## 强制说明 (严禁删除)
+所有目录下的 `AGENTS.md` 文件用于帮助 Agent 分析目录结构并提供引导。
+项目的文档及注释请使用中文。
+如需向用户提问，也必须使用中文。
+
 ## 构建命令
 
 ### Gradle Wrapper
