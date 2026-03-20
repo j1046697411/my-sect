@@ -28,8 +28,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import com.sect.game.domain.valueobject.Attributes
-import com.sect.game.mvi.GameContainer
-import com.sect.game.mvi.GameIntent
+import com.sect.game.feature.game.container.GameContainer
+import com.sect.game.feature.game.contract.GameIntent
 import kotlin.random.Random
 
 private val CHINESE_SURNAMES = listOf(

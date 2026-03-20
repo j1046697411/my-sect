@@ -1,4 +1,4 @@
-package com.sect.game.presentation
+package com.sect.game.feature.game.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -33,13 +32,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.sect.game.domain.entity.Disciple
 import com.sect.game.domain.entity.Resources
 import com.sect.game.domain.valueobject.Attributes
-import com.sect.game.mvi.GameContainer
-import com.sect.game.mvi.GameIntent
+import com.sect.game.feature.game.contract.GameAction
+import com.sect.game.feature.game.contract.GameIntent
+import com.sect.game.feature.game.contract.GameState
+import com.sect.game.feature.game.container.GameContainer
+import com.sect.game.presentation.DiscipleCard
 import com.sect.game.presentation.theme.SectColors
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -93,26 +96,60 @@ fun GameScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            when {
-                state.isLoading -> {
-                    LoadingContent()
-                }
-                state.error != null -> {
-                    ErrorContent(
-                        message = state.error ?: "未知错误",
-                        onRetry = { container.processIntent(GameIntent.LoadGame) }
-                    )
-                }
-                state.disciples.isEmpty() -> {
-                    EmptyContent()
-                }
-                else -> {
-                    DiscipleList(
-                        disciples = state.disciples,
-                        onDiscipleClick = onDiscipleClick
-                    )
-                }
-            }
+            GameContent(
+            state = state,
+            onDiscipleClick = onDiscipleClick,
+            onRetry = { container.processIntent(GameIntent.LoadGame) }
+        )
+        }
+    }
+}
+
+@Composable
+private fun GameContent(
+    state: GameState,
+    onDiscipleClick: (Disciple) -> Unit,
+    onRetry: () -> Unit
+) {
+    when {
+        state.isLoading -> {
+            LoadingContent()
+        }
+        state.error != null -> {
+            ErrorContent(
+                message = state.error,
+                onRetry = onRetry
+            )
+        }
+        state.disciples.isEmpty() -> {
+            EmptyContent()
+        }
+        else -> {
+            DiscipleList(
+                disciples = state.disciples,
+                onDiscipleClick = onDiscipleClick
+            )
+        }
+    }
+}
+
+@Composable
+private fun DiscipleList(
+    disciples: List<Disciple>,
+    onDiscipleClick: (Disciple) -> Unit
+) {
+    LazyColumn(
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(
+            items = disciples,
+            key = { it.id.value }
+        ) { disciple ->
+            DiscipleCard(
+                disciple = disciple,
+                onExpandClick = { onDiscipleClick(disciple) }
+            )
         }
     }
 }
@@ -145,7 +182,7 @@ private fun ResourcesBar(resources: Resources) {
 private fun ResourceItem(
     label: String,
     value: String,
-    color: androidx.compose.ui.graphics.Color
+    color: Color
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -161,110 +198,6 @@ private fun ResourceItem(
             style = MaterialTheme.typography.bodySmall,
             color = color
         )
-    }
-}
-
-@Composable
-private fun DiscipleList(
-    disciples: List<Disciple>,
-    onDiscipleClick: (Disciple) -> Unit
-) {
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        items(
-            items = disciples,
-            key = { it.id.value }
-        ) { disciple ->
-            DiscipleCard(
-                disciple = disciple,
-                onClick = { onDiscipleClick(disciple) }
-            )
-        }
-    }
-}
-
-@Composable
-private fun DiscipleCard(
-    disciple: Disciple,
-    onClick: () -> Unit
-) {
-    Card(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primaryContainer),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = disciple.name.firstOrNull()?.toString() ?: "?",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
-            }
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = disciple.name,
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = disciple.realm.toString(),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    StatLabel(label = "修炼", value = "${disciple.cultivationProgress}%")
-                    StatLabel(label = "疲劳", value = "${disciple.fatigue}%")
-                    StatLabel(label = "健康", value = "${disciple.health}%")
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun StatLabel(label: String, value: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.primary
-        )
-        Text(
-            text = label,
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
-@Composable
-private fun LoadingContent() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
     }
 }
 
@@ -300,6 +233,16 @@ private fun ErrorContent(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun LoadingContent() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
     }
 }
 

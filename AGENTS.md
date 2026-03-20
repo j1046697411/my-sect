@@ -38,9 +38,8 @@
 ### 代码质量
 | 命令 | 描述 |
 |------|------|
-| `./gradlew ktlintCheck` | 运行 Kotlin linter |
-| `./gradlew ktlintFormat` | 自动修复 lint 问题 |
-| `./gradlew detekt` | 静态代码分析 |
+| `./gradlew detekt` | 静态代码分析（已配置自定义规则）|
+| `./gradlew koverReport` | 生成覆盖率报告 |
 
 ### 清理和重新构建
 | 命令 | 描述 |
@@ -118,6 +117,51 @@ fun calculateScore(): Int {
 - 使用仓储模式抽象数据访问
 - 将平台特定代码放在对应的源集中
 
+### FlowMVI 架构
+
+本项目使用 **FlowMVI** 框架实现 MVI（Model-View-Intent）架构。
+
+#### 核心概念
+
+| 概念 | 说明 | 实现 |
+|------|------|------|
+| **State** | UI 显示的状态 | 实现 `MVIState` 接口 |
+| **Intent** | 用户操作或系统事件 | 实现 `MVIIntent` 接口 |
+| **Action** | 副作用（如弹窗、导航） | 实现 `MVIAction` 接口 |
+| **Store** | 处理 Intent 并更新 State | 使用 `store()` 构建器 |
+| **Container** | Store 的包装器，提供依赖注入 | 实现 `Container` 接口 |
+
+#### 项目模块结构
+
+```
+client/src/commonMain/kotlin/com/sect/game/
+├── mvi/                              # MVI 基础设施层
+│   ├── base/                         # 基础抽象
+│   │   └── MviContract.kt
+│   └── extensions/                   # FlowMVI 集成扩展
+│       └── FlowMviExt.kt
+│
+├── feature/                          # 功能模块（可独立演进）
+│   ├── game/                         # 游戏主模块
+│   │   ├── contract/                # 契约（State/Intent/Action）
+│   │   │   └── GameContract.kt
+│   │   ├── container/               # 容器
+│   │   │   ├── GameContainer.kt
+│   │   │   └── GameReducer.kt
+│   │   └── presentation/            # 界面
+│   │       └── GameScreen.kt
+│   │
+│   ├── disciple/                     # 弟子模块（后期扩展）
+│   │   └── ...
+│   │
+│   └── sect/                        # 宗门模块（后期扩展）
+│       └── ...
+│
+└── presentation/                     # 共享 UI 组件
+    └── common/
+        └── CreateDiscipleDialog.kt
+```
+
 ### 测试
 - 最低 80% 测试覆盖率
 - 单元测试使用 `kotlin-test` 框架
@@ -161,11 +205,12 @@ client/
 
 ## 依赖版本
 
-- Kotlin 2.3.10
-- Kotlin Coroutines 1
-- Kotlin Serialization 1.10.0
-- Jetpack Compose (BOM 1.10.1)
+- Kotlin 2.2.0
+- Kotlin Coroutines 1.10.2
+- Kotlin Serialization 1.8.0
+- Jetpack Compose 1.11.0-alpha04
 - Kodein DI 7.26.1
+- FlowMVI 3.2.0
 
 ---
 
@@ -204,9 +249,10 @@ client/
 
 | 问题 | 状态 | 说明 |
 |------|------|------|
-| ktlint/detekt 未配置 | ⚠️ | AGENTS.md 提到但 build.gradle.kts 未应用 |
-| CI/CD 未配置 | ⚠️ | 无 .github/workflows |
 | UI 未连接 GOAP/MVI | ⚠️ | 入口点仅显示静态文本 |
+| 自定义 detekt 规则 | ✅ | NoChineseInTestMethodName 已实现 |
+| CI/CD | ✅ | .github/workflows/ci.yml 已配置 |
+| ktlint | ⚠️ | 未配置（仅使用 detekt）|
 
 ---
 
