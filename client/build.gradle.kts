@@ -45,7 +45,9 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.compose.material3)
                 implementation(libs.kodein)
-                implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
+                implementation(libs.gitlab.detekt.api)
+                implementation(libs.flowmvi.core)
+                implementation(libs.flowmvi.compose)
             }
         }
 
@@ -58,7 +60,9 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
-                implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
+                implementation(libs.compose.material3)
+                implementation(libs.gitlab.detekt.api)
+                implementation(libs.flowmvi.compose)
             }
             resources.srcDirs("src/jvmMain/resources")
         }
@@ -81,6 +85,16 @@ compose.desktop {
             packageName = "SectMvp"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll(
+            "-Xcontext-parameters",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=${project.layout.projectDirectory.file("stability_definitions.txt").asFile.absolutePath}"
+        )
     }
 }
 
