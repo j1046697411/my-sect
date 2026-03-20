@@ -1,20 +1,15 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
+    kotlin("jvm")
+    kotlin("plugin.compose")
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeHotReload)
+    application
 }
 
 kotlin {
-    jvm("desktop")
-
     sourceSets {
-        val desktopMain by getting {
+        main {
             dependencies {
-                implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.coroutines.swing)
                 implementation(libs.kotlinx.serialization.json)
@@ -29,14 +24,6 @@ kotlin {
     }
 }
 
-compose.desktop {
-    application {
-        mainClass = "com.sect.game.client.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "SectMvp"
-            packageVersion = "1.0.0"
-        }
-    }
+application {
+    mainClass.set("com.sect.game.client.MainKt")
 }
