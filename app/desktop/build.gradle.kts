@@ -1,15 +1,20 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
-    kotlin("jvm")
-    kotlin("plugin.compose")
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.composeMultiplatform)
-    application
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeHotReload)
 }
 
 kotlin {
+    jvm("desktop")
+
     sourceSets {
-        main {
+        val desktopMain by getting {
             dependencies {
+                implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.coroutines.swing)
                 implementation(libs.kotlinx.serialization.json)
@@ -24,10 +29,14 @@ kotlin {
     }
 }
 
-application {
-    mainClass.set("com.sect.game.client.MainKt")
-}
+compose.desktop {
+    application {
+        mainClass = "com.sect.game.client.MainKt"
 
-tasks.withType<AbstractArchiveTask> {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "SectMvp"
+            packageVersion = "1.0.0"
+        }
+    }
 }
