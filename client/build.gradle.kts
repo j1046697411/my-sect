@@ -99,7 +99,3 @@ detekt {
     config.setFrom(file("detekt.yml"))
     source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
 }
-
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    dependsOn(tasks.named("compileKotlinJvm"))
-}
