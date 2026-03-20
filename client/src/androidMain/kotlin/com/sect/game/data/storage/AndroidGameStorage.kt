@@ -1,38 +1,55 @@
 package com.sect.game.data.storage
 
-import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
+import java.io.File
+import java.io.IOException
 
-lateinit var androidAppContext: Context
+private lateinit var appContext: Context
 
-fun initAndroidStorage(context: Context) {
-    androidAppContext = context.applicationContext
+fun initializeAndroidContext(context: Context) {
+    appContext = context.applicationContext
 }
 
-actual fun createPlatformStorage(): PlatformGameStorage = AndroidGameStorage(androidAppContext)
+actual fun createPlatformStorage(): PlatformGameStorage = AndroidGameStorage()
 
 class AndroidGameStorage(
-    private val context: Context,
-    private val prefsName: String = "game_save"
+    private val fileName: String = "game_save.json"
 ) : PlatformGameStorage {
-    
-    private val sharedPrefs: SharedPreferences
-        get() = context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
-    
+
+    private val saveFile: File
+        get() = File(appContext.filesDir, fileName)
+
     override fun writeToFile(content: String) {
-        sharedPrefs.edit().putString("save_data", content).apply()
+        try {
+            saveFile.writeText(content)
+        } catch (e: IOException) {
+            throw GameStorageException.SaveWriteException(e)
+        }
     }
 
     override fun readFromFile(): String? {
-        return sharedPrefs.getString("save_data", null)
+        return try {
+            if (saveFile.exists()) {
+                saveFile.readText()
+            } else {
+                null
+            }
+        } catch (e: IOException) {
+            throw GameStorageException.SaveReadException(e)
+        }
     }
 
     override fun deleteFile() {
-        sharedPrefs.edit().remove("save_data").apply()
+        try {
+            if (saveFile.exists()) {
+                saveFile.delete()
+            }
+        } catch (e: IOException) {
+            throw GameStorageException.SaveDeleteException(e)
+        }
     }
 
     override fun fileExists(): Boolean {
-        return sharedPrefs.contains("save_data")
+        return saveFile.exists()
     }
 }
