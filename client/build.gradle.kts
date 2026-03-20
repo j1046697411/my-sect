@@ -70,7 +70,7 @@ android {
 
     packaging {
         resources {
-            excludes += "kotlin/internal/internal.kotlin_builtins"
+            excludes += "**/*.kotlin_builtins"
         }
     }
 }
