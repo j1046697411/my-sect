@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.kover)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -91,7 +92,11 @@ kotlin {
         freeCompilerArgs.addAll(
             "-Xcontext-parameters",
             "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=${project.layout.projectDirectory.file("stability_definitions.txt").asFile.absolutePath}"
+            "plugin:androidx.compose.compiler.plugins.kotlin:" +
+                "stabilityConfigurationPath=" +
+                project.layout.projectDirectory.file(
+                    "stability_definitions.txt",
+                ).asFile.absolutePath,
         )
     }
 }
@@ -112,5 +117,12 @@ detekt {
     source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
     dependencies {
         detektPlugins(project(":tools:detekt-rules"))
+    }
+}
+
+ktlint {
+    filter {
+        exclude("**/main.kt")
+        exclude("**/RealmTest.kt")
     }
 }

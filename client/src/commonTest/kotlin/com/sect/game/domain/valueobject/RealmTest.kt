@@ -6,46 +6,46 @@ import kotlin.test.assertSame
 
 class RealmTest {
     @Test
-    fun next_whenLianQi_returns筑基() {
-        assertEquals(Realm.筑基, Realm.炼气.next())
+    fun next_whenLianQi_returnsZhuJi() {
+        assertEquals(Realm.ZhuJi, Realm.LianQi.next())
     }
 
     @Test
-    fun next_when筑基_returns金丹() {
-        assertEquals(Realm.金丹, Realm.筑基.next())
+    fun next_whenZhuJi_returnsJinDan() {
+        assertEquals(Realm.JinDan, Realm.ZhuJi.next())
     }
 
     @Test
-    fun next_when金丹_returns元婴() {
-        assertEquals(Realm.元婴, Realm.金丹.next())
+    fun next_whenJinDan_returnsYuanYing() {
+        assertEquals(Realm.YuanYing, Realm.JinDan.next())
     }
 
     @Test
-    fun next_when元婴_returns化神() {
-        assertEquals(Realm.化神, Realm.元婴.next())
+    fun next_whenYuanYing_returnsHuaShen() {
+        assertEquals(Realm.HuaShen, Realm.YuanYing.next())
     }
 
     @Test
-    fun next_when化神_returnsNull() {
-        assertEquals(null, Realm.化神.next())
+    fun next_whenHuaShen_returnsNull() {
+        assertEquals(null, Realm.HuaShen.next())
     }
 
     @Test
     fun order_returnsCorrectOrder() {
-        assertEquals(1, Realm.炼气.order)
-        assertEquals(2, Realm.筑基.order)
-        assertEquals(3, Realm.金丹.order)
-        assertEquals(4, Realm.元婴.order)
-        assertEquals(5, Realm.化神.order)
+        assertEquals(1, Realm.LianQi.order)
+        assertEquals(2, Realm.ZhuJi.order)
+        assertEquals(3, Realm.JinDan.order)
+        assertEquals(4, Realm.YuanYing.order)
+        assertEquals(5, Realm.HuaShen.order)
     }
 
     @Test
     fun fromOrder_withValidOrder_returnsRealm() {
-        assertSame(Realm.炼气, Realm.fromOrder(1))
-        assertSame(Realm.筑基, Realm.fromOrder(2))
-        assertSame(Realm.金丹, Realm.fromOrder(3))
-        assertSame(Realm.元婴, Realm.fromOrder(4))
-        assertSame(Realm.化神, Realm.fromOrder(5))
+        assertSame(Realm.LianQi, Realm.fromOrder(1))
+        assertSame(Realm.ZhuJi, Realm.fromOrder(2))
+        assertSame(Realm.JinDan, Realm.fromOrder(3))
+        assertSame(Realm.YuanYing, Realm.fromOrder(4))
+        assertSame(Realm.HuaShen, Realm.fromOrder(5))
     }
 
     @Test

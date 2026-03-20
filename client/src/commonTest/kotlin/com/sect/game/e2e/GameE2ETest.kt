@@ -12,12 +12,10 @@ import com.sect.game.engine.GameEngine
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
-import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class GameE2ETest {
-
     @Test
     fun createDisciple_verifyInList_startEngine_autoCultivation_verifiesProgress() {
         val sect = createSect()
@@ -153,7 +151,7 @@ class GameE2ETest {
         val disciple = createDisciple("修仙弟子")
         sect.addDisciple(disciple)
 
-        assertEquals(Realm.炼气, disciple.realm)
+        assertEquals(Realm.LianQi, disciple.realm)
         assertEquals(0, disciple.cultivationProgress)
 
         engine.start()
@@ -164,8 +162,8 @@ class GameE2ETest {
         assertNotNull(cultivated)
         assertTrue(
             cultivated.cultivationProgress > 0 ||
-            cultivated.fatigue > 0 ||
-            cultivated.health < 100
+                cultivated.fatigue > 0 ||
+                cultivated.health < 100,
         )
     }
 
@@ -191,11 +189,12 @@ class GameE2ETest {
 
     @Test
     fun sectCapacity_limitReached_cannotAddMore() {
-        val smallSect = Sect.create(
-            id = SectId("小宗门"),
-            name = "小宗门",
-            maxDisciples = 2
-        ).getOrThrow()
+        val smallSect =
+            Sect.create(
+                id = SectId("小宗门"),
+                name = "小宗门",
+                maxDisciples = 2,
+            ).getOrThrow()
 
         smallSect.addDisciple(createDisciple("弟子1"))
         smallSect.addDisciple(createDisciple("弟子2"))
@@ -272,7 +271,7 @@ class GameE2ETest {
     private fun createSect(): Sect {
         return Sect.create(
             id = SectId("e2e-sect-${System.nanoTime()}"),
-            name = "E2E测试宗门"
+            name = "E2E测试宗门",
         ).getOrThrow()
     }
 
@@ -281,8 +280,8 @@ class GameE2ETest {
             id = DiscipleId("e2e-disciple-$name-${System.nanoTime()}"),
             name = name,
             attributes = Attributes.DEFAULT,
-            realm = Realm.炼气,
-            lifespan = 100
+            realm = Realm.LianQi,
+            lifespan = 100,
         ).getOrThrow()
     }
 }

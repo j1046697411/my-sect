@@ -58,12 +58,39 @@ sealed class Condition {
     }
 
     companion object {
-        fun greaterThan(key: String, threshold: Int) = GreaterThan(key, threshold)
-        fun lessThan(key: String, threshold: Int) = LessThan(key, threshold)
-        fun greaterThanOrEqual(key: String, threshold: Int) = GreaterThanOrEqual(key, threshold)
-        fun lessThanOrEqual(key: String, threshold: Int) = LessThanOrEqual(key, threshold)
-        fun equals(key: String, value: Int) = Equals(key, value)
-        fun and(left: Condition, right: Condition) = And(left, right)
-        fun or(left: Condition, right: Condition) = Or(left, right)
+        fun greaterThan(
+            key: String,
+            threshold: Int,
+        ) = GreaterThan(key, threshold)
+
+        fun lessThan(
+            key: String,
+            threshold: Int,
+        ) = LessThan(key, threshold)
+
+        fun greaterThanOrEqual(
+            key: String,
+            threshold: Int,
+        ) = GreaterThanOrEqual(key, threshold)
+
+        fun lessThanOrEqual(
+            key: String,
+            threshold: Int,
+        ) = LessThanOrEqual(key, threshold)
+
+        fun equals(
+            key: String,
+            value: Int,
+        ) = Equals(key, value)
+
+        fun and(
+            left: Condition,
+            right: Condition,
+        ) = And(left, right)
+
+        fun or(
+            left: Condition,
+            right: Condition,
+        ) = Or(left, right)
     }
 }

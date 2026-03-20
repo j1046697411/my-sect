@@ -5,11 +5,12 @@ interface ActionProvider {
 }
 
 object CultivationActionPackage : ActionProvider {
-    override val actions: List<Action> = listOf(
-        CultivateAction,
-        RestAction,
-        BreakthroughAction,
-        GatherAction,
-        AlchemyAction
-    )
+    override val actions: List<Action> =
+        listOf(
+            CultivateAction,
+            RestAction,
+            BreakthroughAction,
+            GatherAction,
+            AlchemyAction,
+        )
 }

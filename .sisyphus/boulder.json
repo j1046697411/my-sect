@@ -1,17 +1,15 @@
 {
-  "active_plan": "/Users/yoca-676/Documents/projects/my-sect/.sisyphus/plans/flowmvi-migration.md",
-  "started_at": "2026-03-20T04:06:25.297Z",
+  "active_plan": "/Users/yoca-676/Documents/projects/my-sect/.sisyphus/plans/tech-debt-resolution.md",
+  "started_at": "2026-03-20T05:27:00.089Z",
   "session_ids": [
-    "ses_2f693b51dffeKEpx7lz5M4QuOT",
-    "ses_2f692e307ffe963KcUmiHeO9F9",
-    "ses_2f692b0fdffeZrCako06chMrwL",
-    "ses_2f69288ebffe3ALXnI4AmlcHWV",
-    "ses_2f692cc96ffe1Ihbn5jzzFs1cx",
-    "ses_2f68b87f9ffeBk5S0Uv7OZWKHS",
-    "ses_2f6857ed6ffeAp4vN67y2sLv23",
-    "ses_2f6767da7ffe2f0OWyU634aXiu",
-    "ses_2f663249dffe279tMO3yLeIK0p"
+    "ses_2f649ef29ffer4lbh2uuING6pJ",
+    "ses_2f6492b28ffeQpIgYCxOhpCXYu",
+    "ses_2f64913b6ffeRI4UazfYyc9QGw",
+    "ses_2f648e72cffeeas4DdAeK3jFdm",
+    "ses_2f648fe0effeQhMFanShylQf59",
+    "ses_2f63e3f9dffeZDlEAhtJDQHohe",
+    "ses_2f6387994fferfOS9nvK03bPLw"
   ],
-  "plan_name": "flowmvi-migration",
+  "plan_name": "tech-debt-resolution",
   "agent": "atlas"
 }

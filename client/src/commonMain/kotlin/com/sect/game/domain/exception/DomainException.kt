@@ -19,5 +19,5 @@ fun DomainException.toUserMessage(): String = userMessage
  */
 abstract class DomainExceptionBase(
     final override val message: String,
-    final override val userMessage: String
+    final override val userMessage: String,
 ) : DomainException, Exception(message)

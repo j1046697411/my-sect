@@ -17,7 +17,7 @@ object DiscipleMapper {
             cultivationProgress = disciple.cultivationProgress,
             fatigue = disciple.fatigue,
             health = disciple.health,
-            lifespan = disciple.lifespan
+            lifespan = disciple.lifespan,
         )
     }
 
@@ -25,12 +25,12 @@ object DiscipleMapper {
         return Disciple(
             id = DiscipleId(dto.id),
             name = dto.name,
-            realm = Realm.fromOrder(dto.realm) ?: Realm.炼气,
+            realm = Realm.fromOrder(dto.realm) ?: Realm.LianQi,
             attributes = AttributesMapper.toDomain(dto.attributes),
             cultivationProgress = dto.cultivationProgress,
             fatigue = dto.fatigue,
             health = dto.health,
-            lifespan = dto.lifespan
+            lifespan = dto.lifespan,
         )
     }
 }
@@ -40,7 +40,7 @@ object AttributesMapper {
         return AttributesDto(
             spiritRoot = attributes.spiritRoot,
             talent = attributes.talent,
-            luck = attributes.luck
+            luck = attributes.luck,
         )
     }
 
@@ -48,7 +48,7 @@ object AttributesMapper {
         return Attributes(
             spiritRoot = dto.spiritRoot,
             talent = dto.talent,
-            luck = dto.luck
+            luck = dto.luck,
         )
     }
 }

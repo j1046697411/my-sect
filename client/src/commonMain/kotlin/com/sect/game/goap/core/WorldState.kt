@@ -8,9 +8,8 @@ package com.sect.game.goap.core
 class WorldState(
     private val booleans: Map<String, Boolean> = mapOf(),
     private val ints: Map<String, Int> = mapOf(),
-    private val floats: Map<String, Float> = mapOf()
+    private val floats: Map<String, Float> = mapOf(),
 ) {
-
     fun getBoolean(key: String): Boolean = booleans[key] ?: false
 
     fun getInt(key: String): Int = ints[key] ?: 0
@@ -19,19 +18,31 @@ class WorldState(
 
     fun getValue(key: String): Int = ints[key] ?: 0
 
-    fun withBoolean(key: String, value: Boolean): WorldState {
+    fun withBoolean(
+        key: String,
+        value: Boolean,
+    ): WorldState {
         return WorldState(booleans + (key to value), ints, floats)
     }
 
-    fun withInt(key: String, value: Int): WorldState {
+    fun withInt(
+        key: String,
+        value: Int,
+    ): WorldState {
         return WorldState(booleans, ints + (key to value), floats)
     }
 
-    fun withFloat(key: String, value: Float): WorldState {
+    fun withFloat(
+        key: String,
+        value: Float,
+    ): WorldState {
         return WorldState(booleans, ints, floats + (key to value))
     }
 
-    fun withValue(key: String, value: Int): WorldState {
+    fun withValue(
+        key: String,
+        value: Int,
+    ): WorldState {
         return withInt(key, value)
     }
 
@@ -42,8 +53,11 @@ class WorldState(
      * Returns the number of differing keys as a float.
      */
     fun distanceTo(other: WorldState): Float {
-        val allKeys = (booleans.keys + ints.keys + floats.keys +
-                       other.booleans.keys + other.ints.keys + other.floats.keys).toSet()
+        val allKeys =
+            (
+                booleans.keys + ints.keys + floats.keys +
+                    other.booleans.keys + other.ints.keys + other.floats.keys
+            ).toSet()
         var differences = 0f
         for (key in allKeys) {
             when {

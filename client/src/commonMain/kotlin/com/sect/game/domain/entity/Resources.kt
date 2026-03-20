@@ -7,7 +7,7 @@ package com.sect.game.domain.entity
 data class Resources(
     val spiritStones: Int = 0,
     val herbs: Int = 0,
-    val pills: Int = 0
+    val pills: Int = 0,
 ) {
     init {
         require(spiritStones >= 0) { "spiritStones must be non-negative, but was $spiritStones" }
@@ -19,7 +19,7 @@ data class Resources(
         return Resources(
             spiritStones = this.spiritStones - other.spiritStones,
             herbs = this.herbs - other.herbs,
-            pills = this.pills - other.pills
+            pills = this.pills - other.pills,
         )
     }
 
@@ -27,14 +27,14 @@ data class Resources(
         return Resources(
             spiritStones = this.spiritStones + other.spiritStones,
             herbs = this.herbs + other.herbs,
-            pills = this.pills + other.pills
+            pills = this.pills + other.pills,
         )
     }
 
     fun isAffordable(other: Resources): Boolean {
         return this.spiritStones >= other.spiritStones &&
-                this.herbs >= other.herbs &&
-                this.pills >= other.pills
+            this.herbs >= other.herbs &&
+            this.pills >= other.pills
     }
 
     companion object {

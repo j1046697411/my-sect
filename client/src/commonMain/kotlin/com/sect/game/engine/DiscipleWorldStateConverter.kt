@@ -24,7 +24,10 @@ object DiscipleWorldStateConverter {
      * 计算突破准备度
      * 公式: (100 - fatigue) * 0.6 + health * 0.4，限制在 0-100 范围
      */
-    private fun calculateReadiness(fatigue: Int, health: Int): Int {
+    private fun calculateReadiness(
+        fatigue: Int,
+        health: Int,
+    ): Int {
         val baseReadiness = (100 - fatigue) * 0.6 + health * 0.4
         return baseReadiness.toInt().coerceIn(0, 100)
     }

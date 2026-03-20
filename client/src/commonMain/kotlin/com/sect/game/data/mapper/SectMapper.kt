@@ -14,20 +14,21 @@ object SectMapper {
             name = sect.name,
             disciples = sect.disciples.values.map { DiscipleMapper.toDto(it) },
             resources = ResourcesMapper.toDto(sect.resources),
-            maxDisciples = sect.maxDisciples
+            maxDisciples = sect.maxDisciples,
         )
     }
 
     fun toDomain(dto: SectDto): Sect {
-        val disciples = dto.disciples.associateBy(
-            keySelector = { DiscipleId(it.id) },
-            valueTransform = { DiscipleMapper.toDomain(it) }
-        )
+        val disciples =
+            dto.disciples.associateBy(
+                keySelector = { DiscipleId(it.id) },
+                valueTransform = { DiscipleMapper.toDomain(it) },
+            )
         return Sect(
             id = SectId(dto.id),
             name = dto.name,
             resources = ResourcesMapper.toDomain(dto.resources),
-            maxDisciples = dto.maxDisciples
+            maxDisciples = dto.maxDisciples,
         ).let { sect ->
             disciples.forEach { (id, disciple) ->
                 sect.addDisciple(disciple)
@@ -42,7 +43,7 @@ object ResourcesMapper {
         return ResourcesDto(
             spiritStones = resources.spiritStones,
             herbs = resources.herbs,
-            pills = resources.pills
+            pills = resources.pills,
         )
     }
 
@@ -50,7 +51,7 @@ object ResourcesMapper {
         return Resources(
             spiritStones = dto.spiritStones,
             herbs = dto.herbs,
-            pills = dto.pills
+            pills = dto.pills,
         )
     }
 }

@@ -7,7 +7,7 @@ package com.sect.game.domain.valueobject
 data class Attributes(
     val spiritRoot: Int,
     val talent: Int,
-    val luck: Int
+    val luck: Int,
 ) {
     init {
         require(spiritRoot in 1..100) {
