@@ -1,7 +1,4 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.androidLibrary)
 }
 
@@ -13,10 +10,9 @@ android {
     }
 }
 
-kotlin {
-    androidTarget()
+android {
     sourceSets {
-        val androidMain by getting {
+        named("main") {
             dependencies {
                 implementation(project(":business:data"))
                 implementation(libs.androidx.activity.compose)

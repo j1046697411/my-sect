@@ -1,15 +1,12 @@
 {
-  "active_plan": "/Users/yoca-676/Documents/projects/my-sect/.sisyphus/plans/tech-debt-resolution.md",
-  "started_at": "2026-03-20T05:27:00.089Z",
+  "active_plan": "/Users/yoca-676/.local/share/opencode/worktree/2d17054cedea0482513410afd9e40b9ed72b3fe7/quick-falcon/.sisyphus/plans/app-module-refactor.md",
+  "started_at": "2026-03-20T10:09:01.789Z",
   "session_ids": [
-    "ses_2f649ef29ffer4lbh2uuING6pJ",
-    "ses_2f6492b28ffeQpIgYCxOhpCXYu",
-    "ses_2f64913b6ffeRI4UazfYyc9QGw",
-    "ses_2f648e72cffeeas4DdAeK3jFdm",
-    "ses_2f648fe0effeQhMFanShylQf59",
-    "ses_2f63e3f9dffeZDlEAhtJDQHohe",
-    "ses_2f6387994fferfOS9nvK03bPLw"
+    "ses_2f54b3557ffegeQCrhNLYRQpBH",
+    "ses_2f549a918ffeaGHlFryel1akUH",
+    "ses_2f547365cffeDaQP7HaK8W8ayH",
+    "ses_2f546ff08ffeoVqh6qCtRZVZIS"
   ],
-  "plan_name": "tech-debt-resolution",
+  "plan_name": "app-module-refactor",
   "agent": "atlas"
 }
