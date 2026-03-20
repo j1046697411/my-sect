@@ -22,49 +22,55 @@ class AttributesTest {
 
     @Test
     fun constructor_withInvalidSpiritRoot_throws() {
-        val exception = assertFailsWith<IllegalArgumentException> {
-            Attributes(spiritRoot = 0, talent = 50, luck = 50)
-        }
+        val exception =
+            assertFailsWith<IllegalArgumentException> {
+                Attributes(spiritRoot = 0, talent = 50, luck = 50)
+            }
         assertEquals("spiritRoot must be between 1 and 100, but was 0", exception.message)
     }
 
     @Test
     fun constructor_withInvalidSpiritRootTooHigh_throws() {
-        val exception = assertFailsWith<IllegalArgumentException> {
-            Attributes(spiritRoot = 101, talent = 50, luck = 50)
-        }
+        val exception =
+            assertFailsWith<IllegalArgumentException> {
+                Attributes(spiritRoot = 101, talent = 50, luck = 50)
+            }
         assertEquals("spiritRoot must be between 1 and 100, but was 101", exception.message)
     }
 
     @Test
     fun constructor_withInvalidTalent_throws() {
-        val exception = assertFailsWith<IllegalArgumentException> {
-            Attributes(spiritRoot = 50, talent = 0, luck = 50)
-        }
+        val exception =
+            assertFailsWith<IllegalArgumentException> {
+                Attributes(spiritRoot = 50, talent = 0, luck = 50)
+            }
         assertEquals("talent must be between 1 and 100, but was 0", exception.message)
     }
 
     @Test
     fun constructor_withInvalidTalentTooHigh_throws() {
-        val exception = assertFailsWith<IllegalArgumentException> {
-            Attributes(spiritRoot = 50, talent = 101, luck = 50)
-        }
+        val exception =
+            assertFailsWith<IllegalArgumentException> {
+                Attributes(spiritRoot = 50, talent = 101, luck = 50)
+            }
         assertEquals("talent must be between 1 and 100, but was 101", exception.message)
     }
 
     @Test
     fun constructor_withInvalidLuck_throws() {
-        val exception = assertFailsWith<IllegalArgumentException> {
-            Attributes(spiritRoot = 50, talent = 50, luck = 0)
-        }
+        val exception =
+            assertFailsWith<IllegalArgumentException> {
+                Attributes(spiritRoot = 50, talent = 50, luck = 0)
+            }
         assertEquals("luck must be between 1 and 100, but was 0", exception.message)
     }
 
     @Test
     fun constructor_withInvalidLuckTooHigh_throws() {
-        val exception = assertFailsWith<IllegalArgumentException> {
-            Attributes(spiritRoot = 50, talent = 50, luck = 101)
-        }
+        val exception =
+            assertFailsWith<IllegalArgumentException> {
+                Attributes(spiritRoot = 50, talent = 50, luck = 101)
+            }
         assertEquals("luck must be between 1 and 100, but was 101", exception.message)
     }
 

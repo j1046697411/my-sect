@@ -7,5 +7,6 @@ interface Goal {
     val id: String
     val priority: Int
     val targetConditions: Set<Condition>
+
     fun isGoalSatisfied(state: WorldState): Boolean
 }

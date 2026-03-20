@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
@@ -32,22 +30,24 @@ import com.sect.game.feature.game.container.GameContainer
 import com.sect.game.feature.game.contract.GameIntent
 import kotlin.random.Random
 
-private val CHINESE_SURNAMES = listOf(
-    "张", "李", "王", "刘", "陈", "杨", "赵", "黄", "周", "吴",
-    "徐", "孙", "胡", "朱", "高", "林", "何", "郭", "马", "罗",
-    "梁", "宋", "郑", "谢", "韩", "唐", "冯", "于", "董", "萧"
-)
+private val CHINESE_SURNAMES =
+    listOf(
+        "张", "李", "王", "刘", "陈", "杨", "赵", "黄", "周", "吴",
+        "徐", "孙", "胡", "朱", "高", "林", "何", "郭", "马", "罗",
+        "梁", "宋", "郑", "谢", "韩", "唐", "冯", "于", "董", "萧",
+    )
 
-private val CHINESE_GIVEN_NAMES = listOf(
-    "三", "四", "五", "六", "七", "八", "九", "十", "云", "风",
-    "雷", "电", "雨", "雪", "霜", "龙", "虎", "鹤", "松", "柏",
-    "天", "地", "玄", "黄", "宇", "宙", "洪", "荒", "日", "月"
-)
+private val CHINESE_GIVEN_NAMES =
+    listOf(
+        "三", "四", "五", "六", "七", "八", "九", "十", "云", "风",
+        "雷", "电", "雨", "雪", "霜", "龙", "虎", "鹤", "松", "柏",
+        "天", "地", "玄", "黄", "宇", "宙", "洪", "荒", "日", "月",
+    )
 
 @Composable
 fun CreateDiscipleDialog(
     container: GameContainer,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     var name by remember { mutableStateOf("") }
     var nameError by remember { mutableStateOf(false) }
@@ -62,13 +62,13 @@ fun CreateDiscipleDialog(
         title = {
             Text(
                 text = "招募弟子",
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.headlineSmall,
             )
         },
         text = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 OutlinedTextField(
                     value = name,
@@ -79,22 +79,26 @@ fun CreateDiscipleDialog(
                     label = { Text("弟子姓名") },
                     placeholder = { Text("请输入弟子姓名") },
                     isError = nameError,
-                    supportingText = if (nameError) {
-                        { Text("姓名不能为空") }
-                    } else null,
+                    supportingText =
+                        if (nameError) {
+                            { Text("姓名不能为空") }
+                        } else {
+                            null
+                        },
                     singleLine = true,
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Characters,
-                        imeAction = ImeAction.Done
-                    ),
+                    keyboardOptions =
+                        KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Characters,
+                            imeAction = ImeAction.Done,
+                        ),
                     modifier = Modifier.fillMaxWidth(),
                     trailingIcon = {
                         TextButton(
-                            onClick = { name = generateRandomName() }
+                            onClick = { name = generateRandomName() },
                         ) {
                             Text("随机")
                         }
-                    }
+                    },
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -103,21 +107,21 @@ fun CreateDiscipleDialog(
                     label = "灵根",
                     value = spiritRoot,
                     onValueChange = { spiritRoot = it },
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
                 )
 
                 AttributeSlider(
                     label = "资质",
                     value = talent,
                     onValueChange = { talent = it },
-                    color = MaterialTheme.colorScheme.secondary
+                    color = MaterialTheme.colorScheme.secondary,
                 )
 
                 AttributeSlider(
                     label = "气运",
                     value = luck,
                     onValueChange = { luck = it },
-                    color = MaterialTheme.colorScheme.tertiary
+                    color = MaterialTheme.colorScheme.tertiary,
                 )
             }
         },
@@ -128,15 +132,16 @@ fun CreateDiscipleDialog(
                         nameError = true
                         return@TextButton
                     }
-                    val attributes = Attributes(
-                        spiritRoot = spiritRoot.toInt().coerceIn(1, 100),
-                        talent = talent.toInt().coerceIn(1, 100),
-                        luck = luck.toInt().coerceIn(1, 100)
-                    )
+                    val attributes =
+                        Attributes(
+                            spiritRoot = spiritRoot.toInt().coerceIn(1, 100),
+                            talent = talent.toInt().coerceIn(1, 100),
+                            luck = luck.toInt().coerceIn(1, 100),
+                        )
                     container.processIntent(GameIntent.CreateDisciple(name.trim(), attributes))
                     onDismiss()
                 },
-                enabled = isValid
+                enabled = isValid,
             ) {
                 Text("创建")
             }
@@ -145,7 +150,7 @@ fun CreateDiscipleDialog(
             TextButton(onClick = onDismiss) {
                 Text("取消")
             }
-        }
+        },
     )
 }
 
@@ -154,23 +159,23 @@ private fun AttributeSlider(
     label: String,
     value: Float,
     onValueChange: (Float) -> Unit,
-    color: androidx.compose.ui.graphics.Color
+    color: androidx.compose.ui.graphics.Color,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = label,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
             )
             Text(
                 text = "${value.toInt()}",
                 style = MaterialTheme.typography.bodyMedium,
-                color = color
+                color = color,
             )
         }
         Slider(
@@ -178,11 +183,12 @@ private fun AttributeSlider(
             onValueChange = onValueChange,
             valueRange = 1f..100f,
             steps = 98,
-            colors = SliderDefaults.colors(
-                thumbColor = color,
-                activeTrackColor = color,
-                inactiveTrackColor = color.copy(alpha = 0.3f)
-            )
+            colors =
+                SliderDefaults.colors(
+                    thumbColor = color,
+                    activeTrackColor = color,
+                    inactiveTrackColor = color.copy(alpha = 0.3f),
+                ),
         )
     }
 }

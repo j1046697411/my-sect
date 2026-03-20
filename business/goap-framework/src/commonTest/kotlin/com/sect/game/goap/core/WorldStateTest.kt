@@ -7,7 +7,6 @@ import kotlin.test.assertNotSame
 import kotlin.test.assertTrue
 
 class WorldStateTest {
-
     @Test
     fun default_createsEmptyState() {
         val state = WorldState()
@@ -75,9 +74,10 @@ class WorldStateTest {
 
     @Test
     fun toMap_returnsIntMap() {
-        val state = WorldState()
-            .withInt("health", 80)
-            .withInt("fatigue", 30)
+        val state =
+            WorldState()
+                .withInt("health", 80)
+                .withInt("fatigue", 30)
         val map = state.toMap()
         assertEquals(80, map["health"])
         assertEquals(30, map["fatigue"])
@@ -119,23 +119,26 @@ class WorldStateTest {
 
     @Test
     fun distanceTo_multipleDifferences_returnsSum() {
-        val state1 = WorldState()
-            .withInt("health", 80)
-            .withBoolean("isResting", true)
-            .withFloat("progress", 0.5f)
-        val state2 = WorldState()
-            .withInt("health", 50)
-            .withBoolean("isResting", false)
-            .withFloat("progress", 0.8f)
+        val state1 =
+            WorldState()
+                .withInt("health", 80)
+                .withBoolean("isResting", true)
+                .withFloat("progress", 0.5f)
+        val state2 =
+            WorldState()
+                .withInt("health", 50)
+                .withBoolean("isResting", false)
+                .withFloat("progress", 0.8f)
         assertEquals(3f, state1.distanceTo(state2))
     }
 
     @Test
     fun distanceTo_extraKeyInOther_returnsOne() {
         val state1 = WorldState().withInt("health", 80)
-        val state2 = WorldState()
-            .withInt("health", 80)
-            .withInt("fatigue", 30)
+        val state2 =
+            WorldState()
+                .withInt("health", 80)
+                .withInt("fatigue", 30)
         assertEquals(1f, state1.distanceTo(state2))
     }
 

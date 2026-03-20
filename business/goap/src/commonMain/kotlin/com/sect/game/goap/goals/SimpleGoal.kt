@@ -7,7 +7,7 @@ data class SimpleGoal(
     override val id: String,
     override val priority: Int,
     override val targetConditions: Set<Condition>,
-    private val satisfied: (WorldState) -> Boolean
+    private val satisfied: (WorldState) -> Boolean,
 ) : Goal {
     override fun isGoalSatisfied(state: WorldState): Boolean = satisfied(state)
 }

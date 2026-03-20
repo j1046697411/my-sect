@@ -13,9 +13,8 @@ fun initializeAndroidContext(context: Context) {
 actual fun createPlatformStorage(): PlatformGameStorage = AndroidGameStorage()
 
 class AndroidGameStorage(
-    private val fileName: String = "game_save.json"
+    private val fileName: String = "game_save.json",
 ) : PlatformGameStorage {
-
     private val saveFile: File
         get() = File(appContext.filesDir, fileName)
 

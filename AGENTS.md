@@ -135,31 +135,17 @@ fun calculateScore(): Int {
 
 ```
 client/src/commonMain/kotlin/com/sect/game/
-├── mvi/                              # MVI 基础设施层
-│   ├── base/                         # 基础抽象
-│   │   └── MviContract.kt
-│   └── extensions/                   # FlowMVI 集成扩展
-│       └── FlowMviExt.kt
-│
+├── mvi/                              # MVI 基础设施层（仅 GameErrorHandler.kt）
 ├── feature/                          # 功能模块（可独立演进）
-│   ├── game/                         # 游戏主模块
-│   │   ├── contract/                # 契约（State/Intent/Action）
-│   │   │   └── GameContract.kt
-│   │   ├── container/               # 容器
-│   │   │   ├── GameContainer.kt
-│   │   │   └── GameReducer.kt
-│   │   └── presentation/            # 界面
-│   │       └── GameScreen.kt
-│   │
-│   ├── disciple/                     # 弟子模块（后期扩展）
-│   │   └── ...
-│   │
-│   └── sect/                        # 宗门模块（后期扩展）
-│       └── ...
-│
+│   └── game/                         # 游戏主模块
+│       ├── contract/                # 契约（State/Intent/Action）
+│       ├── container/               # 容器
+│       └── presentation/            # 界面
+├── goap/                            # GOAP AI 系统
+├── domain/                          # 领域模型
+├── data/                            # 数据层
+├── engine/                          # 游戏引擎
 └── presentation/                     # 共享 UI 组件
-    └── common/
-        └── CreateDiscipleDialog.kt
 ```
 
 ### 测试
@@ -249,10 +235,12 @@ client/
 
 | 问题 | 状态 | 说明 |
 |------|------|------|
-| UI 未连接 GOAP/MVI | ⚠️ | 入口点仅显示静态文本 |
-| 自定义 detekt 规则 | ✅ | NoChineseInTestMethodName 已实现 |
-| CI/CD | ✅ | .github/workflows/ci.yml 已配置 |
-| ktlint | ⚠️ | 未配置（仅使用 detekt）|
+| UI 连接 GOAP/MVI | ✅ | GameContainer 集成 GameEngine，UI 显示暂停/恢复/停止控制 |
+| ktlint | ✅ | 已配置，ktlintCheck 通过 |
+| MVI 基础设施层 | ⚠️ | `mvi/` 目录仅含 `GameErrorHandler.kt`，缺少 `base/MviContract.kt` 和 `extensions/FlowMviExt.kt` |
+| desktopMain 依赖重复 | ⚠️ | `compose.material3` 和 `flowmvi.compose` 在 commonMain 和 desktopMain 中重复声明 |
+| Android MainActivity | ⚠️ | 仅显示占位文本，未连接 GameContainer/GameScreen |
+| AGENTS.md 文件位置 | ⚠️ | 多个人源码目录中包含 AGENTS.md（data/、domain/、engine/、goap/、mvi/、presentation/），应移至 docs/ |
 
 ---
 
@@ -262,3 +250,13 @@ client/
 - 使用阿里云镜像加速国内依赖下载
 - Android minSdk: 24，targetSdk: 36
 - 构建需要 Java 17
+
+## CI/CD 非标准模式
+
+| 模式 | 说明 |
+|------|------|
+| 自定义 AI Doc Agent | `.github/actions/run-doc-agent/` 使用 OpenAI API 进行文档审查 |
+| 失败自动创建 Issue | `ci.yml` 在构建失败时自动创建 GitHub Issue |
+| Doc Bot Token | 使用专用 `DOC_BOT_TOKEN` 进行文档自动提交 |
+| 双仓库配置 | 根目录和 tools 目录各自配置 repository（阿里云镜像）|
+| ktlint 排除 | `main.kt` 和 `RealmTest.kt` 被排除在代码风格检查外 |

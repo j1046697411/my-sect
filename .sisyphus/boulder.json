@@ -1,20 +1,15 @@
 {
-  "active_plan": "/Users/yoca-676/.local/share/opencode/worktree/2d17054cedea0482513410afd9e40b9ed72b3fe7/quick-falcon/.sisyphus/plans/module-split.md",
-  "started_at": "2026-03-20T08:18:44.381Z",
+  "active_plan": "/Users/yoca-676/Documents/projects/my-sect/.sisyphus/plans/tech-debt-resolution.md",
+  "started_at": "2026-03-20T05:27:00.089Z",
   "session_ids": [
-    "ses_2f5acb3fdffe4lWbcN78AlG1Ta",
-    "ses_2f5aae150ffeRItqkARI3wpGou",
-    "ses_2f5a3738fffemo2eZqEPyybwTC",
-    "ses_2f5a195f7ffeCV5UaLPTZKGmzJ",
-    "ses_2f59d0ff8ffeoh6IS3QyghqX3I",
-    "ses_2f59a1210ffemwkYs6VUwWV6bo",
-    "ses_2f594a83dffe4SovCYEbv4UDBT",
-    "ses_2f58f1e15ffe5D0y2gmpmsCEkn",
-    "ses_2f586bf13ffeGx0NtsdntzBVHc",
-    "ses_2f583f3dfffe7TWXGS18bLKOlI",
-    "ses_2f5815818ffetXsWzosvSUOaxZ",
-    "ses_2f57de025ffe30v7si04ZhK5H1"
+    "ses_2f649ef29ffer4lbh2uuING6pJ",
+    "ses_2f6492b28ffeQpIgYCxOhpCXYu",
+    "ses_2f64913b6ffeRI4UazfYyc9QGw",
+    "ses_2f648e72cffeeas4DdAeK3jFdm",
+    "ses_2f648fe0effeQhMFanShylQf59",
+    "ses_2f63e3f9dffeZDlEAhtJDQHohe",
+    "ses_2f6387994fferfOS9nvK03bPLw"
   ],
-  "plan_name": "module-split",
+  "plan_name": "tech-debt-resolution",
   "agent": "atlas"
 }

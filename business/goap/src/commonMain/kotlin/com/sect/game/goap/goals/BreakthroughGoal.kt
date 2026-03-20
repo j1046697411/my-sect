@@ -7,10 +7,11 @@ object BreakthroughGoal {
     const val ID = "breakthrough"
     const val PRIORITY = 70
 
-    val targetConditions: Set<Condition> = setOf(
-        Condition.greaterThanOrEqual("cultivationProgress", 100),
-        Condition.greaterThan("readiness", 80)
-    )
+    val targetConditions: Set<Condition> =
+        setOf(
+            Condition.greaterThanOrEqual("cultivationProgress", 100),
+            Condition.greaterThan("readiness", 80),
+        )
 
     fun isSatisfied(state: WorldState): Boolean {
         val progress = state.getValue("cultivationProgress") ?: 0
@@ -23,7 +24,7 @@ object BreakthroughGoal {
             id = ID,
             priority = PRIORITY,
             targetConditions = targetConditions,
-            satisfied = ::isSatisfied
+            satisfied = ::isSatisfied,
         )
     }
 }
