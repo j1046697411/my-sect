@@ -1,15 +1,17 @@
 {
-  "active_plan": "/Users/yoca-676/Documents/projects/my-sect/.sisyphus/plans/tech-debt-resolution.md",
-  "started_at": "2026-03-20T05:27:00.089Z",
+  "active_plan": "/Users/yoca-676/Documents/projects/my-sect/.sisyphus/plans/attribute-system.md",
+  "started_at": "2026-03-20T13:45:53.199Z",
   "session_ids": [
-    "ses_2f649ef29ffer4lbh2uuING6pJ",
-    "ses_2f6492b28ffeQpIgYCxOhpCXYu",
-    "ses_2f64913b6ffeRI4UazfYyc9QGw",
-    "ses_2f648e72cffeeas4DdAeK3jFdm",
-    "ses_2f648fe0effeQhMFanShylQf59",
-    "ses_2f63e3f9dffeZDlEAhtJDQHohe",
-    "ses_2f6387994fferfOS9nvK03bPLw"
+    "ses_2f4eed06cffemBjfHP93w1Qr9D",
+    "ses_2f47e86d0ffeVd0zX77zIUT4kZ",
+    "ses_2f47960c6ffeSlDjnTInkiz3W2",
+    "ses_2f4749cdeffev8DX2c1qsNMsFM",
+    "ses_2f470828effetTUfTj49pxA7Gm",
+    "ses_2f465af16fferzKyN9YuSMQ1hh",
+    "ses_2f465c598ffeBPALEvknwp3hic",
+    "ses_2f4628ed1ffeug7Er6fV7gBbSW",
+    "ses_2f4619303ffeiHTfrZX1EbNd4z"
   ],
-  "plan_name": "tech-debt-resolution",
+  "plan_name": "attribute-system",
   "agent": "atlas"
 }
