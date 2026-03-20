@@ -13,21 +13,31 @@
 
 | 文件 | 用途 |
 |------|------|
-| `GameContract.kt` | State/Intent/Action 定义 |
-| `GameContainer.kt` | MVI Store 实现 |
+| `GameErrorHandler.kt` | 游戏错误处理器 |
+
+**实际的 MVI 组件位于 `feature/game/` 目录下：**
+
+| 文件 | 位置 |
+|------|------|
+| `GameContract.kt` | `feature/game/contract/` |
+| `GameContainer.kt` | `feature/game/container/` |
 
 ## MVI 契约
 
+实际的 MVI 契约定义在 `feature/game/contract/GameContract.kt`，使用 FlowMVI 框架：
+
 ```kotlin
 // State - 游戏状态
-sealed class GameState { ... }
+sealed class GameState : MVIState { ... }
 
 // Intent - 用户意图
-sealed class GameIntent { ... }
+sealed class GameIntent : MVIIntent { ... }
 
 // Action - 副作用
-sealed class GameAction { ... }
+sealed class GameAction : MVIAction { ... }
 ```
+
+**注意**: 项目使用 FlowMVI 框架（`fr.nico招拨.FlowMVI`），MVI 基础设施层仅包含 `GameErrorHandler.kt`，未实现自定义的 `MviContract.kt` 基类。
 
 ## Container 使用
 
