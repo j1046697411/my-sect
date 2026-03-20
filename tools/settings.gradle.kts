@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 pluginManagement {
     repositories {
         google()
@@ -23,9 +21,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "sect-game"
+rootProject.name = "tools"
 
-include(":client")
-include(":tools:detekt-rules")
-include(":tools:kover-config")
-include(":tools:dokka-config")
+include("detekt-rules")
+include("kover-config")
+include("dokka-config")
