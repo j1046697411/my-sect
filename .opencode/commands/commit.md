@@ -23,6 +23,10 @@ agent: build
    - 分析改动内容
    - 在本地运行 `./gradlew compileKotlinJvm` 验证编译（不需要 Android SDK）
    - 如果编译失败，修复问题后重新验证，直到通过
+   - 运行 `./gradlew check` 运行所有检查（测试、lint 等）
+   - 如果检查失败，修复问题后重新验证，直到通过
+   - 确认所有修改已通过本地验证
+   - 运行 `git pull origin <main-branch>` 拉取主分支最新代码（解决可能的冲突）
    - 运行 `git add <files>` 暂存修改
    - 运行 `git commit -m "<type>: <description>"` 提交
 6. 如果没有 PR：运行 `gh pr create --title "<title>" --body "<body>"` 创建 PR

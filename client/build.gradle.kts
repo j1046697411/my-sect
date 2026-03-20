@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.kover)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.androidApplication)
 }
 
 android {
@@ -20,6 +19,12 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.android.min.sdk.get().toInt()
+    }
+
+    packaging {
+        resources {
+            excludes += "**/*.kotlin_builtins"
+        }
     }
 }
 
@@ -75,12 +80,6 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "SectMvp"
             packageVersion = "1.0.0"
-        }
-    }
-
-    packaging {
-        resources {
-            excludes += "**/*.kotlin_builtins"
         }
     }
 }
