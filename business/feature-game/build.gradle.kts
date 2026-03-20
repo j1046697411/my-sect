@@ -11,6 +11,7 @@ kotlin {
             dependencies {
                 implementation(project(":business:domain"))
                 implementation(project(":business:mvi"))
+                implementation(project(":business:engine"))
                 implementation(project(":business:presentation"))
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.flowmvi.core)
