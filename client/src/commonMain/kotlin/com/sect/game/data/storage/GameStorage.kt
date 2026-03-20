@@ -13,7 +13,10 @@ interface GameStorage {
      * @param version 存档版本号，用于迁移支持
      * @return 保存结果
      */
-    fun saveGame(sect: Sect, version: Int): Result<Unit>
+    fun saveGame(
+        sect: Sect,
+        version: Int,
+    ): Result<Unit>
 
     /**
      * 加载游戏存档

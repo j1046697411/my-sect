@@ -1,12 +1,10 @@
 package com.sect.game.goap.core
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class ConditionTest {
-
     @Test
     fun greaterThan_satisfiedWhenValueAboveThreshold() {
         val condition = Condition.greaterThan("health", 50)
@@ -126,9 +124,10 @@ class ConditionTest {
         val left = Condition.greaterThan("health", 50)
         val right = Condition.lessThan("fatigue", 80)
         val condition = Condition.and(left, right)
-        val state = WorldState()
-            .withInt("health", 80)
-            .withInt("fatigue", 30)
+        val state =
+            WorldState()
+                .withInt("health", 80)
+                .withInt("fatigue", 30)
         assertTrue(condition.isSatisfiedBy(state))
     }
 
@@ -137,9 +136,10 @@ class ConditionTest {
         val left = Condition.greaterThan("health", 50)
         val right = Condition.lessThan("fatigue", 80)
         val condition = Condition.and(left, right)
-        val state = WorldState()
-            .withInt("health", 30)
-            .withInt("fatigue", 30)
+        val state =
+            WorldState()
+                .withInt("health", 30)
+                .withInt("fatigue", 30)
         assertFalse(condition.isSatisfiedBy(state))
     }
 
@@ -148,9 +148,10 @@ class ConditionTest {
         val left = Condition.greaterThan("health", 50)
         val right = Condition.lessThan("fatigue", 80)
         val condition = Condition.and(left, right)
-        val state = WorldState()
-            .withInt("health", 80)
-            .withInt("fatigue", 90)
+        val state =
+            WorldState()
+                .withInt("health", 80)
+                .withInt("fatigue", 90)
         assertFalse(condition.isSatisfiedBy(state))
     }
 
@@ -159,9 +160,10 @@ class ConditionTest {
         val left = Condition.greaterThan("health", 50)
         val right = Condition.lessThan("fatigue", 80)
         val condition = Condition.or(left, right)
-        val state = WorldState()
-            .withInt("health", 60)
-            .withInt("fatigue", 90)
+        val state =
+            WorldState()
+                .withInt("health", 60)
+                .withInt("fatigue", 90)
         assertTrue(condition.isSatisfiedBy(state))
     }
 
@@ -170,9 +172,10 @@ class ConditionTest {
         val left = Condition.greaterThan("health", 50)
         val right = Condition.lessThan("fatigue", 80)
         val condition = Condition.or(left, right)
-        val state = WorldState()
-            .withInt("health", 80)
-            .withInt("fatigue", 90)
+        val state =
+            WorldState()
+                .withInt("health", 80)
+                .withInt("fatigue", 90)
         assertTrue(condition.isSatisfiedBy(state))
     }
 
@@ -181,9 +184,10 @@ class ConditionTest {
         val left = Condition.greaterThan("health", 50)
         val right = Condition.lessThan("fatigue", 80)
         val condition = Condition.or(left, right)
-        val state = WorldState()
-            .withInt("health", 30)
-            .withInt("fatigue", 30)
+        val state =
+            WorldState()
+                .withInt("health", 30)
+                .withInt("fatigue", 30)
         assertTrue(condition.isSatisfiedBy(state))
     }
 
@@ -192,9 +196,10 @@ class ConditionTest {
         val left = Condition.greaterThan("health", 50)
         val right = Condition.lessThan("fatigue", 80)
         val condition = Condition.or(left, right)
-        val state = WorldState()
-            .withInt("health", 30)
-            .withInt("fatigue", 90)
+        val state =
+            WorldState()
+                .withInt("health", 30)
+                .withInt("fatigue", 90)
         assertFalse(condition.isSatisfiedBy(state))
     }
 
@@ -218,20 +223,23 @@ class ConditionTest {
         val fatigueLow = Condition.lessThan("fatigue", 80)
         val notResting = Condition.Not(Condition.equals("isResting", 1))
 
-        val combined = Condition.and(
-            healthOk,
-            Condition.and(fatigueLow, notResting)
-        )
+        val combined =
+            Condition.and(
+                healthOk,
+                Condition.and(fatigueLow, notResting),
+            )
 
-        val validState = WorldState()
-            .withInt("health", 50)
-            .withInt("fatigue", 30)
-            .withInt("isResting", 0)
+        val validState =
+            WorldState()
+                .withInt("health", 50)
+                .withInt("fatigue", 30)
+                .withInt("isResting", 0)
 
-        val invalidState = WorldState()
-            .withInt("health", 20)
-            .withInt("fatigue", 30)
-            .withInt("isResting", 0)
+        val invalidState =
+            WorldState()
+                .withInt("health", 20)
+                .withInt("fatigue", 30)
+                .withInt("isResting", 0)
 
         assertTrue(combined.isSatisfiedBy(validState))
         assertFalse(combined.isSatisfiedBy(invalidState))
@@ -247,10 +255,10 @@ class ConditionTest {
 
         val state = WorldState().withInt("key", 10)
 
-        assertFalse(gt.isSatisfiedBy(state))  // 10 > 10 = false
-        assertFalse(lt.isSatisfiedBy(state))  // 10 < 10 = false
-        assertTrue(gte.isSatisfiedBy(state))  // 10 >= 10 = true
-        assertTrue(lte.isSatisfiedBy(state))  // 10 <= 10 = true
-        assertTrue(eq.isSatisfiedBy(state))   // 10 == 10 = true
+        assertFalse(gt.isSatisfiedBy(state)) // 10 > 10 = false
+        assertFalse(lt.isSatisfiedBy(state)) // 10 < 10 = false
+        assertTrue(gte.isSatisfiedBy(state)) // 10 >= 10 = true
+        assertTrue(lte.isSatisfiedBy(state)) // 10 <= 10 = true
+        assertTrue(eq.isSatisfiedBy(state)) // 10 == 10 = true
     }
 }

@@ -7,9 +7,10 @@ object RestGoal {
     const val ID = "rest"
     const val PRIORITY = 60
 
-    val targetConditions: Set<Condition> = setOf(
-        Condition.lessThan("fatigue", 20)
-    )
+    val targetConditions: Set<Condition> =
+        setOf(
+            Condition.lessThan("fatigue", 20),
+        )
 
     fun isSatisfied(state: WorldState): Boolean {
         return (state.getValue("fatigue") ?: 100) < 20
@@ -20,7 +21,7 @@ object RestGoal {
             id = ID,
             priority = PRIORITY,
             targetConditions = targetConditions,
-            satisfied = ::isSatisfied
+            satisfied = ::isSatisfied,
         )
     }
 }

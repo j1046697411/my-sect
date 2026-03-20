@@ -7,9 +7,10 @@ object CultivationGoal {
     const val ID = "cultivation"
     const val PRIORITY = 50
 
-    val targetConditions: Set<Condition> = setOf(
-        Condition.greaterThanOrEqual("cultivationProgress", 100)
-    )
+    val targetConditions: Set<Condition> =
+        setOf(
+            Condition.greaterThanOrEqual("cultivationProgress", 100),
+        )
 
     fun isSatisfied(state: WorldState): Boolean {
         return (state.getValue("cultivationProgress") ?: 0) >= 100
@@ -20,7 +21,7 @@ object CultivationGoal {
             id = ID,
             priority = PRIORITY,
             targetConditions = targetConditions,
-            satisfied = ::isSatisfied
+            satisfied = ::isSatisfied,
         )
     }
 }

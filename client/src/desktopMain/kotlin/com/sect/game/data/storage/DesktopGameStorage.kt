@@ -6,9 +6,8 @@ import java.io.IOException
 actual fun createPlatformStorage(): PlatformGameStorage = DesktopGameStorage()
 
 class DesktopGameStorage(
-    private val saveFileName: String = "game_save.json"
+    private val saveFileName: String = "game_save.json",
 ) : PlatformGameStorage {
-    
     private val saveFile: File
         get() = File(System.getProperty("user.home"), ".sect-game/$saveFileName")
 

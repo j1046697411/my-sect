@@ -13,7 +13,7 @@ data class Disciple(
     val cultivationProgress: Int,
     val fatigue: Int,
     val health: Int,
-    val lifespan: Int
+    val lifespan: Int,
 ) {
     init {
         require(cultivationProgress in 0..100) {
@@ -42,15 +42,15 @@ data class Disciple(
                 isDead() -> throw CultivationException.DeadDiscipleException(id.value)
                 isExhausted() -> throw CultivationException.ExhaustedException(id.value, fatigue)
             }
-            
+
             val progressGain = calculateCultivationGain()
             val fatigueGain = calculateFatigueGain()
             val healthLoss = calculateHealthLoss()
-            
+
             copy(
                 cultivationProgress = (cultivationProgress + progressGain).coerceAtMost(100),
                 fatigue = (fatigue + fatigueGain).coerceAtMost(100),
-                health = (health - healthLoss).coerceAtLeast(0)
+                health = (health - healthLoss).coerceAtLeast(0),
             )
         }
     }
@@ -60,13 +60,13 @@ data class Disciple(
             if (isDead()) {
                 throw CultivationException.DeadDiscipleException(id.value)
             }
-            
+
             val fatigueReduction = 30
             val healthGain = 20
-            
+
             copy(
                 fatigue = (fatigue - fatigueReduction).coerceAtLeast(0),
-                health = (health + healthGain).coerceAtMost(100)
+                health = (health + healthGain).coerceAtMost(100),
             )
         }
     }
@@ -76,10 +76,11 @@ data class Disciple(
             when {
                 isDead() -> throw CultivationException.DeadDiscipleException(id.value)
                 cultivationProgress < 100 -> throw CultivationException.InsufficientProgressException(
-                    id.value, cultivationProgress
+                    id.value,
+                    cultivationProgress,
                 )
             }
-            
+
             realm.next() ?: throw CultivationException.MaxRealmReachedException(id.value, realm.name)
         }
     }
@@ -108,13 +109,13 @@ data class Disciple(
             id: DiscipleId,
             name: String,
             attributes: Attributes,
-            realm: Realm = Realm.炼气,
-            lifespan: Int = 100
+            realm: Realm = Realm.LianQi,
+            lifespan: Int = 100,
         ): Result<Disciple> {
             return Result.runCatching {
                 require(name.isNotBlank()) { "name must not be blank" }
                 require(lifespan > 0) { "lifespan must be positive, but was $lifespan" }
-                
+
                 Disciple(
                     id = id,
                     name = name,
@@ -123,7 +124,7 @@ data class Disciple(
                     cultivationProgress = 0,
                     fatigue = 0,
                     health = 100,
-                    lifespan = lifespan
+                    lifespan = lifespan,
                 )
             }
         }

@@ -8,14 +8,14 @@ data class GoalTemplate(
     val name: String,
     val priority: Int,
     val conditions: Set<Condition>,
-    val targetState: WorldState
+    val targetState: WorldState,
 ) {
     fun toGoal(satisfied: (WorldState) -> Boolean): SimpleGoal {
         return SimpleGoal(
             id = id,
             priority = priority,
             targetConditions = conditions,
-            satisfied = satisfied
+            satisfied = satisfied,
         )
     }
 }

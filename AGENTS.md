@@ -249,10 +249,8 @@ client/
 
 | 问题 | 状态 | 说明 |
 |------|------|------|
-| UI 未连接 GOAP/MVI | ⚠️ | 入口点仅显示静态文本 |
-| 自定义 detekt 规则 | ✅ | NoChineseInTestMethodName 已实现 |
-| CI/CD | ✅ | .github/workflows/ci.yml 已配置 |
-| ktlint | ⚠️ | 未配置（仅使用 detekt）|
+| UI 连接 GOAP/MVI | ✅ | GameContainer 集成 GameEngine，UI 显示暂停/恢复/停止控制 |
+| ktlint | ✅ | 已配置，ktlintCheck 通过 |
 
 ---
 

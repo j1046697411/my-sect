@@ -8,10 +8,8 @@ import com.sect.game.domain.exception.StorageException
 import com.sect.game.domain.exception.toUserMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlin.math.min
 
 object GameErrorHandler {
-
     private const val MAX_RETRY_ATTEMPTS = 3
     private const val RETRY_DELAY_MS = 100L
 
@@ -22,33 +20,34 @@ object GameErrorHandler {
 
     data class DefaultRetryConfig(
         override val maxAttempts: Int = MAX_RETRY_ATTEMPTS,
-        override val delayMs: Long = RETRY_DELAY_MS
+        override val delayMs: Long = RETRY_DELAY_MS,
     ) : RetryConfig
 
     suspend fun <T> executeWithRetry(
         operation: suspend () -> T,
         onError: (Throwable) -> Unit = {},
-        retryConfig: RetryConfig = DefaultRetryConfig()
-    ): Result<T> = withContext(Dispatchers.Default) {
-        var lastError: Throwable? = null
-        var attempt = 0
+        retryConfig: RetryConfig = DefaultRetryConfig(),
+    ): Result<T> =
+        withContext(Dispatchers.Default) {
+            var lastError: Throwable? = null
+            var attempt = 0
 
-        while (attempt < retryConfig.maxAttempts) {
-            attempt++
-            try {
-                val result = operation()
-                return@withContext Result.success(result)
-            } catch (e: Throwable) {
-                lastError = e
-                logError(e, attempt)
-                onError(e)
-                if (attempt < retryConfig.maxAttempts) {
-                    kotlinx.coroutines.delay(retryConfig.delayMs * attempt)
+            while (attempt < retryConfig.maxAttempts) {
+                attempt++
+                try {
+                    val result = operation()
+                    return@withContext Result.success(result)
+                } catch (e: Throwable) {
+                    lastError = e
+                    logError(e, attempt)
+                    onError(e)
+                    if (attempt < retryConfig.maxAttempts) {
+                        kotlinx.coroutines.delay(retryConfig.delayMs * attempt)
+                    }
                 }
             }
+            Result.failure(lastError ?: IllegalStateException("Unknown error after $attempt attempts"))
         }
-        Result.failure(lastError ?: IllegalStateException("Unknown error after $attempt attempts"))
-    }
 
     fun mapToUserMessage(error: Throwable): String {
         return when (error) {
@@ -61,7 +60,10 @@ object GameErrorHandler {
         }
     }
 
-    fun logError(error: Throwable, attempt: Int = 1) {
+    fun logError(
+        error: Throwable,
+        attempt: Int = 1,
+    ) {
         val prefix = if (attempt > 1) "[Retry $attempt] " else ""
         System.err.println("${prefix}Error: ${error.message}")
         error.printStackTrace()
@@ -91,7 +93,7 @@ object GameErrorHandler {
 fun <T> Result<T>.toUserMessage(): String {
     return fold(
         onSuccess = { "操作成功" },
-        onFailure = { GameErrorHandler.mapToUserMessage(it) }
+        onFailure = { GameErrorHandler.mapToUserMessage(it) },
     )
 }
 

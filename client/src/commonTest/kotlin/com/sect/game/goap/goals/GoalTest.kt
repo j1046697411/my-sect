@@ -8,7 +8,6 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class GoalTest {
-
     @Test
     fun survivalGoal_hasCorrectPriority() {
         val goal = SurvivalGoal.create()
@@ -21,7 +20,7 @@ class GoalTest {
         val goal = SurvivalGoal.create()
         val satisfiedState = WorldState().withValue("health", 80)
         val unsatisfiedState = WorldState().withValue("health", 50)
-        
+
         assertTrue(goal.isGoalSatisfied(satisfiedState))
         assertFalse(goal.isGoalSatisfied(unsatisfiedState))
     }
@@ -38,7 +37,7 @@ class GoalTest {
         val goal = CultivationGoal.create()
         val satisfiedState = WorldState().withValue("cultivationProgress", 100)
         val unsatisfiedState = WorldState().withValue("cultivationProgress", 50)
-        
+
         assertTrue(goal.isGoalSatisfied(satisfiedState))
         assertFalse(goal.isGoalSatisfied(unsatisfiedState))
     }
@@ -53,13 +52,15 @@ class GoalTest {
     @Test
     fun breakthroughGoal_satisfiedWhenProgress100AndReadinessAbove80() {
         val goal = BreakthroughGoal.create()
-        val satisfiedState = WorldState()
-            .withValue("cultivationProgress", 100)
-            .withValue("readiness", 85)
-        val unsatisfiedState = WorldState()
-            .withValue("cultivationProgress", 100)
-            .withValue("readiness", 80)
-        
+        val satisfiedState =
+            WorldState()
+                .withValue("cultivationProgress", 100)
+                .withValue("readiness", 85)
+        val unsatisfiedState =
+            WorldState()
+                .withValue("cultivationProgress", 100)
+                .withValue("readiness", 80)
+
         assertTrue(goal.isGoalSatisfied(satisfiedState))
         assertFalse(goal.isGoalSatisfied(unsatisfiedState))
     }
@@ -76,7 +77,7 @@ class GoalTest {
         val goal = RestGoal.create()
         val satisfiedState = WorldState().withValue("fatigue", 15)
         val unsatisfiedState = WorldState().withValue("fatigue", 50)
-        
+
         assertTrue(goal.isGoalSatisfied(satisfiedState))
         assertFalse(goal.isGoalSatisfied(unsatisfiedState))
     }
@@ -87,12 +88,12 @@ class GoalTest {
         val cultivation = GoalFactoryImpl.getGoal("cultivation")
         val breakthrough = GoalFactoryImpl.getGoal("breakthrough")
         val rest = GoalFactoryImpl.getGoal("rest")
-        
+
         assertTrue(survival != null)
         assertTrue(cultivation != null)
         assertTrue(breakthrough != null)
         assertTrue(rest != null)
-        
+
         assertEquals(100, survival.priority)
         assertEquals(50, cultivation.priority)
         assertEquals(70, breakthrough.priority)
@@ -107,13 +108,14 @@ class GoalTest {
 
     @Test
     fun simpleGoal_implementsGoalInterface() {
-        val goal = SimpleGoal(
-            id = "test",
-            priority = 10,
-            targetConditions = setOf(Condition.greaterThan("health", 50)),
-            satisfied = { it.getValue("health") ?: 0 > 50 }
-        )
-        
+        val goal =
+            SimpleGoal(
+                id = "test",
+                priority = 10,
+                targetConditions = setOf(Condition.greaterThan("health", 50)),
+                satisfied = { it.getValue("health") ?: 0 > 50 },
+            )
+
         assertEquals("test", goal.id)
         assertEquals(10, goal.priority)
         assertEquals(1, goal.targetConditions.size)
@@ -121,16 +123,17 @@ class GoalTest {
 
     @Test
     fun goalTemplate_createsSimpleGoal() {
-        val template = GoalTemplate(
-            id = "test",
-            name = "Test",
-            priority = 25,
-            conditions = setOf(Condition.greaterThan("health", 50)),
-            targetState = WorldState().withValue("health", 100)
-        )
-        
+        val template =
+            GoalTemplate(
+                id = "test",
+                name = "Test",
+                priority = 25,
+                conditions = setOf(Condition.greaterThan("health", 50)),
+                targetState = WorldState().withValue("health", 100),
+            )
+
         val goal = template.toGoal { it.getValue("health") ?: 0 >= 100 }
-        
+
         assertEquals("test", goal.id)
         assertEquals(25, goal.priority)
         assertTrue(goal.isGoalSatisfied(WorldState().withValue("health", 100)))
@@ -140,7 +143,7 @@ class GoalTest {
     fun goals_sortedByPriority() {
         val goals = GoalFactoryImpl.getAllGoals()
         val sorted = goals.sortedByDescending { it.priority }
-        
+
         assertEquals("survival", sorted[0].id)
         assertEquals("breakthrough", sorted[1].id)
         assertEquals("rest", sorted[2].id)

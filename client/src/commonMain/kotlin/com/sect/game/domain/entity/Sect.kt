@@ -9,7 +9,7 @@ data class Sect(
     val name: String,
     private val _disciples: MutableMap<DiscipleId, Disciple> = mutableMapOf(),
     val resources: Resources = Resources.EMPTY,
-    val maxDisciples: Int = 100
+    val maxDisciples: Int = 100,
 ) {
     val disciples: Map<DiscipleId, Disciple>
         get() = _disciples.toMap()
@@ -30,8 +30,9 @@ data class Sect(
 
     fun removeDisciple(id: DiscipleId): Result<Disciple> {
         return Result.runCatching {
-            val disciple = _disciples.remove(id)
-                ?: throw SectException.DiscipleNotFoundException(id.value)
+            val disciple =
+                _disciples.remove(id)
+                    ?: throw SectException.DiscipleNotFoundException(id.value)
             disciple
         }
     }
@@ -56,7 +57,7 @@ data class Sect(
                     resourcesToSpend.pills,
                     this@Sect.resources.spiritStones,
                     this@Sect.resources.herbs,
-                    this@Sect.resources.pills
+                    this@Sect.resources.pills,
                 )
             }
             val newResources = this@Sect.resources - resourcesToSpend
@@ -68,44 +69,62 @@ data class Sect(
         return copy(resources = resources + resourcesToAdd)
     }
 
-    fun spendSpecificResource(type: ResourceType, amount: Int): Result<Sect> {
+    fun spendSpecificResource(
+        type: ResourceType,
+        amount: Int,
+    ): Result<Sect> {
         return Result.runCatching {
             require(amount >= 0) { "amount must be non-negative, but was $amount" }
-            val newResources = when (type) {
-                ResourceType.SPIRIT_STONES -> {
-                    if (resources.spiritStones < amount) {
-                        throw SectException.InsufficientResourcesException(
-                            amount, 0, 0,
-                            resources.spiritStones, resources.herbs, resources.pills
-                        )
+            val newResources =
+                when (type) {
+                    ResourceType.SPIRIT_STONES -> {
+                        if (resources.spiritStones < amount) {
+                            throw SectException.InsufficientResourcesException(
+                                amount,
+                                0,
+                                0,
+                                resources.spiritStones,
+                                resources.herbs,
+                                resources.pills,
+                            )
+                        }
+                        resources.copy(spiritStones = resources.spiritStones - amount)
                     }
-                    resources.copy(spiritStones = resources.spiritStones - amount)
-                }
-                ResourceType.HERBS -> {
-                    if (resources.herbs < amount) {
-                        throw SectException.InsufficientResourcesException(
-                            0, amount, 0,
-                            resources.spiritStones, resources.herbs, resources.pills
-                        )
+                    ResourceType.HERBS -> {
+                        if (resources.herbs < amount) {
+                            throw SectException.InsufficientResourcesException(
+                                0,
+                                amount,
+                                0,
+                                resources.spiritStones,
+                                resources.herbs,
+                                resources.pills,
+                            )
+                        }
+                        resources.copy(herbs = resources.herbs - amount)
                     }
-                    resources.copy(herbs = resources.herbs - amount)
-                }
-                ResourceType.PILLS -> {
-                    if (resources.pills < amount) {
-                        throw SectException.InsufficientResourcesException(
-                            0, 0, amount,
-                            resources.spiritStones, resources.herbs, resources.pills
-                        )
+                    ResourceType.PILLS -> {
+                        if (resources.pills < amount) {
+                            throw SectException.InsufficientResourcesException(
+                                0,
+                                0,
+                                amount,
+                                resources.spiritStones,
+                                resources.herbs,
+                                resources.pills,
+                            )
+                        }
+                        resources.copy(pills = resources.pills - amount)
                     }
-                    resources.copy(pills = resources.pills - amount)
                 }
-            }
             copy(resources = newResources)
         }
     }
 
     enum class ResourceType {
-        SPIRIT_STONES, HERBS, PILLS
+        SPIRIT_STONES,
+        HERBS,
+        PILLS,
     }
 
     companion object {
@@ -113,7 +132,7 @@ data class Sect(
             id: SectId,
             name: String,
             maxDisciples: Int = 100,
-            resources: Resources = Resources.EMPTY
+            resources: Resources = Resources.EMPTY,
         ): Result<Sect> {
             return Result.runCatching {
                 require(name.isNotBlank()) { "name must not be blank" }
@@ -122,7 +141,7 @@ data class Sect(
                     id = id,
                     name = name,
                     maxDisciples = maxDisciples,
-                    resources = resources
+                    resources = resources,
                 )
             }
         }

@@ -10,11 +10,11 @@ interface Action {
     val preconditions: List<Condition>
     val effects: List<Effect>
     val cost: Int
-    
+
     fun isValid(worldState: WorldState): Boolean {
         return preconditions.all { it.isSatisfiedBy(worldState) }
     }
-    
+
     fun applyEffects(worldState: WorldState): WorldState {
         return effects.fold(worldState) { state, effect -> effect.apply(state) }
     }
