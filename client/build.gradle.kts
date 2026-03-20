@@ -20,6 +20,12 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.min.sdk.get().toInt()
     }
+
+    packaging {
+        resources {
+            excludes += "**/*.kotlin_builtins"
+        }
+    }
 }
 
 kotlin {
@@ -39,6 +45,7 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.compose.material3)
                 implementation(libs.kodein)
+                implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
             }
         }
 
@@ -53,6 +60,7 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation("io.gitlab.arturbosch.detekt:detekt-api:1.23.7")
             }
+            resources.srcDirs("src/jvmMain/resources")
         }
 
         val androidMain by getting {

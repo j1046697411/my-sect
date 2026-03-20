@@ -1,4 +1,4 @@
-# ADR 001: Document Management System
+# ADR 001: 文档管理系统
 
 ## 背景
 

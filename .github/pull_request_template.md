@@ -1,31 +1,31 @@
 # Pull Request
 
-## Summary
-<!-- Briefly describe the changes and the problem this PR solves -->
+## 概要
+<!-- 简要描述本次变更以及解决的问题 -->
 
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-- [ ] Refactoring
+## 变更类型
+- [ ] Bug 修复
+- [ ] 新功能
+- [ ] 破坏性变更
+- [ ] 文档更新
+- [ ] 重构
 
-## Testing
-- [ ] Tests pass locally
-- [ ] Added/updated tests for new functionality
+## 测试
+- [ ] 本地测试通过
+- [ ] 已为新功能添加/更新测试
 
-## Documentation Impact
-<!-- Assess the documentation impact of this PR -->
+## 文档影响
+<!-- 评估本文档的文档影响 -->
 
-- [ ] API documentation needs update (if API changed)
-- [ ] ADR (Architecture Decision Record) needed (if architectural change)
-- [ ] AGENTS.md or rules need update (if workflow/behavior changed)
-- [ ] README.md needs update (if user-facing changes)
+- [ ] API 文档需要更新（如果 API 变更）
+- [ ] 需要 ADR（架构决策记录）（如果架构变更）
+- [ ] AGENTS.md 或规则需要更新（如果工作流/行为变更）
+- [ ] README.md 需要更新（如果面向用户的变更）
 
-For documentation guidelines, see [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
+文档指南请参阅 [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)。
 
-## Checklist
-- [ ] Code follows project style guidelines
-- [ ] Self-review completed
-- [ ] No new warnings introduced
-- [ ] Commit messages follow conventional format
+## 检查清单
+- [ ] 代码遵循项目风格指南
+- [ ] 已完成自审
+- [ ] 无新增警告
+- [ ] 提交信息遵循约定格式

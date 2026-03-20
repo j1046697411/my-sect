@@ -26,8 +26,8 @@ class RealmTest {
     }
 
     @Test
-    fun next_when化神_wrapsTo炼气() {
-        assertEquals(Realm.炼气, Realm.化神.next())
+    fun next_when化神_returnsNull() {
+        assertEquals(null, Realm.化神.next())
     }
 
     @Test
