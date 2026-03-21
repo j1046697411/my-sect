@@ -697,12 +697,18 @@ client/src/commonMain/kotlin/com/sect/game/
 
 ## Success Criteria
 
-- [x] FlowMVI 3.2.0 依赖正确添加
-- [x] `stability_definitions.txt` 配置完成
-- [x] `AGENTS.md` 架构规范已更新
-- [x] `GameContract` 实现 MVIState/MVIIntent/MVIAction 接口
-- [x] `GameContainer` 使用 store() 构建器
-- [x] `GameReducer` 逻辑分离
-- [x] `GameScreen` 使用 subscribe() 和 intent()
-- [x] 编译通过
-- [ ] 桌面端运行正常
+- [x] FlowMVI 3.2.0 依赖正确添加 — ✅ `client/build.gradle.kts:49-50`
+- [x] `stability_definitions.txt` 配置完成 — ✅ `client/build.gradle.kts:96-106`
+- [x] `AGENTS.md` 架构规范已更新 — ✅
+- [x] `GameContract` 实现 MVIState/MVIIntent/MVIAction 接口 — ✅ `GameContract.kt:6-8,26,42,49`
+- [ ] `GameContainer` 使用 store() 构建器 — ❌ **未实现**（使用 MutableStateFlow + Channel）
+- [ ] `GameReducer` 逻辑分离 — ❌ **不存在**
+- [ ] `GameScreen` 使用 subscribe() 和 intent() — ❌ **未实现**（使用 `container.state.collectAsState()` 和 `container.processIntent()`）
+- [x] 编译通过 — ✅
+- [ ] 桌面端运行正常 — ⏳ 待验证
+
+### 实际待办
+1. **GameReducer**: 需要创建独立的 Reducer 文件，分离 intent 处理逻辑
+2. **GameContainer 重构**: 需要使用 `store()` 构建器实现 `Container<GameState, GameIntent, GameAction>` 接口
+3. **GameScreen 更新**: 需要使用 FlowMVI 的 `subscribe()` API 和 `intent()` 发送意图
+4. **桌面端验证**: 需要运行 `./gradlew :client:desktopRun` 验证
