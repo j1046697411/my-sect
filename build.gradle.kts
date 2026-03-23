@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.kover) apply false
     alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.paparazzi) apply false
 }
