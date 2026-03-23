@@ -17,9 +17,9 @@
 > **注意**：`AGENTS.md` 存在于项目根目录及多个子目录中，每个文件仅描述其所在目录的模块信息。根目录的 AGENTS.md 包含全局性规范，子目录的 AGENTS.md 描述特定模块。
 
 ## 强制说明 (严禁删除)
-所有目录下的 `AGENTS.md` 文件用于帮助 Agent 分析目录结构并提供引导。
-项目的文档及注释请使用中文。
-如需向用户提问，也必须使用中文。
+- 所有目录下的 `AGENTS.md` 文件用于帮助 Agent 分析目录结构并提供引导。
+- 项目的文档及注释请使用中文。
+- 如需向用户提问，也必须使用中文。
 
 ## 构建命令
 
@@ -247,19 +247,6 @@ client/
 - 所有任务完成后必须通过 `git commit` 提交到本地仓库
 - 提交前确保代码通过 `./gradlew check`
 - 提交信息应清晰描述本次修改的内容和目的
-
----
-
-## 技术债务
-
-| 问题 | 状态 | 说明 |
-|------|------|------|
-| UI 连接 GOAP/MVI | ✅ | GameContainer 集成 GameEngine，UI 显示暂停/恢复/停止控制 |
-| ktlint | ✅ | 已配置，ktlintCheck 通过 |
-| MVI 基础设施层 | ✅ | 已完成 `base/MviContract.kt` 和 `extensions/FlowMviExt.kt` |
-| desktopMain 依赖重复 (#17) | ✅ | 依赖已正确配置，重复声明已移除 |
-| Android MainActivity (#18) | ✅ | 已连接 GameContainer/GameScreen |
-| AGENTS.md 文件位置 | ⚠️ | 多个人源码目录中包含 AGENTS.md（data/、domain/、engine/、goap/、mvi/、presentation/），应移至 docs/ |
 
 ---
 
