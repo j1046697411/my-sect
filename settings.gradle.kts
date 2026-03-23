@@ -25,7 +25,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "sect-game"
 
-include(":client")
 include(":tools:detekt-rules")
 include(":tools:kover-config")
 include(":tools:dokka-config")
