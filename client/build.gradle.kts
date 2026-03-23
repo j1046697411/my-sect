@@ -53,6 +53,7 @@ kotlin {
             }
         }
 
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         val commonTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
@@ -61,6 +62,7 @@ kotlin {
                 implementation(project(":business:data"))
                 implementation(project(":business:goap"))
                 implementation(project(":business:goap-framework"))
+                implementation(compose.uiTest)
             }
         }
 

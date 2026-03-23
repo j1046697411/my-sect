@@ -170,7 +170,7 @@ client/src/commonMain/kotlin/com/sect/game/
 ### 测试
 - 最低 80% 测试覆盖率
 - 单元测试使用 `kotlin-test` 框架
-- 测试命名：`类名_方法名_场景_预期结果`
+- 测试命名：`类名_方法名_场景_预期结果` ，使用英文命名
 - 遵循 TDD：Red → Green → Refactor
 
 ---
