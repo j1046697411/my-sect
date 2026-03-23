@@ -67,8 +67,6 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
-                implementation(libs.compose.material3)
-                implementation(libs.flowmvi.compose)
             }
             resources.srcDirs("src/jvmMain/resources")
         }

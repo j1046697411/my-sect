@@ -1,0 +1,826 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.4/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :client
+warning: Dokka Gradle plugin V1 is deprecated
+    
+    Dokka Gradle plugin V1 is deprecated, and will be removed in Dokka version 2.1.0
+    Please migrate to Dokka Gradle plugin V2. This will require updating your project.
+    To learn about migrating read the migration guide https://kotl.in/dokka-gradle-migration
+    
+    To start migrating to Dokka Gradle plugin V2 add
+        org.jetbrains.dokka.experimental.gradle.pluginMode=V2EnabledWithHelpers
+    into your project's `gradle.properties` file.
+    
+    We would appreciate your feedback!
+     - Please report any feedback or problems https://kotl.in/dokka-issues
+     - Chat with the community visit #dokka in https://kotlinlang.slack.com/ (To sign up visit https://kotl.in/slack)
+    
+
+> Task :business:goap:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :tools:detekt-rules:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :business:engine:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :business:goap-framework:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :business:mvi:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :business:domain:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :business:data:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :business:data:desktopProcessResources NO-SOURCE
+> Task :business:engine:desktopProcessResources NO-SOURCE
+> Task :business:goap:desktopProcessResources NO-SOURCE
+> Task :business:mvi:desktopProcessResources NO-SOURCE
+> Task :business:data:processDesktopMainResources SKIPPED
+> Task :business:goap:processDesktopMainResources SKIPPED
+> Task :business:mvi:processDesktopMainResources SKIPPED
+> Task :business:engine:processDesktopMainResources SKIPPED
+> Task :business:data:preBuild UP-TO-DATE
+> Task :app:android:preBuild UP-TO-DATE
+> Task :business:data:preDebugBuild UP-TO-DATE
+> Task :app:android:preDebugBuild UP-TO-DATE
+> Task :business:engine:desktopTestProcessResources NO-SOURCE
+> Task :business:engine:processDesktopTestResources SKIPPED
+> Task :business:goap:desktopTestProcessResources NO-SOURCE
+> Task :business:data:generateDebugResValues UP-TO-DATE
+> Task :business:goap:processDesktopTestResources SKIPPED
+> Task :business:mvi:desktopTestProcessResources NO-SOURCE
+> Task :app:android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :business:mvi:processDesktopTestResources SKIPPED
+> Task :app:android:mergeDebugNativeLibs NO-SOURCE
+> Task :business:data:generateDebugResources UP-TO-DATE
+> Task :app:android:stripDebugDebugSymbols NO-SOURCE
+> Task :tools:dokka-config:compileJava NO-SOURCE
+> Task :app:android:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :tools:dokka-config:processResources UP-TO-DATE
+> Task :business:data:packageDebugResources UP-TO-DATE
+> Task :tools:dokka-config:classes UP-TO-DATE
+> Task :app:android:generateDebugResValues UP-TO-DATE
+> Task :tools:dokka-config:compileTestJava NO-SOURCE
+> Task :app:android:generateDebugResources UP-TO-DATE
+> Task :tools:dokka-config:processTestResources NO-SOURCE
+> Task :tools:dokka-config:testClasses UP-TO-DATE
+> Task :app:android:packageDebugResources UP-TO-DATE
+> Task :tools:dokka-config:test NO-SOURCE
+> Task :tools:dokka-config:check UP-TO-DATE
+> Task :tools:kover-config:koverGenerateArtifact UP-TO-DATE
+> Task :business:data:parseDebugLocalResources UP-TO-DATE
+> Task :app:android:parseDebugLocalResources UP-TO-DATE
+> Task :business:data:generateDebugRFile UP-TO-DATE
+> Task :business:data:javaPreCompileDebug UP-TO-DATE
+> Task :app:android:generateDebugRFile UP-TO-DATE
+> Task :business:data:preReleaseBuild UP-TO-DATE
+> Task :business:data:generateReleaseResValues UP-TO-DATE
+> Task :app:android:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :business:data:generateReleaseResources UP-TO-DATE
+> Task :app:android:mergeDebugShaders UP-TO-DATE
+> Task :app:android:compileDebugShaders NO-SOURCE
+> Task :tools:kover-config:koverCachedVerify UP-TO-DATE
+> Task :app:android:generateDebugAssets UP-TO-DATE
+> Task :business:data:packageReleaseResources UP-TO-DATE
+> Task :app:android:mergeDebugAssets UP-TO-DATE
+> Task :business:data:parseReleaseLocalResources UP-TO-DATE
+> Task :app:android:javaPreCompileDebug UP-TO-DATE
+> Task :tools:kover-config:koverVerify
+> Task :tools:kover-config:compileJava NO-SOURCE
+> Task :business:domain:compileKotlinDesktop UP-TO-DATE
+> Task :app:android:prepareDebugArtProfile UP-TO-DATE
+> Task :tools:detekt-rules:compileKotlin UP-TO-DATE
+> Task :business:goap-framework:compileKotlinDesktop UP-TO-DATE
+> Task :business:data:generateReleaseRFile UP-TO-DATE
+> Task :business:domain:compileDesktopMainJava NO-SOURCE
+> Task :business:goap-framework:compileDesktopMainJava NO-SOURCE
+> Task :tools:detekt-rules:compileJava NO-SOURCE
+> Task :tools:kover-config:processResources UP-TO-DATE
+> Task :tools:kover-config:classes UP-TO-DATE
+> Task :business:domain:desktopProcessResources NO-SOURCE
+> Task :business:goap-framework:desktopProcessResources NO-SOURCE
+> Task :business:goap-framework:processDesktopMainResources SKIPPED
+> Task :business:domain:processDesktopMainResources SKIPPED
+> Task :business:goap-framework:desktopMainClasses UP-TO-DATE
+> Task :business:domain:desktopMainClasses UP-TO-DATE
+> Task :tools:kover-config:compileTestJava NO-SOURCE
+> Task :business:data:javaPreCompileRelease UP-TO-DATE
+> Task :tools:kover-config:processTestResources NO-SOURCE
+> Task :app:android:prepareLintJarForPublish UP-TO-DATE
+> Task :tools:detekt-rules:processResources UP-TO-DATE
+> Task :tools:kover-config:testClasses UP-TO-DATE
+> Task :tools:detekt-rules:classes UP-TO-DATE
+> Task :app:android:processDebugManifest UP-TO-DATE
+> Task :business:data:mergeDebugJniLibFolders UP-TO-DATE
+> Task :tools:detekt-rules:jar UP-TO-DATE
+> Task :business:domain:desktopJar UP-TO-DATE
+> Task :business:goap-framework:desktopJar UP-TO-DATE
+> Task :tools:kover-config:test NO-SOURCE
+> Task :business:data:mergeDebugNativeLibs NO-SOURCE
+> Task :app:android:processDebugJavaRes NO-SOURCE
+> Task :app:android:mergeDebugJavaResource UP-TO-DATE
+> Task :app:android:writeDebugAarMetadata UP-TO-DATE
+> Task :app:android:preDebugAndroidTestBuild UP-TO-DATE
+> Task :app:android:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :app:android:writeDebugLintModelMetadata UP-TO-DATE
+
+> Task :client:checkDesktopMainComposeLibrariesCompatibility
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :client:dependencies  --configuration desktopRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :app:desktop:checkDesktopMainComposeLibrariesCompatibility
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :app:desktop:dependencies  --configuration desktopRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :business:presentation:checkDesktopMainComposeLibrariesCompatibility
+w: Compose Multiplatform runtime dependencies' versions don't match with plugin version.
+    expected: 'org.jetbrains.compose.foundation:foundation:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.foundation:foundation:1.9.0'
+
+    expected: 'org.jetbrains.compose.ui:ui:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.ui:ui:1.9.0'
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:presentation:dependencies  --configuration desktopRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Please update Compose Multiplatform Gradle plugin's version or align dependencies' versions to match the current plugin version.
+
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:presentation:dependencies  --configuration desktopRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :business:feature-game:checkDesktopMainComposeLibrariesCompatibility
+w: Compose Multiplatform runtime dependencies' versions don't match with plugin version.
+    expected: 'org.jetbrains.compose.foundation:foundation:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.foundation:foundation:1.9.0'
+
+    expected: 'org.jetbrains.compose.ui:ui:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.ui:ui:1.9.0'
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:feature-game:dependencies  --configuration desktopRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Please update Compose Multiplatform Gradle plugin's version or align dependencies' versions to match the current plugin version.
+
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:feature-game:dependencies  --configuration desktopRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :app:android:extractProguardFiles UP-TO-DATE
+> Task :business:presentation:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :client:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:android:preDebugUnitTestBuild UP-TO-DATE
+> Task :business:feature-game:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:desktop:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :client:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :business:feature-game:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :app:desktop:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :business:presentation:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :app:desktop:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :business:presentation:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :business:feature-game:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :business:presentation:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :app:desktop:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :business:feature-game:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :client:generateResourceAccessorsForCommonMain SKIPPED
+> Task :business:presentation:generateResourceAccessorsForCommonMain SKIPPED
+> Task :business:feature-game:generateResourceAccessorsForCommonMain SKIPPED
+> Task :app:desktop:generateResourceAccessorsForCommonMain SKIPPED
+> Task :business:presentation:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :client:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :app:desktop:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :business:presentation:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :business:feature-game:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :app:desktop:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :business:feature-game:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :app:desktop:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :business:presentation:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :app:desktop:generateResourceAccessorsForDesktopMain SKIPPED
+> Task :app:desktop:generateActualResourceCollectorsForDesktopMain SKIPPED
+> Task :client:generateResourceAccessorsForDesktopMain SKIPPED
+> Task :business:presentation:generateResourceAccessorsForDesktopMain SKIPPED
+> Task :business:presentation:generateActualResourceCollectorsForDesktopMain SKIPPED
+> Task :client:generateActualResourceCollectorsForDesktopMain SKIPPED
+> Task :app:desktop:generateComposeResClass SKIPPED
+> Task :business:presentation:generateComposeResClass SKIPPED
+> Task :business:presentation:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :client:generateComposeResClass SKIPPED
+> Task :app:desktop:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :business:feature-game:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :client:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :business:feature-game:generateResourceAccessorsForDesktopMain SKIPPED
+> Task :business:feature-game:generateActualResourceCollectorsForDesktopMain SKIPPED
+> Task :business:feature-game:generateComposeResClass SKIPPED
+> Task :business:feature-game:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :business:goap:compileKotlinDesktop UP-TO-DATE
+> Task :business:domain:compileTestKotlinDesktop UP-TO-DATE
+> Task :business:mvi:compileKotlinDesktop UP-TO-DATE
+> Task :business:mvi:compileDesktopMainJava NO-SOURCE
+> Task :business:goap:compileDesktopMainJava NO-SOURCE
+> Task :business:domain:compileDesktopTestJava NO-SOURCE
+> Task :business:mvi:desktopMainClasses UP-TO-DATE
+> Task :business:goap:desktopMainClasses UP-TO-DATE
+> Task :business:goap-framework:compileTestKotlinDesktop UP-TO-DATE
+> Task :business:feature-game:assembleDesktopMainResources UP-TO-DATE
+> Task :business:domain:desktopTestProcessResources NO-SOURCE
+> Task :business:goap-framework:compileDesktopTestJava NO-SOURCE
+> Task :business:feature-game:desktopProcessResources UP-TO-DATE
+> Task :business:domain:processDesktopTestResources SKIPPED
+> Task :business:goap:desktopJar UP-TO-DATE
+> Task :business:domain:desktopTestClasses UP-TO-DATE
+> Task :business:feature-game:processDesktopMainResources SKIPPED
+> Task :business:goap-framework:desktopTestProcessResources NO-SOURCE
+> Task :business:mvi:desktopJar UP-TO-DATE
+> Task :business:data:compileKotlinDesktop UP-TO-DATE
+> Task :business:data:compileDesktopMainJava NO-SOURCE
+> Task :business:goap-framework:processDesktopTestResources SKIPPED
+> Task :business:data:desktopMainClasses UP-TO-DATE
+> Task :business:goap-framework:desktopTestClasses UP-TO-DATE
+> Task :business:data:desktopJar UP-TO-DATE
+
+> Task :app:desktop:checkDesktopTestComposeLibrariesCompatibility
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :app:desktop:dependencies  --configuration desktopTestRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :client:checkDesktopTestComposeLibrariesCompatibility
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :client:dependencies  --configuration desktopTestRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :client:assembleDesktopMainResources UP-TO-DATE
+> Task :app:desktop:assembleDesktopMainResources UP-TO-DATE
+> Task :client:desktopProcessResources UP-TO-DATE
+> Task :app:desktop:desktopProcessResources UP-TO-DATE
+> Task :client:processDesktopMainResources SKIPPED
+> Task :app:desktop:processDesktopMainResources SKIPPED
+
+> Task :business:feature-game:checkDesktopTestComposeLibrariesCompatibility
+w: Compose Multiplatform runtime dependencies' versions don't match with plugin version.
+    expected: 'org.jetbrains.compose.foundation:foundation:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.foundation:foundation:1.9.0'
+
+    expected: 'org.jetbrains.compose.ui:ui:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.ui:ui:1.9.0'
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:feature-game:dependencies  --configuration desktopTestRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Please update Compose Multiplatform Gradle plugin's version or align dependencies' versions to match the current plugin version.
+
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:feature-game:dependencies  --configuration desktopTestRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :business:domain:desktopTest UP-TO-DATE
+> Task :business:goap-framework:desktopTest UP-TO-DATE
+> Task :client:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :business:feature-game:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :app:desktop:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :business:domain:allTests UP-TO-DATE
+> Task :client:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :business:goap-framework:allTests UP-TO-DATE
+> Task :business:feature-game:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :app:desktop:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :business:goap-framework:check UP-TO-DATE
+> Task :business:domain:check UP-TO-DATE
+> Task :client:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :business:feature-game:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :app:desktop:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :client:generateResourceAccessorsForCommonTest SKIPPED
+> Task :app:desktop:generateResourceAccessorsForCommonTest SKIPPED
+> Task :business:feature-game:generateResourceAccessorsForCommonTest SKIPPED
+> Task :client:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :business:feature-game:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :app:desktop:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :business:feature-game:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :app:desktop:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :app:desktop:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :business:mvi:compileTestKotlinDesktop NO-SOURCE
+> Task :business:feature-game:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :business:feature-game:generateResourceAccessorsForDesktopTest SKIPPED
+> Task :client:generateResourceAccessorsForDesktopTest SKIPPED
+> Task :app:desktop:generateResourceAccessorsForDesktopTest SKIPPED
+> Task :business:goap:compileTestKotlinDesktop UP-TO-DATE
+> Task :client:assembleDesktopTestResources UP-TO-DATE
+> Task :business:feature-game:assembleDesktopTestResources UP-TO-DATE
+> Task :business:mvi:compileDesktopTestJava NO-SOURCE
+> Task :business:mvi:desktopTestClasses UP-TO-DATE
+> Task :business:goap:compileDesktopTestJava NO-SOURCE
+> Task :app:desktop:assembleDesktopTestResources UP-TO-DATE
+> Task :business:engine:compileKotlinDesktop UP-TO-DATE
+> Task :business:feature-game:desktopTestProcessResources UP-TO-DATE
+> Task :client:desktopTestProcessResources UP-TO-DATE
+> Task :business:goap:desktopTestClasses UP-TO-DATE
+> Task :business:feature-game:processDesktopTestResources SKIPPED
+> Task :client:processDesktopTestResources SKIPPED
+> Task :business:mvi:desktopTest NO-SOURCE
+> Task :business:engine:compileDesktopMainJava NO-SOURCE
+> Task :tools:kover-config:check
+> Task :business:engine:desktopMainClasses UP-TO-DATE
+> Task :app:desktop:desktopTestProcessResources UP-TO-DATE
+> Task :app:desktop:processDesktopTestResources SKIPPED
+> Task :business:presentation:compileKotlinDesktop UP-TO-DATE
+> Task :business:mvi:allTests NO-SOURCE
+> Task :business:mvi:check UP-TO-DATE
+> Task :business:engine:desktopJar UP-TO-DATE
+> Task :client:koverFindJar UP-TO-DATE
+> Task :business:presentation:compileDesktopMainJava NO-SOURCE
+> Task :client:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :business:presentation:assembleDesktopMainResources UP-TO-DATE
+> Task :business:goap:desktopTest UP-TO-DATE
+> Task :client:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :business:goap:allTests UP-TO-DATE
+> Task :business:goap:check UP-TO-DATE
+> Task :business:presentation:desktopProcessResources UP-TO-DATE
+> Task :client:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :client:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :business:presentation:processDesktopMainResources SKIPPED
+> Task :client:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :business:presentation:desktopMainClasses UP-TO-DATE
+> Task :client:convertXmlValueResourcesForAndroidDebug NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForAndroidDebug NO-SOURCE
+> Task :business:presentation:desktopJar UP-TO-DATE
+> Task :client:prepareComposeResourcesTaskForAndroidDebug NO-SOURCE
+> Task :tools:detekt-rules:detekt UP-TO-DATE
+> Task :client:copyDebugComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :client:preBuild UP-TO-DATE
+> Task :client:preDebugBuild UP-TO-DATE
+> Task :app:android:generateDebugUnitTestStubRFile UP-TO-DATE
+> Task :business:data:compileDebugKotlinAndroid UP-TO-DATE
+> Task :client:generateDebugResValues UP-TO-DATE
+> Task :app:android:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :business:data:compileDebugJavaWithJavac NO-SOURCE
+> Task :tools:detekt-rules:compileTestKotlin NO-SOURCE
+> Task :client:generateDebugResources UP-TO-DATE
+> Task :business:data:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :tools:detekt-rules:compileTestJava NO-SOURCE
+> Task :app:android:processDebugUnitTestJavaRes NO-SOURCE
+
+> Task :business:presentation:checkDesktopTestComposeLibrariesCompatibility
+w: Compose Multiplatform runtime dependencies' versions don't match with plugin version.
+    expected: 'org.jetbrains.compose.foundation:foundation:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.foundation:foundation:1.9.0'
+
+    expected: 'org.jetbrains.compose.ui:ui:1.11.0-alpha04'
+    actual:   'org.jetbrains.compose.ui:ui:1.9.0'
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:presentation:dependencies  --configuration desktopTestRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Please update Compose Multiplatform Gradle plugin's version or align dependencies' versions to match the current plugin version.
+
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.9.22.2
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :business:presentation:dependencies  --configuration desktopTestRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :tools:detekt-rules:processTestResources NO-SOURCE
+> Task :tools:detekt-rules:testClasses UP-TO-DATE
+> Task :business:data:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :client:packageDebugResources UP-TO-DATE
+> Task :business:presentation:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :business:presentation:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :tools:detekt-rules:test NO-SOURCE
+> Task :tools:detekt-rules:check UP-TO-DATE
+> Task :business:presentation:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :business:presentation:generateResourceAccessorsForCommonTest SKIPPED
+> Task :business:presentation:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :business:presentation:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :client:parseDebugLocalResources UP-TO-DATE
+> Task :business:engine:compileTestKotlinDesktop UP-TO-DATE
+> Task :business:presentation:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :business:data:processDebugJavaRes UP-TO-DATE
+> Task :business:presentation:generateResourceAccessorsForDesktopTest SKIPPED
+> Task :business:engine:compileDesktopTestJava NO-SOURCE
+> Task :client:generateDebugRFile UP-TO-DATE
+> Task :business:engine:desktopTestClasses UP-TO-DATE
+> Task :client:generateResourceAccessorsForAndroidDebug SKIPPED
+> Task :business:presentation:compileTestKotlinDesktop NO-SOURCE
+> Task :business:presentation:compileDesktopTestJava NO-SOURCE
+> Task :client:javaPreCompileDebug UP-TO-DATE
+> Task :client:preDebugUnitTestBuild UP-TO-DATE
+> Task :business:presentation:assembleDesktopTestResources UP-TO-DATE
+> Task :business:presentation:desktopTestProcessResources UP-TO-DATE
+> Task :business:presentation:processDesktopTestResources SKIPPED
+> Task :business:presentation:desktopTestClasses UP-TO-DATE
+> Task :business:presentation:desktopTest NO-SOURCE
+> Task :business:presentation:allTests NO-SOURCE
+> Task :business:presentation:check UP-TO-DATE
+> Task :business:engine:desktopTest UP-TO-DATE
+> Task :business:engine:allTests UP-TO-DATE
+> Task :business:engine:check UP-TO-DATE
+> Task :business:feature-game:compileKotlinDesktop UP-TO-DATE
+> Task :business:feature-game:compileDesktopMainJava NO-SOURCE
+> Task :business:feature-game:desktopMainClasses UP-TO-DATE
+> Task :business:feature-game:desktopJar UP-TO-DATE
+> Task :business:feature-game:compileTestKotlinDesktop NO-SOURCE
+> Task :business:feature-game:compileDesktopTestJava NO-SOURCE
+> Task :business:feature-game:desktopTestClasses UP-TO-DATE
+> Task :business:data:compileReleaseKotlinAndroid UP-TO-DATE
+> Task :business:feature-game:desktopTest NO-SOURCE
+> Task :business:feature-game:allTests NO-SOURCE
+> Task :business:data:compileReleaseJavaWithJavac NO-SOURCE
+> Task :business:feature-game:check UP-TO-DATE
+> Task :client:generateDebugUnitTestStubRFile UP-TO-DATE
+> Task :business:data:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :business:data:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :client:compileKotlinDesktop NO-SOURCE
+> Task :business:data:processReleaseJavaRes UP-TO-DATE
+> Task :business:data:stripDebugDebugSymbols NO-SOURCE
+> Task :client:compileDesktopMainJava NO-SOURCE
+> Task :client:desktopMainClasses UP-TO-DATE
+> Task :business:data:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :app:android:extractDebugAnnotations UP-TO-DATE
+> Task :app:android:compileDebugJavaWithJavac NO-SOURCE
+> Task :client:desktopJar UP-TO-DATE
+> Task :app:android:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :app:android:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :app:desktop:compileKotlinDesktop UP-TO-DATE
+> Task :business:data:extractDebugAnnotations UP-TO-DATE
+> Task :app:desktop:compileDesktopMainJava NO-SOURCE
+> Task :app:desktop:desktopMainClasses UP-TO-DATE
+> Task :business:data:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :business:data:mergeDebugShaders UP-TO-DATE
+> Task :app:desktop:desktopJar UP-TO-DATE
+> Task :business:data:compileDebugShaders NO-SOURCE
+> Task :business:data:debugAssetsCopyForAGP NO-SOURCE
+> Task :business:data:generateDebugAssets UP-TO-DATE
+> Task :app:desktop:compileTestKotlinDesktop NO-SOURCE
+> Task :app:desktop:compileDesktopTestJava NO-SOURCE
+> Task :app:desktop:desktopTestClasses UP-TO-DATE
+> Task :app:android:syncDebugLibJars UP-TO-DATE
+> Task :app:desktop:desktopTest NO-SOURCE
+> Task :business:data:mergeDebugAssets UP-TO-DATE
+> Task :app:desktop:allTests NO-SOURCE
+> Task :app:desktop:check UP-TO-DATE
+> Task :business:data:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :business:data:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :app:android:bundleDebugLocalLintAar UP-TO-DATE
+> Task :business:data:prepareDebugArtProfile UP-TO-DATE
+> Task :business:data:prepareLintJarForPublish UP-TO-DATE
+> Task :app:android:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :app:android:createFullJarDebug UP-TO-DATE
+> Task :business:data:processDebugManifest UP-TO-DATE
+> Task :app:android:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :business:data:mergeDebugJavaResource UP-TO-DATE
+> Task :app:android:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :business:data:syncDebugLibJars UP-TO-DATE
+> Task :app:android:testDebugUnitTest NO-SOURCE
+> Task :app:android:preReleaseBuild UP-TO-DATE
+> Task :business:data:writeDebugAarMetadata UP-TO-DATE
+> Task :app:android:generateReleaseResValues UP-TO-DATE
+> Task :business:data:bundleDebugLocalLintAar UP-TO-DATE
+> Task :app:android:generateReleaseResources UP-TO-DATE
+> Task :business:data:createFullJarDebug UP-TO-DATE
+> Task :business:data:writeDebugLintModelMetadata UP-TO-DATE
+> Task :app:android:packageReleaseResources UP-TO-DATE
+> Task :business:data:extractProguardFiles UP-TO-DATE
+> Task :client:compileTestKotlinDesktop UP-TO-DATE
+> Task :client:compileDesktopTestJava NO-SOURCE
+> Task :client:desktopTestClasses UP-TO-DATE
+> Task :business:data:generateDebugLintModel UP-TO-DATE
+> Task :client:desktopTest UP-TO-DATE
+> Task :business:data:lintAnalyzeDebug UP-TO-DATE
+> Task :client:compileDebugKotlinAndroid NO-SOURCE
+> Task :client:compileDebugJavaWithJavac NO-SOURCE
+> Task :business:data:preDebugAndroidTestBuild UP-TO-DATE
+> Task :client:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :business:data:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :client:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :client:convertXmlValueResourcesForAndroidUnitTest NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForAndroidUnitTest NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForAndroidUnitTest NO-SOURCE
+> Task :client:generateResourceAccessorsForAndroidUnitTest SKIPPED
+> Task :client:convertXmlValueResourcesForAndroidUnitTestDebug NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForAndroidUnitTestDebug NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForAndroidUnitTestDebug NO-SOURCE
+> Task :client:generateResourceAccessorsForAndroidUnitTestDebug SKIPPED
+> Task :business:data:generateDebugAndroidTestLintModel UP-TO-DATE
+> Task :app:android:generateDebugAndroidTestLintModel UP-TO-DATE
+> Task :business:data:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:android:generateDebugLintReportModel UP-TO-DATE
+> Task :business:data:generateDebugUnitTestLintModel UP-TO-DATE
+> Task :app:android:generateDebugUnitTestLintModel UP-TO-DATE
+> Task :business:data:lintAnalyzeDebugAndroidTest UP-TO-DATE
+> Task :business:data:lintAnalyzeDebugUnitTest UP-TO-DATE
+> Task :app:android:lintAnalyzeDebug UP-TO-DATE
+> Task :app:android:lintAnalyzeDebugAndroidTest UP-TO-DATE
+> Task :app:android:lintAnalyzeDebugUnitTest UP-TO-DATE
+> Task :app:android:lintReportDebug UP-TO-DATE
+> Task :client:compileDebugUnitTestKotlinAndroid UP-TO-DATE
+> Task :client:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :client:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :business:data:compileTestKotlinDesktop UP-TO-DATE
+> Task :client:processDebugJavaRes NO-SOURCE
+> Task :app:android:lintDebug
+> Task :app:android:lint
+> Task :business:data:compileDesktopTestJava NO-SOURCE
+> Task :business:data:desktopTestProcessResources NO-SOURCE
+> Task :business:data:processDesktopTestResources SKIPPED
+> Task :business:data:desktopTestClasses UP-TO-DATE
+> Task :app:android:parseReleaseLocalResources UP-TO-DATE
+> Task :client:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :app:android:generateReleaseRFile UP-TO-DATE
+> Task :app:android:javaPreCompileRelease UP-TO-DATE
+> Task :app:android:compileReleaseJavaWithJavac NO-SOURCE
+> Task :app:android:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :app:android:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :app:android:preReleaseUnitTestBuild UP-TO-DATE
+> Task :business:data:desktopTest UP-TO-DATE
+> Task :business:data:generateDebugUnitTestStubRFile UP-TO-DATE
+> Task :client:testDebugUnitTest UP-TO-DATE
+> Task :app:android:generateReleaseUnitTestStubRFile UP-TO-DATE
+> Task :client:convertXmlValueResourcesForAndroidRelease NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForAndroidRelease NO-SOURCE
+> Task :app:android:javaPreCompileReleaseUnitTest UP-TO-DATE
+> Task :app:android:compileReleaseUnitTestJavaWithJavac NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForAndroidRelease NO-SOURCE
+> Task :app:android:processReleaseJavaRes NO-SOURCE
+> Task :app:android:processReleaseUnitTestJavaRes NO-SOURCE
+> Task :client:copyReleaseComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :client:preReleaseBuild UP-TO-DATE
+> Task :app:android:testReleaseUnitTest NO-SOURCE
+> Task :app:android:test UP-TO-DATE
+> Task :app:android:check
+> Task :client:generateReleaseResValues UP-TO-DATE
+> Task :client:generateReleaseResources UP-TO-DATE
+> Task :client:packageReleaseResources UP-TO-DATE
+> Task :client:parseReleaseLocalResources UP-TO-DATE
+> Task :client:generateReleaseRFile UP-TO-DATE
+> Task :client:generateResourceAccessorsForAndroidRelease SKIPPED
+> Task :client:compileReleaseKotlinAndroid NO-SOURCE
+> Task :business:data:compileDebugUnitTestKotlinAndroid UP-TO-DATE
+> Task :client:javaPreCompileRelease UP-TO-DATE
+> Task :business:data:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :client:compileReleaseJavaWithJavac NO-SOURCE
+> Task :business:data:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :client:bundleLibRuntimeToJarRelease UP-TO-DATE
+> Task :client:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :client:preReleaseUnitTestBuild UP-TO-DATE
+> Task :business:data:processDebugUnitTestJavaRes UP-TO-DATE
+> Task :business:data:testDebugUnitTest UP-TO-DATE
+> Task :business:data:preReleaseUnitTestBuild UP-TO-DATE
+> Task :business:data:generateReleaseUnitTestStubRFile UP-TO-DATE
+> Task :client:generateReleaseUnitTestStubRFile UP-TO-DATE
+> Task :client:convertXmlValueResourcesForAndroidUnitTestRelease NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForAndroidUnitTestRelease NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForAndroidUnitTestRelease NO-SOURCE
+> Task :client:generateResourceAccessorsForAndroidUnitTestRelease SKIPPED
+> Task :business:data:compileReleaseUnitTestKotlinAndroid UP-TO-DATE
+> Task :business:data:javaPreCompileReleaseUnitTest UP-TO-DATE
+> Task :business:data:compileReleaseUnitTestJavaWithJavac NO-SOURCE
+> Task :business:data:processReleaseUnitTestJavaRes UP-TO-DATE
+> Task :client:compileReleaseUnitTestKotlinAndroid UP-TO-DATE
+> Task :client:javaPreCompileReleaseUnitTest UP-TO-DATE
+> Task :business:data:testReleaseUnitTest UP-TO-DATE
+> Task :client:compileReleaseUnitTestJavaWithJavac NO-SOURCE
+> Task :business:data:allTests UP-TO-DATE
+> Task :client:processReleaseJavaRes NO-SOURCE
+> Task :client:processReleaseUnitTestJavaRes UP-TO-DATE
+> Task :business:data:generateDebugLintReportModel UP-TO-DATE
+> Task :business:data:lintReportDebug UP-TO-DATE
+> Task :business:data:lintDebug
+> Task :business:data:lint
+> Task :business:data:test UP-TO-DATE
+> Task :business:data:check
+> Task :client:testReleaseUnitTest UP-TO-DATE
+> Task :client:allTests UP-TO-DATE
+> Task :client:detekt UP-TO-DATE
+> Task :client:koverGenerateArtifactDebug UP-TO-DATE
+
+> Task :client:checkDesktopDevComposeLibrariesCompatibility
+w: Skiko dependencies' versions are incompatible.
+    androidx.compose.ui:ui-text-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-graphics-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+    androidx.compose.ui:ui-desktop:1.7.0
+    \--- org.jetbrains.skiko:skiko:0.7.7 -> 0.144.4
+
+This may lead to compilation errors or unexpected behavior at runtime.
+Such version mismatch might be caused by dependency constraints in one of the included libraries.
+You can inspect resulted dependencies tree via `./gradlew :client:dependencies  --configuration desktopDevRuntimeClasspath`.
+See more details in Gradle documentation: https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html#sec:listing-dependencies
+
+Note: Skiko is considered implementation detail in Compose Multiplatform and might be incompatible across versions.
+Please align Skiko dependencies to the same version. If possible, avoid direct Skiko references and use Compose APIs instead.
+
+
+> Task :client:convertXmlValueResourcesForDesktopDev NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForDesktopDev NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForDesktopDev NO-SOURCE
+> Task :client:generateResourceAccessorsForDesktopDev SKIPPED
+> Task :client:compileDevKotlinDesktop NO-SOURCE
+> Task :client:compileDesktopDevJava NO-SOURCE
+> Task :client:koverGenerateArtifactJvm UP-TO-DATE
+> Task :client:koverGenerateArtifactRelease UP-TO-DATE
+> Task :client:koverGenerateArtifact UP-TO-DATE
+> Task :client:koverCachedVerify UP-TO-DATE
+> Task :client:koverVerify
+> Task :client:loadKtlintReporters UP-TO-DATE
+> Task :client:runKtlintCheckOverAndroidDebugSourceSet NO-SOURCE
+> Task :client:ktlintAndroidDebugSourceSetCheck SKIPPED
+> Task :client:convertXmlValueResourcesForAndroidInstrumentedTestDebug NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForAndroidInstrumentedTestDebug NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForAndroidInstrumentedTestDebug NO-SOURCE
+> Task :client:generateResourceAccessorsForAndroidInstrumentedTestDebug SKIPPED
+> Task :client:runKtlintCheckOverAndroidInstrumentedTestDebugSourceSet NO-SOURCE
+> Task :client:ktlintAndroidInstrumentedTestDebugSourceSetCheck SKIPPED
+> Task :client:convertXmlValueResourcesForAndroidInstrumentedTest NO-SOURCE
+> Task :client:copyNonXmlValueResourcesForAndroidInstrumentedTest NO-SOURCE
+> Task :client:prepareComposeResourcesTaskForAndroidInstrumentedTest NO-SOURCE
+> Task :client:generateResourceAccessorsForAndroidInstrumentedTest SKIPPED
+> Task :client:runKtlintCheckOverAndroidInstrumentedTestSourceSet NO-SOURCE
+> Task :client:ktlintAndroidInstrumentedTestSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverAndroidMainSourceSet NO-SOURCE
+> Task :client:ktlintAndroidMainSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverAndroidReleaseSourceSet NO-SOURCE
+> Task :client:ktlintAndroidReleaseSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverAndroidUnitTestDebugSourceSet NO-SOURCE
+> Task :client:ktlintAndroidUnitTestDebugSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverAndroidUnitTestReleaseSourceSet NO-SOURCE
+> Task :client:ktlintAndroidUnitTestReleaseSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverAndroidUnitTestSourceSet NO-SOURCE
+> Task :client:ktlintAndroidUnitTestSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverCommonMainSourceSet NO-SOURCE
+> Task :client:ktlintCommonMainSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverCommonTestSourceSet UP-TO-DATE
+> Task :client:ktlintCommonTestSourceSetCheck UP-TO-DATE
+> Task :client:runKtlintCheckOverDesktopDevSourceSet NO-SOURCE
+> Task :client:ktlintDesktopDevSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverDesktopMainSourceSet NO-SOURCE
+> Task :client:ktlintDesktopMainSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverDesktopTestSourceSet NO-SOURCE
+> Task :client:ktlintDesktopTestSourceSetCheck SKIPPED
+> Task :client:runKtlintCheckOverKotlinScripts UP-TO-DATE
+> Task :client:ktlintKotlinScriptCheck UP-TO-DATE
+> Task :client:mergeDebugJniLibFolders UP-TO-DATE
+> Task :client:mergeDebugNativeLibs NO-SOURCE
+> Task :client:stripDebugDebugSymbols NO-SOURCE
+> Task :client:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :client:extractDebugAnnotations UP-TO-DATE
+> Task :client:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :client:mergeDebugShaders UP-TO-DATE
+> Task :client:compileDebugShaders NO-SOURCE
+> Task :client:debugAssetsCopyForAGP NO-SOURCE
+> Task :client:generateDebugAssets UP-TO-DATE
+> Task :client:mergeDebugAssets UP-TO-DATE
+> Task :client:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :client:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :client:prepareDebugArtProfile UP-TO-DATE
+> Task :client:prepareLintJarForPublish UP-TO-DATE
+> Task :client:processDebugManifest UP-TO-DATE
+> Task :client:mergeDebugJavaResource UP-TO-DATE
+> Task :client:syncDebugLibJars UP-TO-DATE
+> Task :client:writeDebugAarMetadata UP-TO-DATE
+> Task :client:bundleDebugLocalLintAar UP-TO-DATE
+> Task :client:createFullJarDebug UP-TO-DATE
+> Task :client:preDebugAndroidTestBuild UP-TO-DATE
+> Task :client:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :client:writeDebugLintModelMetadata UP-TO-DATE
+> Task :client:generateDebugAndroidTestLintModel UP-TO-DATE
+> Task :client:extractProguardFiles UP-TO-DATE
+> Task :client:generateDebugLintReportModel UP-TO-DATE
+> Task :client:generateDebugUnitTestLintModel UP-TO-DATE
+> Task :client:lintAnalyzeDebug UP-TO-DATE
+> Task :client:lintAnalyzeDebugAndroidTest UP-TO-DATE
+> Task :client:lintAnalyzeDebugUnitTest UP-TO-DATE
+> Task :client:lintReportDebug UP-TO-DATE
+> Task :client:lintDebug
+> Task :client:lint
+> Task :client:test UP-TO-DATE
+> Task :client:check
+
+BUILD SUCCESSFUL in 22s
+244 actionable tasks: 14 executed, 230 up-to-date

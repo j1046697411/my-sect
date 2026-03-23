@@ -12,20 +12,34 @@ import com.sect.game.feature.game.contract.GameState
 import com.sect.game.mvi.GameErrorHandler
 import com.sect.game.mvi.toUserMessage
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import pro.respawn.flowmvi.api.Container
+import pro.respawn.flowmvi.api.Store
+import pro.respawn.flowmvi.dsl.store
 
-class GameContainer {
+class GameContainer : Container<GameState, GameIntent, GameAction> {
+
+    private var sect: Sect? = null
+    private var gameEngine: GameEngine? = null
+
     private val _state = MutableStateFlow(GameState())
     val state: StateFlow<GameState> = _state.asStateFlow()
 
     private val _effects = Channel<GameAction>(Channel.BUFFERED)
-    val effects = _effects.receiveAsFlow()
+    val effects: Flow<GameAction> = _effects.receiveAsFlow()
 
-    private var sect: Sect? = null
-    private var gameEngine: GameEngine? = null
+    private val _store: Store<GameState, GameIntent, GameAction> = store(initial = GameState()) {
+        configure {
+            debuggable = true
+        }
+    }
+
+    override val store: Store<GameState, GameIntent, GameAction>
+        get() = _store
 
     fun processIntent(intent: GameIntent) {
         try {

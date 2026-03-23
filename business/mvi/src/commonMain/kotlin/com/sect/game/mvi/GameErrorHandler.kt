@@ -8,8 +8,11 @@ import com.sect.game.domain.exception.StorageException
 import com.sect.game.domain.exception.toUserMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.logging.Level
+import java.util.logging.Logger
 
 object GameErrorHandler {
+    private val logger = Logger.getLogger(GameErrorHandler::class.java.name)
     private const val MAX_RETRY_ATTEMPTS = 3
     private const val RETRY_DELAY_MS = 100L
 
@@ -65,8 +68,8 @@ object GameErrorHandler {
         attempt: Int = 1,
     ) {
         val prefix = if (attempt > 1) "[Retry $attempt] " else ""
-        System.err.println("${prefix}Error: ${error.message}")
-        error.printStackTrace()
+        logger.severe("${prefix}Error: ${error.message}")
+        logger.log(Level.SEVERE, "${prefix}Stack trace", error)
     }
 }
 

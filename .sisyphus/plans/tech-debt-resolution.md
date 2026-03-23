@@ -23,14 +23,15 @@
 
 | 问题 | 状态 | 说明 |
 |------|------|------|
-| UI 未连接 GOAP/MVI | ⚠️ | 入口点仅显示静态文本 |
-| ktlint | ⚠️ | 未配置（仅使用 detekt）|
+| UI 未连接 GOAP/MVI | ✅ | GameEngine 通过 onTick 回调集成到 GameContainer，GameScreen 显示暂停/继续/停止控制 |
+| ktlint | ✅ | 已配置（client/build.gradle.kts:128-133），.editorconfig 已创建 |
+| AGENTS.md 技术债务表格 | ✅ | 已更新 |
 
 ### 已解决（待移除）
 
 | 问题 | 状态 | 说明 |
 |------|------|------|
-| 自定义 detekt 规则 | ✅ | NoChineseInTestMethodName 已实现 |
+| 自定义 detekt 规则 | ✅ | NoChineseInTestMethodName 已实现（tools/detekt-rules/） |
 | CI/CD | ✅ | .github/workflows/ci.yml 已配置 |
 
 ### 研究发现
@@ -57,20 +58,16 @@
 
 ## Work Objectives
 
-### 需要完成的工作
+### 已完成的工作
 
-1. **从 AGENTS.md 移除已解决的技术债务**
-   - 删除"自定义 detekt 规则"行
-   - 删除"CI/CD"行
+1. ✅ **从 AGENTS.md 移除已解决的技术债务** - 已完成
+2. ✅ **解决 UI 未连接 GOAP/MVI** - GameContainer 已集成 GameEngine，GameScreen 已显示暂停/继续/停止控制
+3. ✅ **配置 ktlint** - ktlint 插件已配置，.editorconfig 已创建
 
-2. **解决 UI 未连接 GOAP/MVI**
-   - 将 GOAP 引擎（GameEngine）的 tick 更新集成到 MVI State
-   - 使 UI 能够显示弟子的实时 GOAP 驱动行为
+### 待完成的工作
 
-3. **配置 ktlint**
-   - 添加 ktlint 依赖到 libs.versions.toml
-   - 创建 ktlint 配置
-   - 添加 gradle 任务
+1. **T9: 运行 ktlintCheck 验证** - 需要执行验证命令
+2. **Final Verification Wave** - 4 个最终验证任务
 
 ### 技术方案
 
@@ -123,24 +120,24 @@ GameScreen (Compose UI)
 ### Parallel Execution Waves
 
 ```
-Wave 1 (并行 - 基础配置):
-├── T1: 更新 AGENTS.md 技术债务表格 [quick]
-├── T6: 添加 ktlint 依赖到版本目录 [quick]
-├── T7: 应用 ktlint 插件到项目 [quick]
-└── T8: 创建 ktlint 配置文件 [quick]
+Wave 1 (基础配置 - ✅ 已完成):
+├── T1: 更新 AGENTS.md 技术债务表格 ✅
+├── T6: 添加 ktlint 依赖到版本目录 ✅
+├── T7: 应用 ktlint 插件到项目 ✅
+└── T8: 创建 ktlint 配置文件 ✅
 
-Wave 2 (GOAP/MVI 连接 - 核心):
-├── T2: GameContract 添加游戏状态 [quick]
-├── T3: GameIntent 添加游戏控制 Intent [quick]
-├── T4: GameContainer 集成 GameEngine [unspecified-high]
-└── T5: GameScreen 添加暂停指示器 [quick]
+Wave 2 (GOAP/MVI 连接 - ✅ 已完成):
+├── T2: GameContract 添加游戏状态 ✅ (tickCount, isPaused 已存在)
+├── T3: GameIntent 添加游戏控制 Intent ✅ (PauseGame, ResumeGame, StopGame 已存在)
+├── T4: GameContainer 集成 GameEngine ✅ (GameContainer 创建并管理 GameEngine，onTick 回调同步状态)
+└── T5: GameScreen 添加暂停指示器 ✅ (GameScreen 显示暂停按钮和 Tick 计数)
 
-Wave 3 (验证):
-├── T9: 运行 ktlintCheck 验证
-└── T10: 验证 GOAP/MVI 连接
+Wave 3 (验证 - ⏳ 待执行):
+├── T9: 运行 ktlintCheck 验证 ⏳
+└── T10: 验证 GOAP/MVI 连接 ⏳
 
-Wave FINAL:
-├── F1-F4: Final Verification
+Wave FINAL (⏳ 待执行):
+├── F1-F4: Final Verification ⏳
 ```
 
 ### 依赖关系
@@ -205,10 +202,10 @@ Wave FINAL:
 
 ## Final Verification Wave
 
-- [ ] F1: Plan Compliance Audit
-- [ ] F2: Code Quality Review
-- [ ] F3: Real Manual QA
-- [ ] F4: Scope Fidelity Check
+- [ ] F1: Plan Compliance Audit — 验证所有 Must Have 已实现
+- [ ] F2: Code Quality Review — 运行 `./gradlew check`
+- [ ] F3: Real Manual QA — 验证 GOAP/MVI 连接正常工作
+- [ ] F4: Scope Fidelity Check — 验证范围忠实度
 
 ---
 
@@ -230,9 +227,17 @@ grep -A 5 "## 技术债务" AGENTS.md
 ```
 
 ### 最终检查清单
-- [ ] AGENTS.md 仅保留 2 行技术债务
-- [ ] GameState 包含 tickCount, isPaused
-- [ ] GameIntent 包含 PauseGame, ResumeGame, StopGame
-- [ ] GameContainer 持有 GameEngine 引用并同步状态
-- [ ] ktlint 配置完成并通过检查
-- [ ] 所有测试通过
+- [x] ~~AGENTS.md 仅保留 2 行技术债务~~ ✅ 已完成
+- [x] ~~GameState 包含 tickCount, isPaused~~ ✅ 已存在 (GameContract.kt:23-24)
+- [x] ~~GameIntent 包含 PauseGame, ResumeGame, StopGame~~ ✅ 已存在 (GameContract.kt:37-41)
+- [x] ~~GameContainer 持有 GameEngine 引用并同步状态~~ ✅ 已实现 (GameContainer.kt:59-71 onTick 回调)
+- [x] ~~ktlint 配置完成并通过检查~~ ✅ 已配置
+- [ ] 所有测试通过 ⏳ 待验证
+
+### 实际验证状态
+1. ✅ GameContract: tickCount (Long), isPaused (Boolean) 已添加
+2. ✅ GameIntent: PauseGame, ResumeGame, StopGame 已添加
+3. ✅ GameContainer: GameEngine 已集成，onTick 回调同步状态
+4. ✅ GameScreen: TopAppBar 显示暂停/继续/停止按钮，Tick 计数
+5. ⏳ ktlintCheck: 需运行 `./gradlew :client:ktlintCheck` 验证
+6. ⏳ Final Verification: 需执行 F1-F4
