@@ -26,6 +26,19 @@ kotlin {
                 implementation(project(":business:feature-game"))
             }
         }
+
+        val desktopTest by getting {
+            dependencies {
+                implementation(libs.kotlin.test)
+                implementation(project(":business:domain"))
+                implementation(project(":business:engine"))
+                implementation(project(":business:data"))
+                implementation(project(":business:goap"))
+                implementation(project(":business:goap-framework"))
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.uiTest)
+            }
+        }
     }
 }
 
