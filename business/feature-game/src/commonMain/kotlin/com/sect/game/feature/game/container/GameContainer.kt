@@ -21,13 +21,13 @@ import pro.respawn.flowmvi.api.Container
 import pro.respawn.flowmvi.api.Store
 import pro.respawn.flowmvi.dsl.store
 
-class GameContainer : Container<GameState, GameIntent, GameAction> {
+open class GameContainer : Container<GameState, GameIntent, GameAction> {
 
     private var sect: Sect? = null
     private var gameEngine: GameEngine? = null
 
     private val _state = MutableStateFlow(GameState())
-    val state: StateFlow<GameState> = _state.asStateFlow()
+    open val state: StateFlow<GameState> = _state.asStateFlow()
 
     private val _effects = Channel<GameAction>(Channel.BUFFERED)
     val effects: Flow<GameAction> = _effects.receiveAsFlow()
