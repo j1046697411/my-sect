@@ -280,7 +280,7 @@ private fun ErrorContent(
 }
 
 @Composable
-private fun LoadingContent() {
+fun LoadingContent() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -290,7 +290,7 @@ private fun LoadingContent() {
 }
 
 @Composable
-private fun EmptyContent() {
+fun EmptyContent() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
