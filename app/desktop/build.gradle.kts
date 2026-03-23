@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.roborazzi)
 }
 
 kotlin {
@@ -30,13 +31,20 @@ kotlin {
         val desktopTest by getting {
             dependencies {
                 implementation(libs.kotlin.test)
+                implementation(project(":business:mvi"))
                 implementation(project(":business:domain"))
                 implementation(project(":business:engine"))
                 implementation(project(":business:data"))
                 implementation(project(":business:goap"))
                 implementation(project(":business:goap-framework"))
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.uiTest)
+                implementation(project(":business:presentation"))
+                implementation(project(":business:feature-game"))
+                implementation(compose.desktop.currentOs)
+                implementation(libs.compose.material3)
+                implementation("io.github.takahirom.roborazzi:roborazzi-compose-desktop:${libs.versions.roborazzi.get()}") {
+                    exclude(group = "org.jetbrains.compose.ui", module = "ui-test-junit4-desktop")
+                }
+                implementation(compose.desktop.uiTestJUnit4)
             }
         }
     }
