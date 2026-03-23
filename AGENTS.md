@@ -256,9 +256,9 @@ client/
 |------|------|------|
 | UI 连接 GOAP/MVI | ✅ | GameContainer 集成 GameEngine，UI 显示暂停/恢复/停止控制 |
 | ktlint | ✅ | 已配置，ktlintCheck 通过 |
-| MVI 基础设施层 | ⚠️ | `mvi/` 目录仅含 `GameErrorHandler.kt`，缺少 `base/MviContract.kt` 和 `extensions/FlowMviExt.kt` |
-| desktopMain 依赖重复 | ⚠️ | `compose.material3` 和 `flowmvi.compose` 在 commonMain 和 desktopMain 中重复声明 |
-| Android MainActivity | ⚠️ | 仅显示占位文本，未连接 GameContainer/GameScreen |
+| MVI 基础设施层 | ✅ | 已完成 `base/MviContract.kt` 和 `extensions/FlowMviExt.kt` |
+| desktopMain 依赖重复 (#17) | ✅ | 依赖已正确配置，重复声明已移除 |
+| Android MainActivity (#18) | ✅ | 已连接 GameContainer/GameScreen |
 | AGENTS.md 文件位置 | ⚠️ | 多个人源码目录中包含 AGENTS.md（data/、domain/、engine/、goap/、mvi/、presentation/），应移至 docs/ |
 
 ---

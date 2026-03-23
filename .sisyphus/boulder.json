@@ -1,17 +1,16 @@
 {
-  "active_plan": "/Users/yoca-676/.local/share/opencode/worktree/2d17054cedea0482513410afd9e40b9ed72b3fe7/quick-falcon/.sisyphus/plans/fix-architecture-issues.md",
-  "started_at": "2026-03-21T03:38:06.274Z",
+  "active_plan": "/Users/yoca-676/Documents/projects/my-sect/.sisyphus/plans/mvi-infra-fix.md",
+  "started_at": "2026-03-23T04:08:49.675Z",
   "session_ids": [
-    "ses_2f18745e6ffeOTxveRi5JCzB31",
-    "ses_2f1869f0affez9P2ApIqtgQ2Yg",
-    "ses_2f186b0d4ffeDxKHcKYXSGcdJG",
-    "ses_2f1834b93ffeBbuj1kiC7Fzq23",
-    "ses_2f1836bdcffe4A1mVtvkRe6T0t",
-    "ses_2f18397aaffekS8VLvAqqToVpj",
-    "ses_2f1656117ffesmtFrCWdU7buzq",
-    "ses_2f15ab377ffeYYpO9gwVKC4moc",
-    "ses_2f153d3b4ffe0SPbmnp7cVS0WC"
+    "ses_2e71e6d06ffe3glVB71OWzCajn",
+    "ses_2e71dd02dffeWiVDRMeR8YEjG7",
+    "ses_2e71db24cffeF2h6GFjYKGhpeC",
+    "ses_2e71673faffefX5eDl9xsZD5ey",
+    "ses_2e71527a4ffeuJk60GQcvo3ze0",
+    "ses_2e713dd63ffelHr45fblIkKiBM",
+    "ses_2e713f0caffeLRJNKSf2phxRRS",
+    "ses_2e714028affeS2tmVZjYBDF5Wv"
   ],
-  "plan_name": "fix-architecture-issues",
+  "plan_name": "mvi-infra-fix",
   "agent": "atlas"
 }
