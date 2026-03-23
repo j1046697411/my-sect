@@ -25,3 +25,4 @@ build/dokka/
 *.log
 .sisyphus/evidence/
 .sisyphus/boulder.json
+app/desktop/src/test/
