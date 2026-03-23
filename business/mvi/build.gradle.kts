@@ -10,6 +10,7 @@ kotlin {
             dependencies {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(project(":business:domain"))
+                implementation(libs.flowmvi.core)
             }
         }
         val commonTest by getting { }

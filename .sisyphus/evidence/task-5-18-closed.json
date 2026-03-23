@@ -1,0 +1,14 @@
+{
+  "task": "Close GitHub issue #18",
+  "issue": {
+    "number": 18,
+    "title": "[功能缺失] Android MainActivity 未连接 GameContainer",
+    "state": "CLOSED",
+    "closed_at": "2026-03-23",
+    "resolution_comment": "已修复 - 代码实际已正确，AGENTS.md 技术债务表已同步更新为 ✅"
+  },
+  "verification": {
+    "command": "gh issue view 18 --json state --jq '.state'",
+    "result": "CLOSED"
+  }
+}
